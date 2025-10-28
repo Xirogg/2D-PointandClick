@@ -21,6 +21,8 @@ var ActualName
 @onready var ItemQuantity: Label = $InnerBorder/ItemQuantitiy
 @onready var ItemName: Label = $InnerBorder/ItemName
 @onready var activity_stuff: ColorRect = $ActivityStuff
+@onready var craft_window: ColorRect = $CraftWindow
+@onready var craft_button: Button = $CraftWindow/CraftButton
 
 # Signals
 
@@ -132,3 +134,18 @@ func _on_use_button_pressed() -> void:
 #Make the Use Button Disappear when another Slot is selected
 func _on_item_button_focus_exited() -> void:
 	activity_stuff.hide()
+
+func show_craft_interface(): 
+	
+	craft_window.show()
+	
+	
+func hide_craft_interface():
+	
+	craft_window.hide()
+
+
+func _on_craft_button_pressed() -> void:
+	var invui = get_parent().get_parent()
+	
+	invui.check_crafting()

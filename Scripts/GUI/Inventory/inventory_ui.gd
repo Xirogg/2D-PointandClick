@@ -11,6 +11,8 @@ var InventorySlot = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
 
 var dragged_slot = null
+var origin_slot_index = null
+var target_slot_index = null
 
 
 func _ready() -> void:
@@ -46,21 +48,30 @@ func on_updateinvenory():
 			
 			slot.setempty()
 			
-			
+func check_crafting():
+	
+	print(Global.inventory[origin_slot_index], "   ", Global.inventory[target_slot_index])
+
+
 func on_drag_start(slot_control: Control):
 
 	dragged_slot = slot_control
-	print("Drag start: ", dragged_slot)
+	origin_slot_index = get_slot_index(dragged_slot)
+	print("Drag start: ", origin_slot_index)
 	
 func on_drag_end(): 
 
 	print("Drag end")
 	var target_slot = get_slot_under_mouse()
+	target_slot_index = get_slot_index(target_slot)
 	print("Target Slot ",target_slot)
 	if target_slot and dragged_slot != target_slot: 
 		
 		if target_slot.item != null:
-			print("Cant Change That shit burv")
+			
+			print("Cant Change That shit burv", target_slot_index )
+			target_slot.show_craft_interface()
+			
 			
 		else:
 			
@@ -68,7 +79,7 @@ func on_drag_end():
 			drop_slot(dragged_slot, target_slot)
 			print("GGGR",target_slot.item)
 	else:
-		print("GEGG", target_slot.item)
+		print("GEGG", target_slot)
 		
 func get_slot_under_mouse() -> Control:
 	
