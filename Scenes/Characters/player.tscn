@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://byaqju3fev4ui"]
+
+[ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
+[ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_40svl")
+
+[node name="InventoryLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="InventoryLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.207455, 0.736285, 0.548941, 1)
+
+[node name="InventoryUI" parent="InventoryLayer/ColorRect" instance=ExtResource("1_3etf2")]
+z_index = 3
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 65.0

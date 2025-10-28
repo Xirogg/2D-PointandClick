@@ -1,0 +1,139 @@
+[gd_scene load_steps=24 format=3 uid="uid://dio84if8664sb"]
+
+[ext_resource type="Script" uid="uid://yjf12ny2w2g3" path="res://Scripts/GUI/Inventory/inventory_slot.gd" id="1_hn0s5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hn0s5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4t3c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sewa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wp4f5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vip6l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1ck8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_buo6y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6d2a3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qa07p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gflqo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d318y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5tkh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aefmw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u7mvt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sj865"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60hp5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fm35k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3dte"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldfqj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wdyqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5isg2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gufw5"]
+
+[node name="InventorySlot" type="Control"]
+z_index = 6
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1072.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hn0s5")
+
+[node name="InnerBorder" type="ColorRect" parent="."]
+z_index = 9
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.429837, 0.0887732, 1)
+
+[node name="ItemIcon" type="TextureRect" parent="InnerBorder"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ItemQuantitiy" type="Label" parent="InnerBorder"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ItemName" type="Label" parent="InnerBorder"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ItemButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hn0s5")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_e4t3c")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2sewa")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_wp4f5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_vip6l")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_l1ck8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_buo6y")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6d2a3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qa07p")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gflqo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d318y")
+
+[node name="ActivityStuff" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_top = -30.0
+offset_right = 79.0
+mouse_filter = 1
+color = Color(0.314316, 0.314316, 0.314316, 1)
+
+[node name="UseButton" type="Button" parent="ActivityStuff"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_d5tkh")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_aefmw")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_u7mvt")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_sj865")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_60hp5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_fm35k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q3dte")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ldfqj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wdyqe")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5isg2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gufw5")
+text = "USE"
+
+[connection signal="gui_input" from="ItemButton" to="." method="_on_item_button_gui_input"]
