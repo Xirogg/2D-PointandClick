@@ -50,8 +50,39 @@ func on_updateinvenory():
 			
 func check_crafting():
 	
-	print(Global.inventory[origin_slot_index], "   ", Global.inventory[target_slot_index])
+	#Get the Dev Names for each Item
+	var origin_slot = Global.inventory[origin_slot_index]
+	var target_slot = Global.inventory[target_slot_index]
+	var origin_name = origin_slot["gd_name"]
+	var target_name = target_slot["gd_name"]
+	
 
+	var item_array: Array = [origin_name, target_name]
+	item_array.sort()
+	#print(item_array)
+	
+	#Check for valid Combination
+	for Recepies in ItemLogic.CraftingRecepies.keys():
+		
+		var sorted_recepie = Recepies.duplicate()
+		sorted_recepie.sort()
+		#Check for all possibilities
+		if item_array == sorted_recepie:
+			for item in item_array:
+				Global.removeitem(item)
+			
+			return ItemLogic.CraftingRecepies[Recepies]
+			
+	return ""
+	
+func craft_item():
+	
+	var recepie = check_crafting()
+	
+	if recepie != "":
+		
+		ItemLogic.add_item(recepie)
+	
 
 func on_drag_start(slot_control: Control):
 
@@ -116,7 +147,7 @@ func drop_slot(slot_1: Control, slot_2: Control):
 			print("Dropping slots: ", slot_1_index," ", slot_2_index )
 	
 func setitemname(item_Name):
-	print("NAM", item_Name)
+	print("NAME ", item_Name)
 	item_name.text = item_Name
 	
 func setdescriptionname(description_name):

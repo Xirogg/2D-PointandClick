@@ -148,4 +148,5 @@ func hide_craft_interface():
 func _on_craft_button_pressed() -> void:
 	var invui = get_parent().get_parent()
 	
-	invui.check_crafting()
+	invui.craft_item()
+	

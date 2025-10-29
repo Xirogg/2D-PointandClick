@@ -21,6 +21,14 @@ var Items: Dictionary = {
 		"description_de" : " Bruh aber deutsch",
 		"texture" : preload("res://Assets/Placeholders/32s32.png")
 		},
+	"Test Craft Item": {
+		"gd_name" : "Test Craft Item ",
+		"name_en" : " Craft  ",
+		"name_de" : " Craft ",
+		"description_en" : " Kraft  ",
+		"description_de" : " Kraft ",
+		"texture" : preload("res://Assets/Placeholders/32s32.png"),
+		},
 	
 	"Placeholder": {
 		"gd_name" : " ",
@@ -35,7 +43,7 @@ var Items: Dictionary = {
 
 var CraftingRecepies: Dictionary = {
 	
-	#Empty for now
+	["Test Item", "Test Item2"]: "Test Craft Item",
 }
 
 
