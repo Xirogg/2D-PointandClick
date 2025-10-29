@@ -3,8 +3,9 @@ extends Control
 
 
 var item = null
-
+var gd_name
 var item_name
+
 
 var item_name_de
 var item_description_de
@@ -50,7 +51,7 @@ func set_item(new_item):
 	ItemIcon.texture = new_item["texture"] 
 #	ItemQuantity.text = str(item["quantity"])
 	ItemName.text = str(item["name_de"])
-	
+	gd_name = str(item["gd_name"])
 	item_name = str(item["name_de"])
 	
 	item_name_de = str(item["name_de"])

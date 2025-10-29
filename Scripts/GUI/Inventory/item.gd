@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var gd_name = ""
 @export var item_name_de = ""
 @export var item_texture: Texture
 @export var item_descrpition_de = ""
@@ -31,6 +32,7 @@ func pickupitem():
 	
 	var Item = {
 		"quantity": 1,
+		"gd_name": gd_name,
 		"name_de": item_name_de,
 		"description_de": item_descrpition_de,
 		"texture": item_texture,
