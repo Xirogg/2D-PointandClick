@@ -13,7 +13,7 @@ script = ExtResource("1_ocigg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup_Range"]
 shape = SubResource("RectangleShape2D_whdr0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Item Icon" type="Sprite2D" parent="."]
 
 [connection signal="mouse_entered" from="Pickup_Range" to="." method="_on_pickup_range_mouse_entered"]
 [connection signal="mouse_exited" from="Pickup_Range" to="." method="_on_pickup_range_mouse_exited"]
