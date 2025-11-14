@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://tn8k4rh7eqku"]
+
+[ext_resource type="Script" uid="uid://bsc4n5e7wjc3p" path="res://Scripts/Modules/activity_module.gd" id="1_qanmh"]
+
+[node name="Activity Module" type="Area2D"]
+script = ExtResource("1_qanmh")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -9,7 +9,6 @@
 script = ExtResource("1_40svl")
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="InventoryLayer"]
 anchors_preset = 15
