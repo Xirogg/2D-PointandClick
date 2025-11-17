@@ -31,6 +31,7 @@ func Handle_Activity():
 			return
 		
 
+
 func _on_area_entered(area: Area2D) -> void:
 	mouse_in_range = true
 
