@@ -5,9 +5,6 @@ var PlayerNode: Node = null ### Player Node
 var inventory: Array = []
 var inventory_size: int = 10
 
-
-
-
 signal updateinventory 
 
 signal clickedinteractibles
@@ -16,11 +13,17 @@ signal clickedinteractibles
 
 var LastSelectedItem = null 
 
-
 var SelectedLanguage: String
+###########################
+#GOON SPAWN STUFF
+
+var npc_scene = load("res://Scenes/Modules/npc.tscn")
+var npc_texture: Array[CompressedTexture2D]
+var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(80,15))
+var npc_min_distance: int = 4
 
 func _ready() -> void:
-	
+	AppendNPCStufF()
 	inventory.resize(inventory_size)
 	
 	
@@ -65,8 +68,6 @@ func removeitem(item):
 			
 	return false
 		
-	
-	
 
 
 func player_reference(player): 
@@ -89,3 +90,44 @@ func change_selecteditem(selected_item):
 	
 	LastSelectedItem = selected_item
 	print("Selected Item ", LastSelectedItem)
+
+
+func AppendNPCStufF(): 
+	var placeholder1 = preload("res://Assets/Placeholders/Placeholder Goons/Bodyguard 01.png")
+	npc_texture.append(placeholder1)
+	var placeholder2 = preload("res://Assets/Placeholders/Placeholder Goons/General 02.png")
+	npc_texture.append(placeholder2)
+	var placeholder3 = preload("res://Assets/Placeholders/Placeholder Goons/Yuji 01.png")
+	npc_texture.append(placeholder3)
+
+func GetValidSpawnPositions(existing: Array[Vector2]) -> Vector2: 
+	var tries := 0
+	while tries < 10000: 
+		var valid_pos := Vector2(randf_range(npc_spawn_rect.position.x, npc_spawn_rect.position.x + npc_spawn_rect.size.x), randf_range(npc_spawn_rect.position.y, npc_spawn_rect.position.y + npc_spawn_rect.size.y))
+		
+		var pos_ok := true
+		for e in existing: 
+			if e.distance_to(valid_pos) < npc_min_distance:
+				pos_ok = false 
+				break
+				
+		if pos_ok: 
+			return valid_pos
+		tries += 1
+	return npc_spawn_rect.position
+		
+func SpawnNPCs(): 
+	print("Spawning NPCs")
+	randomize()
+	var spawn_positions: Array[Vector2] = []
+	
+	for i in 3: 
+		
+		var position = GetValidSpawnPositions(spawn_positions)
+		spawn_positions.append(position) 
+		
+		var npc = npc_scene.instantiate() 
+		npc.position = position 
+		npc.get_node("NPC Texture").texture  = npc_texture.pick_random()
+		add_child(npc)
+		print("Spawned NPC, location: ", position)

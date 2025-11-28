@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://byaqju3fev4ui"]
+[gd_scene load_steps=4 format=3 uid="uid://byaqju3fev4ui"]
 
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
-[ext_resource type="PackedScene" uid="uid://b4dxlcoly5yhw" path="res://Scenes/GUI/Inventory/item.tscn" id="3_gy20a"]
-[ext_resource type="Texture2D" uid="uid://ckwn83b5stpea" path="res://Assets/Placeholders/32s32.png" id="4_cqrjx"]
+[ext_resource type="Texture2D" uid="uid://bplsrobgle78v" path="res://icon.svg" id="3_al8ar"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_40svl")
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="InventoryLayer"]
 anchors_preset = 15
@@ -25,10 +25,7 @@ layout_mode = 1
 offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="Item" parent="." instance=ExtResource("3_gy20a")]
-position = Vector2(672, 272)
-gd_name = "12"
-item_name_de = "124"
-item_texture = ExtResource("4_cqrjx")
-item_descrpition_de = "1233"
-item_name_en = "12"
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(6, 0)
+scale = Vector2(0.6875, 1)
+texture = ExtResource("3_al8ar")
