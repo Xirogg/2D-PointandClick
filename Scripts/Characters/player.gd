@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	
 	
 	
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LMB (Single)"): 
 		var mouse_postition = get_global_mouse_position()
 		mouse_postition = round(mouse_postition)
@@ -82,5 +82,5 @@ func Handle_Sus_Bar():
 	
 	var bar_target = clamp(Global.Sussynes, sus_bar_min, sus_bar_max )
 	var tween = get_tree().create_tween()
-	var duration := 2
+	var duration := 0.5
 	tween.tween_property(sus_bar, "value", bar_target, duration).set_trans(Tween.TRANS_BOUNCE)
