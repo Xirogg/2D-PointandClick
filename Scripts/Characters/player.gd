@@ -13,6 +13,7 @@ var shpapeshiftable_races: Dictionary = {
 ### COMPONENTS
 @onready var player_sprite: Sprite2D = $"Player Sprite"
 @onready var shape_shift_b_container: HBoxContainer = $"Player HUD/ShapeShiftBContainer"
+@onready var sus_bar: ProgressBar = $"Player HUD/Sus-Bar"
 
 
 
@@ -23,6 +24,8 @@ func _ready() -> void:
 	ItemLogic.add_item("Test Item")
 	ItemLogic.add_item("Test Item2")
 	
+func _process(delta: float) -> void:
+	Handle_Sus_Bar()
 	
 	
 	
@@ -45,7 +48,7 @@ func _physics_process(delta: float) -> void:
 func Show_Possible_Shapeshifts(): 
 	for child in shape_shift_b_container.get_children():
 		if child: 
-			queue_free()
+			child.queue_free()
 			
 	for race in shpapeshiftable_races.keys(): 
 		var race_button := Button.new()
@@ -66,6 +69,18 @@ func _on_race_button_pressed(race):
 	if test: 
 		player_sprite.texture = test
 		Global.change_current_shape_string(race)
+		Global.emit_signal("changed_shape")
+		for child in shape_shift_b_container.get_children():
+			child.queue_free()
 
 func _on_shapeshift_button_pressed() -> void:
 	Show_Possible_Shapeshifts()
+
+func Handle_Sus_Bar(): 
+	var sus_bar_min = 0 
+	var sus_bar_max = 100 
+	
+	var bar_target = clamp(Global.Sussynes, sus_bar_min, sus_bar_max )
+	var tween = get_tree().create_tween()
+	var duration := 2
+	tween.tween_property(sus_bar, "value", bar_target, duration).set_trans(Tween.TRANS_BOUNCE)

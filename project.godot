@@ -28,6 +28,10 @@ folder_colors={
 "res://Scripts/": "blue"
 }
 
+[global_group]
+
+Player="Player Gruppe nur für Player"
+
 [input]
 
 "LMB (Single)"={

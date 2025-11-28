@@ -22,6 +22,11 @@ var npc_texture: Array[CompressedTexture2D]
 var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(1100,0))
 var npc_min_distance: int = 48
 
+### SUS Stuff
+signal changed_shape
+var Sussynes: int = 0 
+
+
 var current_shape: String = "test"
 
 func _ready() -> void:
@@ -32,7 +37,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	checklanguage()
-	print(current_shape)
+	
 func checklanguage(): 
 	var local = TranslationServer.get_locale()
 	SelectedLanguage = local.to_lower()
@@ -135,3 +140,24 @@ func SpawnNPCs():
 		npc.get_node("NPC Texture").texture  = npc_texture.pick_random()
 		add_child(npc)
 		print("Spawned NPC, location: ", position)
+
+func Add_Sus(sus_to_add): 
+	var max_sus = 100 
+	
+	var temp = Sussynes + sus_to_add
+	
+	if temp >= max_sus: 
+		print("Please piss off ", max_sus)
+		Sussynes = max_sus
+		
+	else: 
+		Sussynes += sus_to_add
+
+func Remove_Sus(sus_to_remove): 
+	var min_sus = 0 
+	var temp = Sussynes - sus_to_remove
+	
+	
+	if temp <= min_sus: 
+		Sussynes = min_sus
+	

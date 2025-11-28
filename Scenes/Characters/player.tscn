@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://byaqju3fev4ui"]
+[gd_scene load_steps=5 format=3 uid="uid://byaqju3fev4ui"]
 
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
 [ext_resource type="Texture2D" uid="uid://bplsrobgle78v" path="res://icon.svg" id="3_al8ar"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_al8ar"]
+radius = 37.0
+height = 126.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_40svl")
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
@@ -31,17 +35,36 @@ texture = ExtResource("3_al8ar")
 
 [node name="Player HUD" type="CanvasLayer" parent="."]
 
-[node name="Shapeshift Button" type="Button" parent="Player HUD"]
+[node name="Shapeshift Button" type="Button" parent="Player HUD" groups=["Player"]]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -8.0
 offset_right = 8.0
 grow_vertical = 0
+action_mode = 0
 text = "Shift"
 
 [node name="ShapeShiftBContainer" type="HBoxContainer" parent="Player HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -93.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = -53.0
+grow_vertical = 0
+
+[node name="Sus-Bar" type="ProgressBar" parent="Player HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_right = 182.0
+offset_bottom = 64.0
+grow_horizontal = 2
+show_percentage = false
+
+[node name="Player Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_al8ar")
 
 [connection signal="pressed" from="Player HUD/Shapeshift Button" to="." method="_on_shapeshift_button_pressed"]
