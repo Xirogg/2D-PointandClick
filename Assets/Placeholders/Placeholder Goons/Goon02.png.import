@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwaqot6k4k6p7"
-path="res://.godot/imported/General 02.png-a07bd9eba83abe4964af520a1a2e4f9f.ctex"
+uid="uid://dhjjjxecjpk6s"
+path="res://.godot/imported/Goon02.png-2fb582b11b1f1297316fa808c127078a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/Placeholder Goons/General 02.png"
-dest_files=["res://.godot/imported/General 02.png-a07bd9eba83abe4964af520a1a2e4f9f.ctex"]
+source_file="res://Assets/Placeholders/Placeholder Goons/Goon02.png"
+dest_files=["res://.godot/imported/Goon02.png-2fb582b11b1f1297316fa808c127078a.ctex"]
 
 [params]
 

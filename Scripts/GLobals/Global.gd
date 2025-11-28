@@ -6,12 +6,12 @@ var inventory: Array = []
 var inventory_size: int = 10
 
 signal updateinventory 
-
 signal clickedinteractibles
 
 @onready var Inventory_Slot_Scene = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
 var LastSelectedItem = null 
+
 
 var SelectedLanguage: String
 ###########################
@@ -19,8 +19,10 @@ var SelectedLanguage: String
 
 var npc_scene = load("res://Scenes/Modules/npc.tscn")
 var npc_texture: Array[CompressedTexture2D]
-var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(80,15))
-var npc_min_distance: int = 4
+var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(1100,0))
+var npc_min_distance: int = 48
+
+var current_shape: String = "test"
 
 func _ready() -> void:
 	AppendNPCStufF()
@@ -30,7 +32,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	checklanguage()
-
+	print(current_shape)
 func checklanguage(): 
 	var local = TranslationServer.get_locale()
 	SelectedLanguage = local.to_lower()
@@ -68,7 +70,8 @@ func removeitem(item):
 			
 	return false
 		
-
+func change_current_shape_string(shape: String): 
+	current_shape = shape
 
 func player_reference(player): 
 	PlayerNode = player
@@ -93,17 +96,18 @@ func change_selecteditem(selected_item):
 
 
 func AppendNPCStufF(): 
-	var placeholder1 = preload("res://Assets/Placeholders/Placeholder Goons/Bodyguard 01.png")
+	var placeholder1 = preload("res://Assets/Placeholders/Placeholder Goons/Goon01.png")
 	npc_texture.append(placeholder1)
-	var placeholder2 = preload("res://Assets/Placeholders/Placeholder Goons/General 02.png")
+	var placeholder2 = preload("res://Assets/Placeholders/Placeholder Goons/Goon02.png")
 	npc_texture.append(placeholder2)
-	var placeholder3 = preload("res://Assets/Placeholders/Placeholder Goons/Yuji 01.png")
+	var placeholder3 = preload("res://Assets/Placeholders/Placeholder Goons/Goon03.png")
 	npc_texture.append(placeholder3)
 
 func GetValidSpawnPositions(existing: Array[Vector2]) -> Vector2: 
 	var tries := 0
 	while tries < 10000: 
-		var valid_pos := Vector2(randf_range(npc_spawn_rect.position.x, npc_spawn_rect.position.x + npc_spawn_rect.size.x), randf_range(npc_spawn_rect.position.y, npc_spawn_rect.position.y + npc_spawn_rect.size.y))
+		var placeholder_pos_y = 350
+		var valid_pos := Vector2(randf_range(npc_spawn_rect.position.x, npc_spawn_rect.position.x + npc_spawn_rect.size.x), placeholder_pos_y)  
 		
 		var pos_ok := true
 		for e in existing: 

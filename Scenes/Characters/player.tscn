@@ -25,7 +25,23 @@ layout_mode = 1
 offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(6, 0)
-scale = Vector2(0.6875, 1)
+[node name="Player Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.640625, 1)
 texture = ExtResource("3_al8ar")
+
+[node name="Player HUD" type="CanvasLayer" parent="."]
+
+[node name="Shapeshift Button" type="Button" parent="Player HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+text = "Shift"
+
+[node name="ShapeShiftBContainer" type="HBoxContainer" parent="Player HUD"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="Player HUD/Shapeshift Button" to="." method="_on_shapeshift_button_pressed"]

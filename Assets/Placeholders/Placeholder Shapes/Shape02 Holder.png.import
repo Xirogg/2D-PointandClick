@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmyt5wsdbpg7k"
-path="res://.godot/imported/Yuji 01.png-ea0f6688e662c4b929b90fb8ff14cd2a.ctex"
+uid="uid://b1y3yics4m5l4"
+path="res://.godot/imported/Shape02 Holder.png-91bce66a35403c8ab0c18163c59263fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/Placeholder Goons/Yuji 01.png"
-dest_files=["res://.godot/imported/Yuji 01.png-ea0f6688e662c4b929b90fb8ff14cd2a.ctex"]
+source_file="res://Assets/Placeholders/Placeholder Shapes/Shape02 Holder.png"
+dest_files=["res://.godot/imported/Shape02 Holder.png-91bce66a35403c8ab0c18163c59263fc.ctex"]
 
 [params]
 

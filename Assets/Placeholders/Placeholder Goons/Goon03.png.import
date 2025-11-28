@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsus4efreic51"
-path="res://.godot/imported/Bodyguard 01.png-22ee7da29e78a9e5bf3356c0a09f3809.ctex"
+uid="uid://0qpbgxhmxxan"
+path="res://.godot/imported/Goon03.png-54e1031209f4cba9a851cfbfad3e94e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholders/Placeholder Goons/Bodyguard 01.png"
-dest_files=["res://.godot/imported/Bodyguard 01.png-22ee7da29e78a9e5bf3356c0a09f3809.ctex"]
+source_file="res://Assets/Placeholders/Placeholder Goons/Goon03.png"
+dest_files=["res://.godot/imported/Goon03.png-54e1031209f4cba9a851cfbfad3e94e3.ctex"]
 
 [params]
 
