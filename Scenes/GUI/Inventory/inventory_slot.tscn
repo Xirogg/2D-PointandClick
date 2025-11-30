@@ -138,6 +138,7 @@ text = "USE"
 
 [node name="CraftWindow" type="ColorRect" parent="."]
 visible = false
+layout_mode = 0
 offset_top = -30.0
 offset_right = 79.0
 mouse_filter = 1

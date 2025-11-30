@@ -20,7 +20,7 @@ var SelectedLanguage: String
 var npc_scene = load("res://Scenes/Modules/npc.tscn")
 var npc_texture: Array[CompressedTexture2D]
 var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(1100,0))
-var npc_min_distance: int = 48
+var npc_min_distance: int = 46
 
 ### SUS Stuff
 signal changed_shape
