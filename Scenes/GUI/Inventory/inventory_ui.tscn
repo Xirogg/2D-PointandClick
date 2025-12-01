@@ -32,10 +32,10 @@ columns = 5
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 486.0
-offset_top = 369.0
-offset_right = 526.0
-offset_bottom = 392.0
+offset_left = 236.0
+offset_top = 172.0
+offset_right = 276.0
+offset_bottom = 195.0
 
 [node name="ItemDescription" type="Label" parent="."]
 layout_mode = 1
@@ -43,6 +43,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -160.0
+offset_left = 16.0
+offset_top = -111.0
+offset_right = 16.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 0

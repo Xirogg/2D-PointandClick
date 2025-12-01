@@ -2,14 +2,14 @@ extends Node
 
 var Items: Dictionary = {
 	
-	"Test Item": {
+	"Lunari": {
 		
-		"gd_name" : "Test Item",
-		"name_en" : "Test Item",
-		"name_de" : "Test Item",
-		"description_en" : " Bruh",
-		"description_de" : " Bruh aber deutsch",
-		"texture" : preload("res://Assets/Placeholders/Raccoon.png")
+		"gd_name" : "Lunari Shapeshift Item",
+		"name_en" : "Lunari",
+		"name_de" : "Luna",
+		"description_en" : " Nutze es, um dich in einen Lunari zu verwandeln",
+		"description_de" : " Nutze es, um dich in einen Lunari zu verwandeln",
+		"texture" : preload("res://Assets/Items/Claw.png")
 	},
 	
 	"Test Item2": {
@@ -17,17 +17,17 @@ var Items: Dictionary = {
 		"gd_name" : "Test Item2",
 		"name_en" : "Test Item2",
 		"name_de" : "Test Item2",
-		"description_en" : " Brwuh",
-		"description_de" : " Bruh aber deutsch",
-		"texture" : preload("res://Assets/Placeholders/32s32.png")
+		"description_en" : " Dies hat einen unbekannten Wert",
+		"description_de" : " Dies hat einen unbekannten Wert",
+		"texture" : preload("res://Assets/Items/Basic Amulett.png")
 		},
 	"Test Craft Item": {
 		"gd_name" : "Test Craft Item ",
 		"name_en" : " Craft  ",
 		"name_de" : " Craft ",
-		"description_en" : " Kraft  ",
-		"description_de" : " Kraft ",
-		"texture" : preload("res://Assets/Placeholders/32s32.png"),
+		"description_en" : " Kraft...  ",
+		"description_de" : " Kraft.. ",
+		"texture" : preload("res://Assets/Items/Present.png"),
 		},
 	
 	"Placeholder": {

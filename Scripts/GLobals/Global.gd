@@ -12,6 +12,7 @@ signal clickedinteractibles
 
 var LastSelectedItem = null 
 
+var is_lunari: bool = false
 
 var SelectedLanguage: String
 ###########################
@@ -19,8 +20,8 @@ var SelectedLanguage: String
 
 var npc_scene = load("res://Scenes/Modules/npc.tscn")
 var npc_texture: Array[CompressedTexture2D]
-var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(1100,0))
-var npc_min_distance: int = 46
+var npc_spawn_rect := Rect2(Vector2.ZERO, Vector2(480,0))
+var npc_min_distance: int = 24
 
 ### SUS Stuff
 signal changed_shape
@@ -29,7 +30,9 @@ var Sussynes: int = 0
 
 var current_shape: String = "test"
 
+var can_enter_next_room: bool = false
 func _ready() -> void:
+	
 	AppendNPCStufF()
 	inventory.resize(inventory_size)
 	
@@ -37,6 +40,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	checklanguage()
+	
+	if current_shape == "Lunari": 
+		is_lunari = true
+	else: 
+		is_lunari = false
 	
 func checklanguage(): 
 	var local = TranslationServer.get_locale()
@@ -47,7 +55,7 @@ func additem(item):
 	for i in range(inventory.size()):
 		
 		if inventory[i] != null and inventory[i]["name_de"] == item["name_de"]:
-			inventory[i]["quantity"] += item["quantity"] 
+			#inventory[i]["quantity"] += item["quantity"] 
 			emit_signal("updateinventory")
 			return true 
 			
@@ -101,17 +109,16 @@ func change_selecteditem(selected_item):
 
 
 func AppendNPCStufF(): 
-	var placeholder1 = preload("res://Assets/Placeholders/Placeholder Goons/Goon01.png")
-	npc_texture.append(placeholder1)
-	var placeholder2 = preload("res://Assets/Placeholders/Placeholder Goons/Goon02.png")
+
+	var placeholder2 = preload("res://Assets/Placeholders/Placeholder Goons/Katsoro_Sprite.png")
 	npc_texture.append(placeholder2)
-	var placeholder3 = preload("res://Assets/Placeholders/Placeholder Goons/Goon03.png")
+	var placeholder3 = preload("res://Assets/Placeholders/Placeholder Goons/Yuji-Sprite.png")
 	npc_texture.append(placeholder3)
 
 func GetValidSpawnPositions(existing: Array[Vector2]) -> Vector2: 
 	var tries := 0
 	while tries < 10000: 
-		var placeholder_pos_y = 350
+		var placeholder_pos_y = 165
 		var valid_pos := Vector2(randf_range(npc_spawn_rect.position.x, npc_spawn_rect.position.x + npc_spawn_rect.size.x), placeholder_pos_y)  
 		
 		var pos_ok := true
@@ -160,4 +167,6 @@ func Remove_Sus(sus_to_remove):
 	
 	if temp <= min_sus: 
 		Sussynes = min_sus
+	else:
+		Sussynes -= sus_to_remove
 	

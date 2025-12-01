@@ -1,17 +1,19 @@
+class_name Player
 extends CharacterBody2D
 
 @export var Speed: int = 250
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var click_target :=  Vector2.ZERO
 
 var shpapeshiftable_races: Dictionary = {
-	"Shape01 Holder": true,
-	"Shape02 Holder": true,
-	"Shape03 Holder": true
+	"Lunari": false,
+	"Avalen": true
+
 }
 
 ### COMPONENTS
-@onready var player_sprite: Sprite2D = $"Player Sprite"
+
 @onready var shape_shift_b_container: HBoxContainer = $"Player HUD/ShapeShiftBContainer"
 @onready var sus_bar: ProgressBar = $"Player HUD/Sus-Bar"
 
@@ -21,21 +23,38 @@ func _ready() -> void:
 	click_target = position
 	
 	#Stuff for Debug
-	ItemLogic.add_item("Test Item")
-	ItemLogic.add_item("Test Item2")
+
 	
 func _process(delta: float) -> void:
 	Handle_Sus_Bar()
+	playanis()
+func playanis(): 
 	
-	
-	
+	if velocity.x < 0: 
+		animated_sprite_2d.flip_h = true
+		
+	if velocity.x > 0:
+		animated_sprite_2d.flip_h = false
+		
+	if velocity.x != 0:
+		if Global.is_lunari:
+			animated_sprite_2d.play("Lunari Walk")
+		else: 
+			animated_sprite_2d.play("Avalen Walk")
+			
+	if velocity.x == 0:
+		if Global.is_lunari:
+			animated_sprite_2d.play("Lunari")
+		else:
+			animated_sprite_2d.play("default")
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LMB (Single)"): 
 		var mouse_postition = get_global_mouse_position()
 		mouse_postition = round(mouse_postition)
 		click_target = Vector2(mouse_postition.x, position.y)
 		print("Clicked Target ", mouse_postition)
-		Global.SpawnNPCs()
+		
 func _physics_process(delta: float) -> void:
 	velocity = position.direction_to(click_target) * Speed
 	
@@ -67,9 +86,14 @@ func _on_race_button_pressed(race):
 	var test = load(temp)
 	
 	if test: 
-		player_sprite.texture = test
+		
 		Global.change_current_shape_string(race)
 		Global.emit_signal("changed_shape")
+		if Global.is_lunari:
+			animated_sprite_2d.play("Lunari")
+		else:
+			animated_sprite_2d.play("default")
+		
 		for child in shape_shift_b_container.get_children():
 			child.queue_free()
 
@@ -84,3 +108,17 @@ func Handle_Sus_Bar():
 	var tween = get_tree().create_tween()
 	var duration := 0.5
 	tween.tween_property(sus_bar, "value", bar_target, duration).set_trans(Tween.TRANS_BOUNCE)
+
+
+func _on_inventory_button_pressed() -> void:
+	$InventoryLayer.show()
+
+
+func _on_close_inv_pressed() -> void:
+	$InventoryLayer.hide()
+
+
+func _on_sus_t_imer_timeout() -> void:
+	Global.Remove_Sus(5)
+	print("Removed Sus ", Global.Sussynes)
+	
