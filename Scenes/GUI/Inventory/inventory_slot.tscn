@@ -48,20 +48,22 @@
 
 [node name="InventorySlot" type="Control"]
 z_index = 6
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1072.0
-offset_bottom = -568.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = -447.0
+offset_bottom = -236.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hn0s5")
 
 [node name="InnerBorder" type="ColorRect" parent="."]
 z_index = 9
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -122,7 +124,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_d5tkh")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_aefmw")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_u7mvt")
@@ -138,6 +139,7 @@ text = "USE"
 
 [node name="CraftWindow" type="ColorRect" parent="."]
 visible = false
+layout_mode = 0
 offset_top = -30.0
 offset_right = 79.0
 mouse_filter = 1
@@ -164,4 +166,5 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_gufw5")
 text = "Craft"
 
 [connection signal="gui_input" from="ItemButton" to="." method="_on_item_button_gui_input"]
+[connection signal="pressed" from="ActivityStuff/UseButton" to="." method="_on_use_button_pressed"]
 [connection signal="pressed" from="CraftWindow/CraftButton" to="." method="_on_craft_button_pressed"]

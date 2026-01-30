@@ -88,7 +88,7 @@ func _on_item_button_mouse_exited() -> void:
 func _on_item_button_gui_input(event: InputEvent) -> void:
 	var InventoryUI = get_parent().get_parent() #Node InventoryUI
 	if event is InputEventMouseButton:
-		print("TESTRUN LADIES")
+		
 		#LMB
 		if event.button_index == MOUSE_BUTTON_MASK_LEFT and event.is_pressed():
 
@@ -130,8 +130,14 @@ func _on_use_button_pressed() -> void:
 	#Hide the Inventory and select the Playerrs selected Item
 	invui.hide()
 	activity_stuff.hide()
-	Global.change_selecteditem(item_name)
-	print(Global.LastSelectedItem, "LAST")
+	if item_name == "Luna": 
+		print("Das ist das Lunari Shapeshift Item lets go")
+		var player : Player = get_tree().get_first_node_in_group("Player")
+		player.shpapeshiftable_races["Lunari"] = true
+		
+	else: 
+		Global.change_selecteditem(item_name)
+		print(Global.LastSelectedItem, "LAST")
 #Make the Use Button Disappear when another Slot is selected
 func _on_item_button_focus_exited() -> void:
 	activity_stuff.hide()

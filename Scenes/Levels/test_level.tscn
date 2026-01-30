@@ -1,0 +1,107 @@
+[gd_scene load_steps=25 format=3 uid="uid://cem8j5xkwqf63"]
+
+[ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="1_7t06c"]
+[ext_resource type="Script" uid="uid://dhjyqpeu3bgt0" path="res://Scripts/Levels/test_level.gd" id="1_b07c4"]
+[ext_resource type="PackedScene" uid="uid://cspp3t7jeew4h" path="res://Scenes/Characters/prototype_npc.tscn" id="3_2ytpj"]
+[ext_resource type="Texture2D" uid="uid://c3twxm5l8tiwy" path="res://Assets/Items/Background.png" id="4_db73o"]
+[ext_resource type="Texture2D" uid="uid://c0ed0cvdfnr44" path="res://Assets/Items/Claw.png" id="5_k8g1k"]
+[ext_resource type="Texture2D" uid="uid://biwcjd353ob2n" path="res://Assets/Items/Basic Amulett.png" id="6_x4x4f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ytpj"]
+size = Vector2(60, 270)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k8g1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4x4f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l7ek2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7rivk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hyk2w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mvu5i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xxcax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sufl4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rkdv3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xnpcw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3bggx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ch0ib"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4tft1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7hwwp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wunx2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0p41"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mbrqs"]
+
+[node name="Test Level" type="Node2D"]
+script = ExtResource("1_b07c4")
+
+[node name="Player" parent="." instance=ExtResource("1_7t06c")]
+position = Vector2(22, 217)
+
+[node name="Prototype NPC" parent="." instance=ExtResource("3_2ytpj")]
+position = Vector2(393, 215)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(447, 138)
+shape = SubResource("RectangleShape2D_2ytpj")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(241, 135)
+texture = ExtResource("4_db73o")
+
+[node name="Claw" type="Sprite2D" parent="."]
+position = Vector2(150, 246)
+texture = ExtResource("5_k8g1k")
+
+[node name="x" type="Button" parent="Claw"]
+offset_left = -11.0
+offset_top = -8.0
+offset_right = 9.0
+offset_bottom = 9.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k8g1k")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_x4x4f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l7ek2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7rivk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hyk2w")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mvu5i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xxcax")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_sufl4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rkdv3")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xnpcw")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3bggx")
+
+[node name="BasicAmulett" type="Sprite2D" parent="."]
+position = Vector2(229, 244)
+texture = ExtResource("6_x4x4f")
+
+[node name="Amul" type="Button" parent="BasicAmulett"]
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ch0ib")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4tft1")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_7hwwp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wunx2")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_k0p41")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mbrqs")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="Claw/x" to="." method="_on_x_pressed"]
+[connection signal="pressed" from="BasicAmulett/Amul" to="." method="_on_amul_pressed"]

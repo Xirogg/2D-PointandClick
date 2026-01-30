@@ -1,14 +1,79 @@
-[gd_scene load_steps=5 format=3 uid="uid://byaqju3fev4ui"]
+[gd_scene load_steps=16 format=3 uid="uid://byaqju3fev4ui"]
 
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
-[ext_resource type="PackedScene" uid="uid://b4dxlcoly5yhw" path="res://Scenes/GUI/Inventory/item.tscn" id="3_gy20a"]
-[ext_resource type="Texture2D" uid="uid://ckwn83b5stpea" path="res://Assets/Placeholders/32s32.png" id="4_cqrjx"]
+[ext_resource type="Texture2D" uid="uid://crjqeye1viok6" path="res://Assets/test/InventoryIcon.png" id="3_25bbb"]
+[ext_resource type="Texture2D" uid="uid://c65h5u36gyoj1" path="res://Assets/test/Avalen1.png" id="3_xo8ps"]
+[ext_resource type="Texture2D" uid="uid://bp1gldew6jvt1" path="res://Assets/test/Avalen2.png" id="4_fcmex"]
+[ext_resource type="Texture2D" uid="uid://bdhpmqhal5gpl" path="res://Assets/test/Avalen3.png" id="5_25bbb"]
+[ext_resource type="Texture2D" uid="uid://b1dya1wrffxml" path="res://Assets/Lunari S/Sprite-0004.png" id="6_cueqf"]
+[ext_resource type="Texture2D" uid="uid://bqp8p5nhj6u67" path="res://Assets/Placeholders/Placeholder Shapes/Lunari.png" id="6_fcmex"]
+[ext_resource type="Texture2D" uid="uid://c5nsqu683b51r" path="res://Assets/Lunari S/Sprite-0005.png" id="7_01b8d"]
+[ext_resource type="Texture2D" uid="uid://bh75iucbefyjq" path="res://Assets/Lunari S/wadwd.png" id="8_xccyk"]
+[ext_resource type="Texture2D" uid="uid://cw0dkg8v4t8q5" path="res://Assets/Placeholders/Placeholder Shapes/Avalen.png" id="9_h1n2f"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25bbb"]
+bg_color = Color(0.547848, 0.616669, 0.615966, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cueqf"]
+bg_color = Color(0.714705, 0.186562, 0.0351023, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_al8ar"]
+radius = 20.0
+height = 74.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dxpk4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xo8ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fcmex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_25bbb")
+}],
+"loop": true,
+"name": &"Avalen Walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_fcmex")
+}],
+"loop": true,
+"name": &"Lunari",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_cueqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_01b8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xccyk")
+}],
+"loop": true,
+"name": &"Lunari Walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_h1n2f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_40svl")
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="InventoryLayer"]
 anchors_preset = 15
@@ -25,10 +90,65 @@ layout_mode = 1
 offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="Item" parent="." instance=ExtResource("3_gy20a")]
-position = Vector2(672, 272)
-gd_name = "12"
-item_name_de = "124"
-item_texture = ExtResource("4_cqrjx")
-item_descrpition_de = "1233"
-item_name_en = "12"
+[node name="Close Inv" type="Button" parent="InventoryLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Close Inv"
+
+[node name="Player HUD" type="CanvasLayer" parent="."]
+
+[node name="Shapeshift Button" type="Button" parent="Player HUD" groups=["Player"]]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+action_mode = 0
+text = "Shift"
+
+[node name="ShapeShiftBContainer" type="HBoxContainer" parent="Player HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -93.0
+offset_right = 40.0
+offset_bottom = -53.0
+grow_vertical = 0
+
+[node name="Sus-Bar" type="ProgressBar" parent="Player HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 74.0
+offset_bottom = 37.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_25bbb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cueqf")
+show_percentage = false
+
+[node name="Inventory Button" type="Button" parent="Player HUD"]
+offset_right = 31.0
+offset_bottom = 29.0
+icon = ExtResource("3_25bbb")
+
+[node name="Player Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_al8ar")
+
+[node name="SusTImer" type="Timer" parent="."]
+autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dxpk4")
+animation = &"Lunari"
+
+[connection signal="pressed" from="InventoryLayer/ColorRect/Close Inv" to="." method="_on_close_inv_pressed"]
+[connection signal="pressed" from="Player HUD/Shapeshift Button" to="." method="_on_shapeshift_button_pressed"]
+[connection signal="pressed" from="Player HUD/Inventory Button" to="." method="_on_inventory_button_pressed"]
+[connection signal="timeout" from="SusTImer" to="." method="_on_sus_t_imer_timeout"]
