@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8fm6k5qu30su"]
+[gd_scene format=3 uid="uid://b8fm6k5qu30su"]
 
 [ext_resource type="Script" uid="uid://di0ub0a5m44g2" path="res://Scripts/Levels/test_level_right.gd" id="1_7nxuw"]
 [ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="2_javxa"]
 [ext_resource type="PackedScene" uid="uid://b4dxlcoly5yhw" path="res://Scenes/GUI/Inventory/item.tscn" id="3_qtagc"]
-[ext_resource type="Texture2D" uid="uid://bhavh6uvbs2mb" path="res://Assets/Items/Level_03.png" id="4_tcx35"]
+[ext_resource type="Texture2D" uid="uid://bhavh6uvbs2mb" path="res://Assets/Placeholders/Items/Level_03.png" id="4_tcx35"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_javxa"]
 size = Vector2(62, 280)

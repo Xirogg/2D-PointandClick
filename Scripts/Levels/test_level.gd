@@ -6,7 +6,7 @@ var is_payer_in_range: bool = false
 @onready var amul: Button = $BasicAmulett/Amul
 
 func _ready() -> void:
-	Global.SpawnNPCs()
+	pass
 
 func _process(delta: float) -> void:
 	if is_payer_in_range: 

@@ -2,22 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuyahdfvael27"
-path="res://.godot/imported/Guard_Sprite.png-1a23f9a71525bd28b52315d25e82aed9.ctex"
+uid="uid://bhavh6uvbs2mb"
+path="res://.godot/imported/Level_03.png-d43802b27126c4f3b1501bf585e75c07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Guard_Sprite.png"
-dest_files=["res://.godot/imported/Guard_Sprite.png-1a23f9a71525bd28b52315d25e82aed9.ctex"]
+source_file="res://Assets/Placeholders/Items/Level_03.png"
+dest_files=["res://.godot/imported/Level_03.png-d43802b27126c4f3b1501bf585e75c07.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -25,6 +27,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
