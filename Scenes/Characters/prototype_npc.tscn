@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cspp3t7jeew4h"]
+[gd_scene format=3 uid="uid://cspp3t7jeew4h"]
 
 [ext_resource type="Script" uid="uid://bc75ve8qcdo66" path="res://Scripts/Characters/prototype_npc.gd" id="1_xv470"]
-[ext_resource type="Texture2D" uid="uid://cuyahdfvael27" path="res://Assets/Items/Guard_Sprite.png" id="2_xv470"]
+[ext_resource type="Texture2D" uid="uid://cuyahdfvael27" path="res://Assets/Placeholders/Items/Guard_Sprite.png" id="2_xv470"]
+
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbdrm"]
 

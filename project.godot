@@ -8,17 +8,21 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Point and Click Tech Stuff"
 run/main_scene="uid://cem8j5xkwqf63"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/GLobals/Global.gd"
-ItemLogic="*res://Scripts/GLobals/ItemLogic.gd"
+Global="*res://Scripts/Globals/Global.gd"
+ItemLogic="*res://Scripts/Globals/ItemLogic.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
@@ -28,6 +32,10 @@ window/size/viewport_height=270
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
+
+[dotnet]
+
+project/assembly_name="Point and Click Tech Stuff"
 
 [editor_plugins]
 
