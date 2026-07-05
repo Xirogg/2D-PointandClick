@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://wmpjjuiim3u7"]
+[gd_scene load_steps=3 format=3 uid="uid://wmpjjuiim3u7"]
 
 [ext_resource type="Script" uid="uid://ba5c5qkif4nj7" path="res://Scripts/GUI/Inventory/inventory_ui.gd" id="1_yp2rw"]
+
+[sub_resource type="StyleBoxFlat" id="sb_panel"]
+bg_color = Color(0.078431, 0.137255, 0.129412, 0.980392)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.501961, 0.427451, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="InventoryUI" type="Control"]
 z_index = 2
@@ -8,44 +20,94 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 104.0
-offset_top = 105.0
-offset_right = -104.0
-offset_bottom = -105.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_yp2rw")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 251.0
-offset_top = 120.0
-offset_right = -265.0
-offset_bottom = -260.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -92.0
+offset_right = 132.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("sb_panel")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -84.0
+offset_right = 100.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.74902, 0.921569, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "Inventar"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -58.0
+offset_right = 112.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
 columns = 5
 
 [node name="ItemName" type="Label" parent="."]
-layout_mode = 0
-offset_left = 236.0
-offset_top = 172.0
-offset_right = 276.0
-offset_bottom = 195.0
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 34.0
+offset_right = 120.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
+horizontal_alignment = 1
 
 [node name="ItemDescription" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -111.0
-offset_right = 16.0
-offset_bottom = 49.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = 54.0
+offset_right = 124.0
+offset_bottom = 86.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.741176, 0.815686, 0.729412, 1)
+autowrap_mode = 3
+horizontal_alignment = 1

@@ -1,82 +1,84 @@
-[gd_scene load_steps=24 format=3 uid="uid://dio84if8664sb"]
+[gd_scene load_steps=9 format=3 uid="uid://dio84if8664sb"]
 
 [ext_resource type="Script" uid="uid://yjf12ny2w2g3" path="res://Scripts/GUI/Inventory/inventory_slot.gd" id="1_hn0s5"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hn0s5"]
+[sub_resource type="StyleBoxFlat" id="sb_slot_normal"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.501961, 0.427451, 0.784314)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4t3c"]
+[sub_resource type="StyleBoxFlat" id="sb_slot_hover"]
+bg_color = Color(0.858824, 0.921569, 0.788235, 0.117647)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.827451, 0.639216, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sewa"]
+[sub_resource type="StyleBoxFlat" id="sb_slot_pressed"]
+bg_color = Color(0.203922, 0.478431, 0.396078, 0.392157)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.694118, 0.933333, 0.741176, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wp4f5"]
+[sub_resource type="StyleBoxEmpty" id="sb_empty"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vip6l"]
+[sub_resource type="StyleBoxFlat" id="sb_action_normal"]
+bg_color = Color(0.164706, 0.360784, 0.309804, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1ck8"]
+[sub_resource type="StyleBoxFlat" id="sb_action_hover"]
+bg_color = Color(0.223529, 0.478431, 0.407843, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_buo6y"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6d2a3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qa07p"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gflqo"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d318y"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5tkh"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aefmw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u7mvt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sj865"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60hp5"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fm35k"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3dte"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldfqj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wdyqe"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5isg2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gufw5"]
+[sub_resource type="StyleBoxFlat" id="sb_action_pressed"]
+bg_color = Color(0.294118, 0.588235, 0.494118, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="InventorySlot" type="Control"]
-z_index = 6
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 2.0
-offset_right = -447.0
-offset_bottom = -236.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
 script = ExtResource("1_hn0s5")
 
 [node name="InnerBorder" type="ColorRect" parent="."]
-z_index = 9
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.429837, 0.0887732, 1)
+color = Color(0.109804, 0.188235, 0.180392, 1)
 
 [node name="ItemIcon" type="TextureRect" parent="InnerBorder"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ItemQuantitiy" type="Label" parent="InnerBorder"]
 visible = false
@@ -97,17 +99,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hn0s5")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_e4t3c")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_2sewa")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_wp4f5")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_vip6l")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_l1ck8")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_buo6y")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6d2a3")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qa07p")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gflqo")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_d318y")
+theme_override_styles/focus = SubResource("sb_empty")
+theme_override_styles/disabled = SubResource("sb_empty")
+theme_override_styles/hover = SubResource("sb_slot_hover")
+theme_override_styles/pressed = SubResource("sb_slot_pressed")
+theme_override_styles/normal = SubResource("sb_slot_normal")
 
 [node name="ActivityStuff" type="ColorRect" parent="."]
 visible = false
@@ -115,7 +111,7 @@ layout_mode = 0
 offset_top = -30.0
 offset_right = 79.0
 mouse_filter = 1
-color = Color(0.314316, 0.314316, 0.314316, 1)
+color = Color(0.070588, 0.129412, 0.121569, 0.980392)
 
 [node name="UseButton" type="Button" parent="ActivityStuff"]
 layout_mode = 1
@@ -124,17 +120,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_d5tkh")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_aefmw")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_u7mvt")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_sj865")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_60hp5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_fm35k")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_q3dte")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ldfqj")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wdyqe")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5isg2")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_gufw5")
+theme_override_styles/focus = SubResource("sb_empty")
+theme_override_styles/hover = SubResource("sb_action_hover")
+theme_override_styles/pressed = SubResource("sb_action_pressed")
+theme_override_styles/normal = SubResource("sb_action_normal")
 text = "USE"
 
 [node name="CraftWindow" type="ColorRect" parent="."]
@@ -143,7 +132,7 @@ layout_mode = 0
 offset_top = -30.0
 offset_right = 79.0
 mouse_filter = 1
-color = Color(0.314316, 0.314316, 0.314316, 1)
+color = Color(0.070588, 0.129412, 0.121569, 0.980392)
 
 [node name="CraftButton" type="Button" parent="CraftWindow"]
 layout_mode = 1
@@ -152,17 +141,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_d5tkh")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_aefmw")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_u7mvt")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_sj865")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_60hp5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_fm35k")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_q3dte")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ldfqj")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wdyqe")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5isg2")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_gufw5")
+theme_override_styles/focus = SubResource("sb_empty")
+theme_override_styles/hover = SubResource("sb_action_hover")
+theme_override_styles/pressed = SubResource("sb_action_pressed")
+theme_override_styles/normal = SubResource("sb_action_normal")
 text = "Craft"
 
 [connection signal="gui_input" from="ItemButton" to="." method="_on_item_button_gui_input"]

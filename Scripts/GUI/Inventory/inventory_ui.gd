@@ -4,9 +4,9 @@ extends Control
 var InventorySlot = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
 #Scene Nodes
-@onready var Grid_Container: GridContainer = $GridContainer
-@onready var item_name: Label = $ItemName
-@onready var item_description: Label = $ItemDescription
+@onready var Grid_Container: GridContainer = %GridContainer
+@onready var item_name: Label = %ItemName
+@onready var item_description: Label = %ItemDescription
 
 
 
@@ -26,9 +26,9 @@ func _ready() -> void:
 
 func cleargrid():
 	
-	while $GridContainer.get_child_count() > 0:
+	while Grid_Container.get_child_count() > 0:
 		var child = Grid_Container.get_child(0)
-		$GridContainer.remove_child(child)
+		Grid_Container.remove_child(child)
 		child.queue_free()
 		
 func on_updateinvenory():
@@ -38,7 +38,7 @@ func on_updateinvenory():
 		var slot = InventorySlot.instantiate()
 		slot.drag_start.connect(on_drag_start)
 		slot.drag_end.connect(on_drag_end)
-		$GridContainer.add_child(slot)
+		Grid_Container.add_child(slot)
 		
 		if item != null: 
 			
