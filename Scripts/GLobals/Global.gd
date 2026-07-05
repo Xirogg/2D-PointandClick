@@ -5,6 +5,13 @@ var PlayerNode: Node = null ### Player Node
 var inventory: Array = []
 var inventory_size: int = 10
 
+# --- World item pickup persistence ---------------------------------
+# Remembers which editor-placed world items have already been collected,
+# so they do NOT respawn when a level scene is reloaded. Because this is an
+# autoload it survives scene changes for the whole game session.
+#   item_id (StringName) -> true
+var picked_up_items: Dictionary = {}
+
 signal updateinventory 
 signal clickedinteractibles
 
@@ -53,9 +60,36 @@ func additem(item):
 	return false
 		
 
-func removeitem(item): 
-	
-	
+# --- World item pickup persistence ---------------------------------
+
+func is_item_picked_up(item_id: StringName) -> bool:
+	return picked_up_items.get(item_id, false)
+
+
+func mark_item_picked_up(item_id: StringName) -> void:
+	picked_up_items[item_id] = true
+
+
+# Central pickup entry point for editor-placed world items (item.gd).
+# Handles the inventory logic AND remembers the item as collected.
+# Returns true when the item was actually taken, so the caller can free the
+# world node. Returns false (e.g. inventory full) so the item stays in the
+# world and can be picked up later.
+func pickup_world_item(item: Dictionary, item_id: StringName) -> bool:
+	if additem(item):
+		mark_item_picked_up(item_id)
+		return true
+	return false
+
+
+# Call this when starting a new game so previously collected items reappear.
+func reset_picked_up_items() -> void:
+	picked_up_items.clear()
+
+
+func removeitem(item):
+
+
 	for i in range(inventory.size()):
 		
 		if inventory[i] != null and inventory[i]["name_de"] == item:
