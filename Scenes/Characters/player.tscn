@@ -2,66 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
-[ext_resource type="Texture2D" uid="uid://crjqeye1viok6" path="res://Assets/Placeholders/test/InventoryIcon.png" id="3_25bbb"]
-[ext_resource type="Texture2D" uid="uid://c65h5u36gyoj1" path="res://Assets/Placeholders/test/Avalen1.png" id="3_xo8ps"]
-[ext_resource type="Texture2D" uid="uid://bp1gldew6jvt1" path="res://Assets/Placeholders/test/Avalen2.png" id="4_fcmex"]
-[ext_resource type="Texture2D" uid="uid://bdhpmqhal5gpl" path="res://Assets/Placeholders/test/Avalen3.png" id="5_25bbb"]
-[ext_resource type="Texture2D" uid="uid://b1dya1wrffxml" path="res://Assets/Placeholders/Lunari S/Sprite-0004.png" id="6_cueqf"]
-[ext_resource type="Texture2D" uid="uid://bqp8p5nhj6u67" path="res://Assets/Placeholders/Placeholder Shapes/Lunari.png" id="6_fcmex"]
-[ext_resource type="Texture2D" uid="uid://c5nsqu683b51r" path="res://Assets/Placeholders/Lunari S/Sprite-0005.png" id="7_01b8d"]
-[ext_resource type="Texture2D" uid="uid://bh75iucbefyjq" path="res://Assets/Placeholders/Lunari S/wadwd.png" id="8_xccyk"]
-[ext_resource type="Texture2D" uid="uid://cw0dkg8v4t8q5" path="res://Assets/Placeholders/Placeholder Shapes/Avalen.png" id="9_h1n2f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_al8ar"]
 radius = 20.0
 height = 74.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_dxpk4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_xo8ps")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_fcmex")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_25bbb")
-}],
-"loop": true,
-"name": &"Avalen Walk",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_fcmex")
-}],
-"loop": true,
-"name": &"Lunari",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_cueqf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_01b8d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_xccyk")
-}],
-"loop": true,
-"name": &"Lunari Walk",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_h1n2f")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Player" type="CharacterBody2D" unique_id=1531897282 groups=["Player"]]
 script = ExtResource("1_40svl")
@@ -99,18 +43,9 @@ text = "Close Inv"
 [node name="Inventory Button" type="Button" parent="Player HUD" unique_id=1675823108]
 offset_right = 31.0
 offset_bottom = 29.0
-icon = ExtResource("3_25bbb")
 
 [node name="Player Hitbox" type="CollisionShape2D" parent="." unique_id=1954601224]
 shape = SubResource("CapsuleShape2D_al8ar")
 
-[node name="SusTImer" type="Timer" parent="." unique_id=219657887]
-autostart = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=506569248]
-sprite_frames = SubResource("SpriteFrames_dxpk4")
-animation = &"Lunari"
-
 [connection signal="pressed" from="InventoryLayer/ColorRect/Close Inv" to="." method="_on_close_inv_pressed"]
 [connection signal="pressed" from="Player HUD/Inventory Button" to="." method="_on_inventory_button_pressed"]
-[connection signal="timeout" from="SusTImer" to="." method="_on_sus_t_imer_timeout"]
