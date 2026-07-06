@@ -49,13 +49,18 @@ func on_updateinvenory():
 			slot.setempty()
 			
 func check_crafting():
-	
+
 	#Get the Dev Names for each Item
 	var origin_slot = Global.inventory[origin_slot_index]
 	var target_slot = Global.inventory[target_slot_index]
+
+	#Need two actual items to attempt a combination.
+	if origin_slot == null or target_slot == null:
+		return ""
+
 	var origin_name = origin_slot["gd_name"]
 	var target_name = target_slot["gd_name"]
-	
+
 
 	var item_array: Array = [origin_name, target_name]
 	item_array.sort()
@@ -76,12 +81,23 @@ func check_crafting():
 	return ""
 	
 func craft_item():
-	
+
+	# Only escalate when the player actually tried to combine two items.
+	var origin_item = Global.inventory[origin_slot_index]
+	var target_item = Global.inventory[target_slot_index]
+	if origin_item == null or target_item == null:
+		return
+
 	var recepie = check_crafting()
-	
+
 	if recepie != "":
-		
+
 		ItemLogic.add_item(recepie)
+
+	else:
+
+		# The two items can't be combined -> the player failed. Escalate.
+		Global.increase_escalation()
 	
 
 func on_drag_start(slot_control: Control):

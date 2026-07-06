@@ -12,8 +12,16 @@ var inventory_size: int = 10
 #   item_id (StringName) -> true
 var picked_up_items: Dictionary = {}
 
-signal updateinventory 
+signal updateinventory
 signal clickedinteractibles
+
+# --- Escalation tracker --------------------------------------------
+# Goes up by 1 every time the player tries to combine two items that
+# cannot be combined. Kept as an int in the range 0..ESCALATION_MAX so
+# the Player HUD progress bar (0 = good, 10 = bad) can bind to it directly.
+const ESCALATION_MAX: int = 10
+var escalation: int = 0
+signal escalation_changed(new_value: int)
 
 @onready var Inventory_Slot_Scene = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
@@ -118,9 +126,25 @@ func swap_inventory(index_1, index_2):
 
 #Update last Selected Item
 func change_selecteditem(selected_item):
-	
+
 	LastSelectedItem = selected_item
 	print("Selected Item ", LastSelectedItem)
+
+
+# --- Escalation tracker --------------------------------------------
+
+# Raise escalation after a failed item combination. Clamped to
+# 0..ESCALATION_MAX and broadcast so the HUD can update its progress bar.
+func increase_escalation(amount: int = 1) -> void:
+	escalation = clampi(escalation + amount, 0, ESCALATION_MAX)
+	print("Escalation: ", escalation, "/", ESCALATION_MAX)
+	escalation_changed.emit(escalation)
+
+
+# Reset the tracker (e.g. when starting a new game).
+func reset_escalation() -> void:
+	escalation = 0
+	escalation_changed.emit(escalation)
 
 
 
