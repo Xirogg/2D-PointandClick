@@ -6,12 +6,12 @@ extends CharacterBody2D
 ## (0 = exactly the camera/background bounds).
 @export var edge_margin: float = 0.0
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-<<<<<<< Updated upstream
+
+
 @onready var escalation_bar: ProgressBar = $"Player HUD/EscalationBar"
-=======
+
 @onready var camera: Camera2D = $Camera2D
->>>>>>> Stashed changes
+
 
 var click_target :=  Vector2.ZERO
 
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		position.x = click_target.x
 
 
-<<<<<<< Updated upstream
+
 func _on_escalation_changed(value: int) -> void:
 	escalation_bar.value = value
 
@@ -67,8 +67,8 @@ func _escalation_color(value: int) -> Color:
 	elif value <= 7:
 		return Color(0.803922, 0.435294, 0.101961) # dark orange
 	else:
-		return Color(0.792157, 0.235294, 0.235294) # red
-=======
+		return Color(0.992157, 0.235294, 0.235294) # red
+
 ## Clamps a world X to the scene's horizontal bounds — the same limits the
 ## camera stops at — so a click out of bounds walks the player as far as
 ## possible and no further.
@@ -79,7 +79,7 @@ func _clamp_x_to_bounds(x: float) -> float:
 		# Scene narrower than the margins; fall back to its centre.
 		return (camera.limit_left + camera.limit_right) * 0.5
 	return clampf(x, min_x, max_x)
->>>>>>> Stashed changes
+
 
 
 func _on_inventory_button_pressed() -> void:
