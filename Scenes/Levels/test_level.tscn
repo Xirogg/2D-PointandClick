@@ -23,7 +23,7 @@ position = Vector2(393, 215)
 position = Vector2(447, 138)
 shape = SubResource("RectangleShape2D_2ytpj")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1163363898]
+[node name="Background" type="Sprite2D" parent="." unique_id=1163363898 groups=["camera_bounds"]]
 z_index = -4
 position = Vector2(241, 135)
 texture = ExtResource("4_db73o")

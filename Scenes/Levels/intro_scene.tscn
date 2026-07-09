@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://fd7o1lb464ib"]
+
+[ext_resource type="Texture2D" uid="uid://dkrsql2fef78k" path="res://Assets/Placeholders/Placeholder.png" id="1_ebiix"]
+
+[node name="IntroScene" type="Node2D" unique_id=738897541]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1257244160]
+repeat_size = Vector2(1500, 0)
+autoscroll = Vector2(-29, 0)
+repeat_times = 1
+
+[node name="Placeholder" type="Sprite2D" parent="Parallax2D" unique_id=1967768347]
+centered = false
+texture = ExtResource("1_ebiix")

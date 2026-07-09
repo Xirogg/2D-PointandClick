@@ -2,8 +2,16 @@ class_name Player
 extends CharacterBody2D
 
 @export var Speed: int = 250
+## Keeps the player this many pixels inside the scene edges
+## (0 = exactly the camera/background bounds).
+@export var edge_margin: float = 0.0
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+<<<<<<< Updated upstream
 @onready var escalation_bar: ProgressBar = $"Player HUD/EscalationBar"
+=======
+@onready var camera: Camera2D = $Camera2D
+>>>>>>> Stashed changes
 
 var click_target :=  Vector2.ZERO
 
@@ -23,10 +31,10 @@ func _ready() -> void:
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LMB (Single)"): 
-		var mouse_postition = get_global_mouse_position()
-		mouse_postition = round(mouse_postition)
-		click_target = Vector2(mouse_postition.x, position.y)
-		print("Clicked Target ", mouse_postition)
+		var mouse_position := get_global_mouse_position()
+		var target_x := _clamp_x_to_bounds(round(mouse_position.x))
+		click_target = Vector2(target_x, position.y)
+		print("Clicked Target ", target_x)
 		
 func _physics_process(delta: float) -> void:
 	velocity = position.direction_to(click_target) * Speed
@@ -38,6 +46,7 @@ func _physics_process(delta: float) -> void:
 		position.x = click_target.x
 
 
+<<<<<<< Updated upstream
 func _on_escalation_changed(value: int) -> void:
 	escalation_bar.value = value
 
@@ -59,6 +68,18 @@ func _escalation_color(value: int) -> Color:
 		return Color(0.803922, 0.435294, 0.101961) # dark orange
 	else:
 		return Color(0.792157, 0.235294, 0.235294) # red
+=======
+## Clamps a world X to the scene's horizontal bounds — the same limits the
+## camera stops at — so a click out of bounds walks the player as far as
+## possible and no further.
+func _clamp_x_to_bounds(x: float) -> float:
+	var min_x := camera.limit_left + edge_margin
+	var max_x := camera.limit_right - edge_margin
+	if min_x > max_x:
+		# Scene narrower than the margins; fall back to its centre.
+		return (camera.limit_left + camera.limit_right) * 0.5
+	return clampf(x, min_x, max_x)
+>>>>>>> Stashed changes
 
 
 func _on_inventory_button_pressed() -> void:
