@@ -30,6 +30,9 @@ func _open_guess_editor() -> void:
 	line.name = "GuessInput"
 	line.text = Lexicon.get_guess(glyph_id)
 	line.placeholder_text = "your guess…"
+	line.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	line.select_all_on_focus = true
+	line.add_theme_font_size_override("font_size", 16)
 	add_child(line)
 	line.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	line.grab_focus()
