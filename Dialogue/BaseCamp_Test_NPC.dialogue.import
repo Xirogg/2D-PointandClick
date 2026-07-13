@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://clyx8e7rqd5bp"
+path="res://.godot/imported/BaseCamp_Test_NPC.dialogue-1b028b8fdf12a4ae61fb2da1c663de33.tres"
+
+[deps]
+
+source_file="res://Dialogue/BaseCamp_Test_NPC.dialogue"
+dest_files=["res://.godot/imported/BaseCamp_Test_NPC.dialogue-1b028b8fdf12a4ae61fb2da1c663de33.tres"]
+
+[params]
+
+defaults=true

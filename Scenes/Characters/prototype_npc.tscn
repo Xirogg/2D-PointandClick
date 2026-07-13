@@ -1,52 +1,54 @@
 [gd_scene format=3 uid="uid://cspp3t7jeew4h"]
 
 [ext_resource type="Script" uid="uid://bc75ve8qcdo66" path="res://Scripts/Characters/prototype_npc.gd" id="1_xv470"]
-[ext_resource type="Texture2D" uid="uid://cuyahdfvael27" path="res://Assets/Placeholders/Items/Guard_Sprite.png" id="2_xv470"]
-
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbdrm"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xv470"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ifjf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_odn5c"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_368bu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nofya"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pfuxc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtn3i"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ahr5h"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_smpv6"]
+[ext_resource type="Texture2D" uid="uid://bplsrobgle78v" path="res://icon.svg" id="2_xv470"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rwfr4"]
 
-[node name="Prototype NPC" type="CharacterBody2D"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_smpv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ahr5h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtn3i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pfuxc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nofya"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_368bu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_odn5c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ifjf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xv470"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbdrm"]
+
+[node name="Prototype NPC" type="CharacterBody2D" unique_id=1535008498]
 script = ExtResource("1_xv470")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1056780205]
 offset_left = -20.0
 offset_top = -32.0
 offset_right = 19.0
 offset_bottom = 30.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kbdrm")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xv470")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8ifjf")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_odn5c")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_368bu")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_nofya")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_pfuxc")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_wtn3i")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ahr5h")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_smpv6")
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rwfr4")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_smpv6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ahr5h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_wtn3i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pfuxc")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_nofya")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_368bu")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_odn5c")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8ifjf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xv470")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kbdrm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="." unique_id=1334395940]
+position = Vector2(-3.8146973e-06, 0)
+scale = Vector2(0.2734375, 0.40625)
 texture = ExtResource("2_xv470")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

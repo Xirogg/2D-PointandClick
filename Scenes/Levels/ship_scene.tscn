@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bawrgabf0imiw"]
+
+[ext_resource type="Texture2D" uid="uid://dkrsql2fef78k" path="res://Assets/Placeholders/Placeholder.png" id="1_6dpnc"]
+
+[node name="Ship_Scene" type="Node2D" unique_id=519845933]
+
+[node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=940820431]
+modulate = Color(1, 0.36862746, 1, 1)
+position = Vector2(750, 180)
+texture = ExtResource("1_6dpnc")

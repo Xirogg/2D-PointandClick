@@ -34,6 +34,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://Scenes/GUI/dialogue_balloon.tscn"
+
 [dotnet]
 
 project/assembly_name="Point and Click Tech Stuff"
@@ -46,6 +50,9 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 folder_colors={
 "res://Assets/": "purple",
+"res://Dialogue/": "teal",
+"res://Modules/": "gray",
+"res://Ressources/": "red",
 "res://Scenes/": "yellow",
 "res://Scripts/": "blue"
 }
@@ -72,6 +79,10 @@ camera_bounds=""
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(153, 20),"global_position":Vector2(162, 68),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":true,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialogue/BaseCamp_NPC1.dialogue", "res://Dialogue/BaseCamp_Test_NPC.dialogue")
 
 [rendering]
 
