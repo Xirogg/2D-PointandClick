@@ -88,6 +88,10 @@ theme/custom_font="uid://bfqdqxvalq65a"
 
 locale/translations_pot_files=PackedStringArray("res://Dialogue/BaseCamp_NPC1.dialogue", "res://Dialogue/BaseCamp_Test_NPC.dialogue")
 
+[layer_names]
+
+2d_physics/layer_3="Interactable"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

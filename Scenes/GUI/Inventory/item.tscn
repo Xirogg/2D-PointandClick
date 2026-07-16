@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4dxlcoly5yhw"]
+[gd_scene load_steps=4 format=3 uid="uid://b4dxlcoly5yhw"]
 
 [ext_resource type="Script" uid="uid://drhwo3tf0fnn6" path="res://Scripts/GUI/Inventory/item.gd" id="1_ocigg"]
+[ext_resource type="Script" path="res://Scripts/Interaction/interactable.gd" id="2_ntract"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_whdr0"]
 size = Vector2(50, 52)
@@ -9,11 +10,11 @@ size = Vector2(50, 52)
 script = ExtResource("1_ocigg")
 
 [node name="Pickup_Range" type="Area2D" parent="."]
+script = ExtResource("2_ntract")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup_Range"]
 shape = SubResource("RectangleShape2D_whdr0")
 
 [node name="Item Icon" type="Sprite2D" parent="."]
 
-[connection signal="mouse_entered" from="Pickup_Range" to="." method="_on_pickup_range_mouse_entered"]
-[connection signal="mouse_exited" from="Pickup_Range" to="." method="_on_pickup_range_mouse_exited"]
+[connection signal="interacted" from="Pickup_Range" to="." method="_on_pickup_range_interacted"]

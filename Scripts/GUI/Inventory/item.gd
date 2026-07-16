@@ -16,8 +16,6 @@ extends Node2D
 
 var scene_path: String = "res://Scenes/GUI/Inventory/item.tscn"
 
-var MouseinRange: bool = false
-
 # Resolved once in _ready so pickup and the respawn check always agree.
 var _resolved_id: StringName
 
@@ -47,10 +45,10 @@ func _resolve_item_id() -> StringName:
 	return StringName(get_path())
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("LMB"):
-		if MouseinRange:
-			pickupitem()
+# Called by the Pickup_Range Interactable once the player has walked over to
+# this item, so picking up never happens from across the room.
+func _on_pickup_range_interacted(_player: Node2D) -> void:
+	pickupitem()
 
 
 func pickupitem():
@@ -72,12 +70,3 @@ func pickupitem():
 	# the world item if it was actually taken (e.g. not when inventory is full).
 	if Global.pickup_world_item(Item, _resolved_id):
 		self.queue_free()
-
-
-func _on_pickup_range_mouse_entered() -> void:
-	MouseinRange = true
-	print("In Range of Item: ", item_name_de )
-
-
-func _on_pickup_range_mouse_exited() -> void:
-	MouseinRange = false

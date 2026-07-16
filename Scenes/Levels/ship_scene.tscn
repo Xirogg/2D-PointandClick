@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="2_lc756"]
 [ext_resource type="Script" uid="uid://bnup18soqo87w" path="res://Scripts/Levels/ship_scene.gd" id="3_shipsc"]
 [ext_resource type="PackedScene" path="res://Scenes/GUI/Glyphs/glyph_popup.tscn" id="4_glyphp"]
+[ext_resource type="Script" path="res://Scripts/Interaction/interactable.gd" id="5_ntract"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_console"]
+size = Vector2(520, 237)
 
 [node name="Ship_Scene" type="Node2D" unique_id=519845933]
 script = ExtResource("3_shipsc")
@@ -13,15 +17,21 @@ modulate = Color(1, 0.36862746, 1, 1)
 position = Vector2(750, 180)
 texture = ExtResource("1_6dpnc")
 
-[node name="Button" type="Button" parent="." unique_id=1120281473]
-offset_left = 882.0
-offset_top = 56.0
-offset_right = 1402.0
-offset_bottom = 293.0
+[node name="Console" type="Area2D" parent="." node_paths=PackedStringArray("interaction_point")]
+position = Vector2(1142, 174.5)
+script = ExtResource("5_ntract")
+display_name = "Konsole"
+interaction_point = NodePath("InteractionPoint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Console"]
+shape = SubResource("RectangleShape2D_console")
+
+[node name="InteractionPoint" type="Marker2D" parent="Console"]
+position = Vector2(-40, 105)
 
 [node name="Player" parent="." unique_id=1531897282 instance=ExtResource("2_lc756")]
 position = Vector2(593, 280)
 
 [node name="GlyphPopup" parent="." unique_id=2062616247 instance=ExtResource("4_glyphp")]
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="interacted" from="Console" to="." method="_on_console_interacted"]

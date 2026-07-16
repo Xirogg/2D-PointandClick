@@ -42,6 +42,9 @@ corner_radius_bottom_left = 4
 radius = 20.0
 height = 74.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_reach"]
+radius = 80.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1531897282 groups=["Player"]]
 script = ExtResource("1_40svl")
 
@@ -98,6 +101,13 @@ show_percentage = false
 
 [node name="Player Hitbox" type="CollisionShape2D" parent="." unique_id=1954601224]
 shape = SubResource("CapsuleShape2D_al8ar")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_reach")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1096616963]
 script = ExtResource("2_pcam")
