@@ -62,6 +62,10 @@ folder_colors={
 Player="Player Gruppe nur für Player"
 camera_bounds=""
 
+[gui]
+
+theme/custom_font="uid://bfqdqxvalq65a"
+
 [input]
 
 "LMB (Single)"={

@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Glyphs/glyph_popup.gd" id="1_glyphpopup"]
+
+[sub_resource type="StyleBoxFlat" id="sb_panel"]
+bg_color = Color(0.078431, 0.137255, 0.129412, 0.980392)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.501961, 0.427451, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_close"]
+bg_color = Color(0.164706, 0.360784, 0.309804, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="sb_close_hover"]
+bg_color = Color(0.223529, 0.478431, 0.407843, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="GlyphPopup" type="CanvasLayer"]
+layer = 3
+visible = false
+script = ExtResource("1_glyphpopup")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05098, 0.094118, 0.090196, 0.882353)
+
+[node name="Panel" type="Panel" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -124.0
+offset_right = 130.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("sb_panel")
+
+[node name="Margin" type="MarginContainer" parent="Backdrop/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Backdrop/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Backdrop/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74902, 0.921569, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "Glyphe"
+horizontal_alignment = 1
+
+[node name="GlyphTexture" type="TextureRect" parent="Backdrop/Panel/Margin/VBox"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameInput" type="LineEdit" parent="Backdrop/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Deine Vermutung…"
+alignment = 1
+select_all_on_focus = true
+
+[node name="CloseButton" type="Button" parent="Backdrop/Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 22)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
+theme_override_styles/normal = SubResource("sb_close")
+theme_override_styles/hover = SubResource("sb_close_hover")
+theme_override_styles/pressed = SubResource("sb_close_hover")
+text = "Schließen"
+
+[connection signal="text_submitted" from="Backdrop/Panel/Margin/VBox/NameInput" to="." method="_on_name_input_text_submitted"]
+[connection signal="pressed" from="Backdrop/Panel/Margin/VBox/CloseButton" to="." method="_on_close_button_pressed"]

@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cspp3t7jeew4h" path="res://Scenes/Characters/prototype_npc.tscn" id="2_c7yk6"]
 [ext_resource type="Resource" uid="uid://clyx8e7rqd5bp" path="res://Dialogue/BaseCamp_Test_NPC.dialogue" id="3_left"]
 [ext_resource type="Resource" uid="uid://b2ctb1lkperrp" path="res://Dialogue/BaseCamp_NPC1.dialogue" id="4_right"]
+[ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="5_yflxa"]
 
 [node name="BaseCamp_Scene" type="Node2D" unique_id=400114802]
 
-[node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=691299169]
+[node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=691299169 groups=["camera_bounds"]]
 modulate = Color(0, 1, 1, 1)
 z_index = -1
 position = Vector2(750, 180)
@@ -20,3 +21,6 @@ dialogue_resource = ExtResource("4_right")
 [node name="Prototype NPC2" parent="." unique_id=2037405147 instance=ExtResource("2_c7yk6")]
 position = Vector2(163, 314)
 dialogue_resource = ExtResource("3_left")
+
+[node name="Player" parent="." unique_id=1531897282 instance=ExtResource("5_yflxa")]
+position = Vector2(289, 289)

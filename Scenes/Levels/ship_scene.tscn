@@ -1,10 +1,27 @@
 [gd_scene format=3 uid="uid://bawrgabf0imiw"]
 
 [ext_resource type="Texture2D" uid="uid://dkrsql2fef78k" path="res://Assets/Placeholders/Placeholder.png" id="1_6dpnc"]
+[ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="2_lc756"]
+[ext_resource type="Script" uid="uid://bnup18soqo87w" path="res://Scripts/Levels/ship_scene.gd" id="3_shipsc"]
+[ext_resource type="PackedScene" path="res://Scenes/GUI/Glyphs/glyph_popup.tscn" id="4_glyphp"]
 
 [node name="Ship_Scene" type="Node2D" unique_id=519845933]
+script = ExtResource("3_shipsc")
 
-[node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=940820431]
+[node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=940820431 groups=["camera_bounds"]]
 modulate = Color(1, 0.36862746, 1, 1)
 position = Vector2(750, 180)
 texture = ExtResource("1_6dpnc")
+
+[node name="Button" type="Button" parent="." unique_id=1120281473]
+offset_left = 882.0
+offset_top = 56.0
+offset_right = 1402.0
+offset_bottom = 293.0
+
+[node name="Player" parent="." unique_id=1531897282 instance=ExtResource("2_lc756")]
+position = Vector2(593, 280)
+
+[node name="GlyphPopup" parent="." unique_id=2062616247 instance=ExtResource("4_glyphp")]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

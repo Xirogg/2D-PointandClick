@@ -1,6 +1,8 @@
-extends HBoxContainer
+extends Control
 
-const GlyphViewScene := preload("res://Scenes/Placeholders/test_glyph_scene.tscn")
+const GlyphSlotScene := preload("res://Scenes/Placeholders/test_glyph_scene.tscn")
+
+@onready var grid: GridContainer = %GlyphGrid
 
 
 func _ready() -> void:
@@ -9,9 +11,11 @@ func _ready() -> void:
 
 
 func build(ids: Array) -> void:
-	for child in get_children():
+	for child in grid.get_children():
 		child.queue_free()
 	for id in ids:
-		var view: GlyphView = GlyphViewScene.instantiate()
+		var slot: PanelContainer = GlyphSlotScene.instantiate()
+		var view: GlyphView = slot.get_node("%GlyphView")
+		# Set before add_child so the view has its id by the time _ready runs.
 		view.glyph_id = id
-		add_child(view)
+		grid.add_child(slot)

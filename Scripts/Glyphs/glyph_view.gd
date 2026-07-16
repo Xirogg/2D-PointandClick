@@ -10,13 +10,18 @@ func _ready() -> void:
 		push_warning("glyph_view: no glyph registered for id '%s'" % [glyph_id])
 		return
 	texture = glyph.texture
-	guess_label.text = Lexicon.get_guess(glyph_id)
+	_refresh_guess()
 	Lexicon.guess_changed.connect(_on_guess_changed)
 	gui_input.connect(_on_input)
 
 func _on_guess_changed(id: StringName, _word: String) -> void:
 	if id == glyph_id:
-		guess_label.text = Lexicon.get_guess(glyph_id)
+		_refresh_guess()
+
+# Un-named glyphs get a placeholder so no slot reads as blank/broken.
+func _refresh_guess() -> void:
+	var guess := Lexicon.get_guess(glyph_id)
+	guess_label.text = guess if guess != "" else "?"
 
 func _on_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed \
@@ -29,7 +34,7 @@ func _open_guess_editor() -> void:
 	var line := LineEdit.new()
 	line.name = "GuessInput"
 	line.text = Lexicon.get_guess(glyph_id)
-	line.placeholder_text = "your guess…"
+	line.placeholder_text = "Deine Vermutung…"
 	line.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	line.select_all_on_focus = true
 	line.add_theme_font_size_override("font_size", 16)

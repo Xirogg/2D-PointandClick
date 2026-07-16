@@ -109,7 +109,7 @@ theme_override_styles/normal = SubResource("sb_slot_normal")
 visible = false
 layout_mode = 0
 offset_top = -30.0
-offset_right = 79.0
+offset_right = 88.0
 mouse_filter = 1
 color = Color(0.070588, 0.129412, 0.121569, 0.980392)
 
@@ -124,13 +124,13 @@ theme_override_styles/focus = SubResource("sb_empty")
 theme_override_styles/hover = SubResource("sb_action_hover")
 theme_override_styles/pressed = SubResource("sb_action_pressed")
 theme_override_styles/normal = SubResource("sb_action_normal")
-text = "USE"
+text = "BENUTZEN"
 
 [node name="CraftWindow" type="ColorRect" parent="."]
 visible = false
 layout_mode = 0
 offset_top = -30.0
-offset_right = 79.0
+offset_right = 88.0
 mouse_filter = 1
 color = Color(0.070588, 0.129412, 0.121569, 0.980392)
 
@@ -145,7 +145,7 @@ theme_override_styles/focus = SubResource("sb_empty")
 theme_override_styles/hover = SubResource("sb_action_hover")
 theme_override_styles/pressed = SubResource("sb_action_pressed")
 theme_override_styles/normal = SubResource("sb_action_normal")
-text = "Craft"
+text = "Kombinieren"
 
 [connection signal="gui_input" from="ItemButton" to="." method="_on_item_button_gui_input"]
 [connection signal="pressed" from="ActivityStuff/UseButton" to="." method="_on_use_button_pressed"]

@@ -1,29 +1,47 @@
-[gd_scene format=3 uid="uid://clwn5c41i1ric"]
+[gd_scene load_steps=3 format=3 uid="uid://clwn5c41i1ric"]
 
 [ext_resource type="Script" uid="uid://cyo20t0rrkm6p" path="res://Scripts/Glyphs/glyph_view.gd" id="1_vdq08"]
 
-[node name="GlyphView" type="TextureRect" unique_id=860559513]
+[sub_resource type="StyleBoxFlat" id="sb_glyph_slot"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.109804, 0.188235, 0.180392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.501961, 0.427451, 0.784314)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="GlyphSlot" type="PanelContainer"]
+theme_override_styles/panel = SubResource("sb_glyph_slot")
+
+[node name="GlyphView" type="TextureRect" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
-custom_minimum_size = Vector2(80, 104)
+custom_minimum_size = Vector2(64, 84)
+layout_mode = 2
 mouse_filter = 0
 expand_mode = 1
 stretch_mode = 4
 mouse_default_cursor_shape = 2
 script = ExtResource("1_vdq08")
 
-[node name="GuessLabel" type="Label" parent="." unique_id=1242135936]
+[node name="GuessLabel" type="Label" parent="GlyphView"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -22.0
+offset_top = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 3
