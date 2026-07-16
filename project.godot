@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Point and Click Tech Stuff"
+config/name="Unsequenced"
 run/main_scene="uid://cem8j5xkwqf63"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
@@ -26,6 +26,10 @@ ItemLogic="*res://Scripts/Globals/ItemLogic.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Lexicon="*uid://cox207qi7j4f6"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://Scenes/GUI/dialogue_balloon.tscn"
+
 [display]
 
 window/size/viewport_width=640
@@ -33,10 +37,6 @@ window/size/viewport_height=360
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
-
-[dialogue_manager]
-
-runtime/balloon_path="res://Scenes/GUI/dialogue_balloon.tscn"
 
 [dotnet]
 
