@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://Scripts/GUI/Menus/main_menu.gd" id="1_mainmenu"]
 [ext_resource type="PackedScene" path="res://Scenes/GUI/Menus/settings_menu.tscn" id="2_settingsmenu"]
+[ext_resource type="Texture2D" uid="uid://dsrd7duf8nvje" path="res://Assets/Placeholders/Intro.png" id="3_intro"]
+[ext_resource type="Resource" uid="uid://dietuswekfkcw" path="res://Dialogue/Intro.dialogue" id="4_introdialogue"]
 
 [sub_resource type="StyleBoxFlat" id="sb_button"]
 bg_color = Color(0.164706, 0.360784, 0.309804, 1)
@@ -44,17 +46,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mainmenu")
+intro_dialogue = ExtResource("4_introdialogue")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1200, 0)
+autoscroll = Vector2(-150, 0)
+
+[node name="Placeholder" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("3_intro")
+centered = false
+
+[node name="Menu" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05098, 0.094118, 0.090196, 1)
+mouse_filter = 1
 
-[node name="Title" type="Label" parent="."]
+[node name="Background" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.05098, 0.094118, 0.090196, 0.72)
+
+[node name="Title" type="Label" parent="Menu"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -67,7 +89,7 @@ text = "Unsequenced"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,7 +104,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="PlayButton" type="Button" parent="Buttons"]
+[node name="PlayButton" type="Button" parent="Menu/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 28)
 layout_mode = 2
@@ -94,7 +116,7 @@ theme_override_styles/hover = SubResource("sb_button_hover")
 theme_override_styles/pressed = SubResource("sb_button_pressed")
 text = "Spielen"
 
-[node name="SettingsButton" type="Button" parent="Buttons"]
+[node name="SettingsButton" type="Button" parent="Menu/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 28)
 layout_mode = 2
@@ -106,7 +128,7 @@ theme_override_styles/hover = SubResource("sb_button_hover")
 theme_override_styles/pressed = SubResource("sb_button_pressed")
 text = "Einstellungen"
 
-[node name="QuitButton" type="Button" parent="Buttons"]
+[node name="QuitButton" type="Button" parent="Menu/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 28)
 layout_mode = 2
@@ -121,6 +143,6 @@ text = "Verlassen"
 [node name="SettingsMenu" parent="." instance=ExtResource("2_settingsmenu")]
 unique_name_in_owner = true
 
-[connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Menu/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Menu/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
