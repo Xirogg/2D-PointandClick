@@ -116,5 +116,6 @@ script = ExtResource("2_pcam")
 position = Vector2(0, 10)
 texture = ExtResource("4_gy20a")
 
+[connection signal="close_requested" from="InventoryLayer/ColorRect/InventoryUI" to="." method="_on_close_inv_pressed"]
 [connection signal="pressed" from="InventoryLayer/ColorRect/Close Inv" to="." method="_on_close_inv_pressed"]
 [connection signal="pressed" from="Player HUD/Inventory Button" to="." method="_on_inventory_button_pressed"]

@@ -1,96 +1,53 @@
-[gd_scene load_steps=9 format=3 uid="uid://dio84if8664sb"]
+[gd_scene load_steps=11 format=3 uid="uid://dio84if8664sb"]
 
 [ext_resource type="Script" uid="uid://yjf12ny2w2g3" path="res://Scripts/GUI/Inventory/inventory_slot.gd" id="1_hn0s5"]
+[ext_resource type="Texture2D" uid="uid://k64xwta3h1lu" path="res://Assets/UI/Inventory/slot_frame.png" id="2_frame"]
+[ext_resource type="Texture2D" uid="uid://z7mnd1kbewt9" path="res://Assets/UI/Inventory/slot_frame_hover.png" id="3_frame_hover"]
+[ext_resource type="Texture2D" uid="uid://f7ywsev0z7w9" path="res://Assets/UI/Inventory/slot_frame_pressed.png" id="4_frame_pressed"]
 
-[sub_resource type="StyleBoxFlat" id="sb_slot_normal"]
-bg_color = Color(0, 0, 0, 0)
+[sub_resource type="StyleBoxTexture" id="sb_slot_normal"]
+texture = ExtResource("2_frame")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="sb_slot_hover"]
+texture = ExtResource("3_frame_hover")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="sb_slot_pressed"]
+texture = ExtResource("4_frame_pressed")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="sb_popup_normal"]
+bg_color = Color(0.078431, 0.137255, 0.121569, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.27451, 0.501961, 0.427451, 0.784314)
+border_color = Color(0.27451, 0.501961, 0.427451, 1)
 
-[sub_resource type="StyleBoxFlat" id="sb_slot_hover"]
-bg_color = Color(0.858824, 0.921569, 0.788235, 0.117647)
+[sub_resource type="StyleBoxFlat" id="sb_popup_hover"]
+bg_color = Color(0.164706, 0.360784, 0.309804, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.588235, 0.827451, 0.639216, 1)
 
-[sub_resource type="StyleBoxFlat" id="sb_slot_pressed"]
-bg_color = Color(0.203922, 0.478431, 0.396078, 0.392157)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.694118, 0.933333, 0.741176, 1)
-
 [sub_resource type="StyleBoxEmpty" id="sb_empty"]
 
-[sub_resource type="StyleBoxFlat" id="sb_action_normal"]
-bg_color = Color(0.164706, 0.360784, 0.309804, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="sb_action_hover"]
-bg_color = Color(0.223529, 0.478431, 0.407843, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="sb_action_pressed"]
-bg_color = Color(0.294118, 0.588235, 0.494118, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [node name="InventorySlot" type="Control"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 script = ExtResource("1_hn0s5")
-
-[node name="InnerBorder" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.109804, 0.188235, 0.180392, 1)
-
-[node name="ItemIcon" type="TextureRect" parent="InnerBorder"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = -3.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ItemQuantitiy" type="Label" parent="InnerBorder"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ItemName" type="Label" parent="InnerBorder"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="ItemButton" type="Button" parent="."]
 layout_mode = 1
@@ -100,53 +57,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/focus = SubResource("sb_empty")
-theme_override_styles/disabled = SubResource("sb_empty")
+theme_override_styles/disabled = SubResource("sb_slot_normal")
 theme_override_styles/hover = SubResource("sb_slot_hover")
 theme_override_styles/pressed = SubResource("sb_slot_pressed")
 theme_override_styles/normal = SubResource("sb_slot_normal")
 
-[node name="ActivityStuff" type="ColorRect" parent="."]
-visible = false
-layout_mode = 0
-offset_top = -30.0
-offset_right = 88.0
-mouse_filter = 1
-color = Color(0.070588, 0.129412, 0.121569, 0.980392)
-
-[node name="UseButton" type="Button" parent="ActivityStuff"]
+[node name="ItemIcon" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UseButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -20.0
+offset_top = -24.0
+offset_right = 68.0
+offset_bottom = -6.0
+theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
+theme_override_colors/font_hover_color = Color(0.749020, 0.921569, 0.792157, 1)
 theme_override_styles/focus = SubResource("sb_empty")
-theme_override_styles/hover = SubResource("sb_action_hover")
-theme_override_styles/pressed = SubResource("sb_action_pressed")
-theme_override_styles/normal = SubResource("sb_action_normal")
+theme_override_styles/hover = SubResource("sb_popup_hover")
+theme_override_styles/pressed = SubResource("sb_popup_hover")
+theme_override_styles/normal = SubResource("sb_popup_normal")
 text = "BENUTZEN"
 
-[node name="CraftWindow" type="ColorRect" parent="."]
+[node name="CraftButton" type="Button" parent="."]
 visible = false
 layout_mode = 0
-offset_top = -30.0
-offset_right = 88.0
-mouse_filter = 1
-color = Color(0.070588, 0.129412, 0.121569, 0.980392)
-
-[node name="CraftButton" type="Button" parent="CraftWindow"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -20.0
+offset_top = -24.0
+offset_right = 68.0
+offset_bottom = -6.0
+theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
+theme_override_colors/font_hover_color = Color(0.749020, 0.921569, 0.792157, 1)
 theme_override_styles/focus = SubResource("sb_empty")
-theme_override_styles/hover = SubResource("sb_action_hover")
-theme_override_styles/pressed = SubResource("sb_action_pressed")
-theme_override_styles/normal = SubResource("sb_action_normal")
+theme_override_styles/hover = SubResource("sb_popup_hover")
+theme_override_styles/pressed = SubResource("sb_popup_hover")
+theme_override_styles/normal = SubResource("sb_popup_normal")
 text = "Kombinieren"
 
 [connection signal="gui_input" from="ItemButton" to="." method="_on_item_button_gui_input"]
-[connection signal="pressed" from="ActivityStuff/UseButton" to="." method="_on_use_button_pressed"]
-[connection signal="pressed" from="CraftWindow/CraftButton" to="." method="_on_craft_button_pressed"]
+[connection signal="pressed" from="UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="CraftButton" to="." method="_on_craft_button_pressed"]

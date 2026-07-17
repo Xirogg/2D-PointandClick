@@ -9,6 +9,9 @@ var InventorySlot = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 @onready var item_description: Label = %ItemDescription
 
 
+## A slot asked for the inventory to close (its "BENUTZEN" was pressed). The
+## Player owns the InventoryLayer, so it does the actual hiding.
+signal close_requested
 
 var dragged_slot = null
 var origin_slot_index = null
@@ -16,13 +19,10 @@ var target_slot_index = null
 
 
 func _ready() -> void:
-	
+
 	Global.updateinventory.connect(on_updateinvenory)
 	on_updateinvenory()
 
-
-		
-#		modulator_target.inner_border.modulate = Color(5,5,1)
 
 func cleargrid():
 	
@@ -38,16 +38,41 @@ func on_updateinvenory():
 		var slot = InventorySlot.instantiate()
 		slot.drag_start.connect(on_drag_start)
 		slot.drag_end.connect(on_drag_end)
+		slot.selected.connect(on_slot_selected)
+		slot.use_requested.connect(on_slot_use_requested)
+		slot.craft_requested.connect(on_slot_craft_requested)
 		Grid_Container.add_child(slot)
-		
-		if item != null: 
-			
+
+		if item != null:
+
 			slot.set_item(item)
-			
-		else: 
-			
+
+		else:
+
 			slot.setempty()
-			
+
+
+## A slot was clicked: describe it, and keep it the only slot with a popup open.
+func on_slot_selected(slot: Control):
+
+	for other_slot in Grid_Container.get_children():
+		if other_slot != slot:
+			other_slot.hide_popups()
+
+	setitemname(slot.display_name())
+	setdescriptionname(slot.display_description())
+
+
+func on_slot_use_requested(_slot: Control):
+
+	close_requested.emit()
+
+
+func on_slot_craft_requested(_slot: Control):
+
+	craft_item()
+
+
 func check_crafting():
 
 	#Get the Dev Names for each Item

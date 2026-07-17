@@ -1,159 +1,121 @@
 extends Control
 
+## One inventory cell: the pixel-art frame, the item icon drawn on top of it,
+## and the two small popups that open above it (use / combine).
+##
+## Hover and press visuals come from ItemButton's StyleBoxTextures, so there is
+## no state-juggling code here. The slot also never reaches up into the
+## inventory UI by walking get_parent() chains — it reports what happened
+## through signals and lets inventory_ui.gd decide, so it keeps working no
+## matter how deeply the UI ends up nested in the Player scene.
 
-
-var item = null
-var gd_name
-var item_name
-
-
-var item_name_de
-var item_description_de
-
-var item_name_en
-var item_description_en
-
-
-var ActualName
-
-#  Node References
-@onready var inner_border: ColorRect = $InnerBorder
-@onready var ItemIcon: TextureRect = $InnerBorder/ItemIcon
-@onready var ItemQuantity: Label = $InnerBorder/ItemQuantitiy
-@onready var ItemName: Label = $InnerBorder/ItemName
-@onready var activity_stuff: ColorRect = $ActivityStuff
-@onready var craft_window: ColorRect = $CraftWindow
-@onready var craft_button: Button = $CraftWindow/CraftButton
-
-# Signals
+## Brightening laid over the whole slot while it is dragged with RMB.
+const DRAG_TINT := Color(1.5, 1.5, 1.5)
 
 signal drag_start(slot)
 signal drag_end()
+## LMB on this slot. The UI fills the name/description labels from it and
+## closes the popups still open on other slots.
+signal selected(slot)
+## "BENUTZEN" pressed. The UI closes the inventory.
+signal use_requested(slot)
+## "Kombinieren" pressed. The UI runs the crafting check.
+signal craft_requested(slot)
 
-# For Crafting
+## The inventory entry shown here, or null while the slot is empty.
+var item = null
+
+@onready var item_icon: TextureRect = $ItemIcon
+@onready var use_button: Button = $UseButton
+@onready var craft_button: Button = $CraftButton
 
 
-func _ready() -> void:
-	print("Inv Slot instantiated")
-
-
-func setempty():
-	ItemIcon.texture = null 
-	ItemQuantity.text = " "
-	ItemName.text = " "
-	
-	
-func set_item(new_item):
-	
+func set_item(new_item) -> void:
 	item = new_item
-	
-	
-	ItemIcon.texture = new_item["texture"] 
-#	ItemQuantity.text = str(item["quantity"])
-	ItemName.text = str(item["name_de"])
-	gd_name = str(item["gd_name"])
-	item_name = str(item["name_de"])
-	
-	item_name_de = str(item["name_de"])
-	item_description_de = str(item["description_de"])
-	
-	item_name_en = str(item["name_en"])
-	item_description_en = str(item["description_en"])
-	 
-	#print("ITEM : ", ItemQuantity.text, "  | ITEM NAME: ", ItemName.text)
-	
-	
-func get_item():
-	
-	var ChosenItemName = str(ItemName.text)
-	Global.LastSelectedItem = ChosenItemName
-	print(ActualName)
+	item_icon.texture = new_item["texture"]
 
 
-#func _on_item_button_pressed() -> void:
-	#if item != null:
-		#get_item()
-	#else:
-		#return
+func setempty() -> void:
+	item = null
+	item_icon.texture = null
+	hide_popups()
 
 
-func _on_item_button_mouse_entered() -> void:
-	pass # Replace with function body.
+## Name in the player's language, empty while the slot is empty.
+func display_name() -> String:
+	if item == null:
+		return ""
+	return item["name_de"] if Global.SelectedLanguage == "de" else item["name_en"]
 
 
-func _on_item_button_mouse_exited() -> void:
-	pass # Replace with function body.
+## Description in the player's language, empty while the slot is empty.
+func display_description() -> String:
+	if item == null:
+		return ""
+	return item["description_de"] if Global.SelectedLanguage == "de" else item["description_en"]
+
+
+func show_craft_interface() -> void:
+	use_button.hide()
+	craft_button.show()
+
+
+func hide_craft_interface() -> void:
+	craft_button.hide()
+
+
+func hide_popups() -> void:
+	use_button.hide()
+	craft_button.hide()
 
 
 func _on_item_button_gui_input(event: InputEvent) -> void:
-	var InventoryUI = get_parent().get_parent() #Node InventoryUI
-	if event is InputEventMouseButton:
-		
-		#LMB
-		if event.button_index == MOUSE_BUTTON_MASK_LEFT and event.is_pressed():
+	if event is not InputEventMouseButton:
+		return
 
-			
-			if item != null: 
-				
-				#Name und Beschreibung von Items anzeigen
-				if Global.SelectedLanguage == "de":
-					InventoryUI.setitemname(item_name_de)
-					InventoryUI.setdescriptionname(item_description_de)
-					activity_stuff.show()
-					#
-				else: 
-					InventoryUI.setitemname(item_name_en)
-					InventoryUI.setdescriptionname(item_description_en)
-					activity_stuff.show()
-				
-			else: 
-				#Nichts anzeigen bei leeren Slots / Text resetten
-				InventoryUI.setitemname("")
-				InventoryUI.setdescriptionname("")
-				
-				
-		#RMG
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.is_pressed():
-				
-				inner_border.modulate = Color(2,0,2)
-				drag_start.emit(self)
-				
-			else: 
-				
-				inner_border.modulate = Color(1,1,1)
-				drag_end.emit()
-		
+	if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		selected.emit(self)
+		# An empty slot has nothing to use, so it only clears the labels.
+		if item != null:
+			use_button.show()
+		return
+
+	if event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed():
+			modulate = DRAG_TINT
+			drag_start.emit(self)
+		else:
+			modulate = Color.WHITE
+			drag_end.emit()
+
 
 func _on_use_button_pressed() -> void:
-	var invui = get_parent().get_parent().get_parent().get_parent()
-	#Hide the Inventory and select the Playerrs selected Item
-	invui.hide()
-	activity_stuff.hide()
-	if item_name == "Luna": 
-		print("Das ist das Lunari Shapeshift Item lets go")
-		var player : Player = get_tree().get_first_node_in_group("Player")
-		player.shpapeshiftable_races["Lunari"] = true
-		
-	else: 
-		Global.change_selecteditem(item_name)
-		print(Global.LastSelectedItem, "LAST")
-#Make the Use Button Disappear when another Slot is selected
-func _on_item_button_focus_exited() -> void:
-	activity_stuff.hide()
+	use_button.hide()
+	if item == null:
+		return
 
-func show_craft_interface(): 
-	
-	craft_window.show()
-	
-	
-func hide_craft_interface():
-	
-	craft_window.hide()
+	use_requested.emit(self)
+
+	if item["name_de"] == "Luna":
+		_unlock_lunari()
+		return
+
+	# Puzzles match on the German name (see activity_module.needed_item), so
+	# this key deliberately ignores the selected language.
+	Global.change_selecteditem(item["name_de"])
+
+
+## The Lunari token unlocks the shapeshift rather than becoming a held item.
+## Player does not define `shpapeshiftable_races` yet, so this warns instead of
+## crashing until that half exists.
+func _unlock_lunari() -> void:
+	var player := get_tree().get_first_node_in_group("Player")
+	if player == null or not "shpapeshiftable_races" in player:
+		push_warning("Luna used, but Player has no 'shpapeshiftable_races' - shapeshift unlock skipped.")
+		return
+	player.shpapeshiftable_races["Lunari"] = true
 
 
 func _on_craft_button_pressed() -> void:
-	var invui = get_parent().get_parent()
-	
-	invui.craft_item()
-	
+	craft_button.hide()
+	craft_requested.emit(self)
