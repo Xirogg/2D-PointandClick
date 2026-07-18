@@ -3,7 +3,24 @@
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
 [ext_resource type="Script" uid="uid://c5f7e3skvr87x" path="res://Scripts/Characters/player_camera.gd" id="2_pcam"]
-[ext_resource type="Texture2D" uid="uid://ckwn83b5stpea" path="res://Assets/Placeholders/32s32.png" id="4_gy20a"]
+[ext_resource type="Texture2D" uid="uid://cr7irmvjfumlq" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist1.png" id="10_idle1"]
+[ext_resource type="Texture2D" uid="uid://cpnupwnj51ny6" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist2.png" id="11_idle2"]
+[ext_resource type="Texture2D" uid="uid://c8kfbmmtdlfhg" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist3.png" id="12_idle3"]
+[ext_resource type="Texture2D" uid="uid://bkrjqw0jlsa7w" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist4.png" id="13_idle4"]
+[ext_resource type="Texture2D" uid="uid://bireyjvhs5qcs" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist5.png" id="14_idle5"]
+[ext_resource type="Texture2D" uid="uid://bx226ecva0jjn" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist6.png" id="15_idle6"]
+[ext_resource type="Texture2D" uid="uid://hrpkoevkebc3" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist7.png" id="16_idle7"]
+[ext_resource type="Texture2D" uid="uid://376bcoucsrqw" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist8.png" id="17_idle8"]
+[ext_resource type="Texture2D" uid="uid://ddlnc2ubxe0ff" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist9.png" id="18_idle9"]
+[ext_resource type="Texture2D" uid="uid://cdldjey0670qe" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist10.png" id="19_idle10"]
+[ext_resource type="Texture2D" uid="uid://cn2x2vv5iay6q" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist1.png" id="20_walk1"]
+[ext_resource type="Texture2D" uid="uid://dj3c43f76xrdu" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist2.png" id="21_walk2"]
+[ext_resource type="Texture2D" uid="uid://bgr4wx7njx7vv" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist3.png" id="22_walk3"]
+[ext_resource type="Texture2D" uid="uid://7hwywt5kgpas" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist4.png" id="23_walk4"]
+[ext_resource type="Texture2D" uid="uid://c3yjn672u0fx0" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist5.png" id="24_walk5"]
+[ext_resource type="Texture2D" uid="uid://tusf63gay4yo" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist6.png" id="25_walk6"]
+[ext_resource type="Texture2D" uid="uid://dq3m0yf4guce0" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist7.png" id="26_walk7"]
+[ext_resource type="Texture2D" uid="uid://d0hkuwo1x33vt" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist8.png" id="27_walk8"]
 
 [sub_resource type="StyleBoxFlat" id="sb_close"]
 bg_color = Color(0.164706, 0.360784, 0.309804, 1)
@@ -45,6 +62,73 @@ height = 74.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_reach"]
 radius = 80.0
 
+[sub_resource type="SpriteFrames" id="sf_maya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_idle1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_idle2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_idle3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_idle4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_idle5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_idle6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_idle7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_idle8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_idle9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_idle10")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_walk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_walk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_walk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_walk4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_walk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_walk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_walk7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_walk8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=1531897282 groups=["Player"]]
 script = ExtResource("1_40svl")
 
@@ -58,7 +142,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.05098, 0.094118, 0.090196, 0.882353)
+color = Color(0.05098, 0.094118, 0.090196, 0.6)
 
 [node name="InventoryUI" parent="InventoryLayer/ColorRect" unique_id=313216069 instance=ExtResource("1_3etf2")]
 z_index = 3
@@ -102,19 +186,21 @@ show_percentage = false
 [node name="Player Hitbox" type="CollisionShape2D" parent="." unique_id=1954601224]
 shape = SubResource("CapsuleShape2D_al8ar")
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=345462724]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1145213318]
 shape = SubResource("CircleShape2D_reach")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1096616963]
 script = ExtResource("2_pcam")
 
-[node name="32s32" type="Sprite2D" parent="." unique_id=1765270009]
-position = Vector2(0, 10)
-texture = ExtResource("4_gy20a")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1765270009]
+position = Vector2(0, -6)
+sprite_frames = SubResource("sf_maya")
+animation = &"idle"
+autoplay = "idle"
 
 [connection signal="close_requested" from="InventoryLayer/ColorRect/InventoryUI" to="." method="_on_close_inv_pressed"]
 [connection signal="pressed" from="InventoryLayer/ColorRect/Close Inv" to="." method="_on_close_inv_pressed"]

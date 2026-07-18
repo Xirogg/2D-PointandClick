@@ -1,9 +1,34 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene format=3 uid="uid://pkvqabfe20k0"]
 
-[ext_resource type="Script" path="res://Scripts/GUI/Menus/main_menu.gd" id="1_mainmenu"]
+[ext_resource type="Script" uid="uid://c8u0r16cfxoux" path="res://Scripts/GUI/Menus/main_menu.gd" id="1_mainmenu"]
 [ext_resource type="PackedScene" path="res://Scenes/GUI/Menus/settings_menu.tscn" id="2_settingsmenu"]
 [ext_resource type="Texture2D" uid="uid://dsrd7duf8nvje" path="res://Assets/Placeholders/Intro.png" id="3_intro"]
 [ext_resource type="Resource" uid="uid://dietuswekfkcw" path="res://Dialogue/Intro.dialogue" id="4_introdialogue"]
+[ext_resource type="Script" path="res://Scripts/GUI/Menus/menu_helicopter.gd" id="5_helicopter"]
+[ext_resource type="Texture2D" uid="uid://djwmghq7igwat" path="res://Assets/Characters/Helicopter/Helikopta1.png" id="6_heli1"]
+[ext_resource type="Texture2D" uid="uid://dcnll4jvohy8j" path="res://Assets/Characters/Helicopter/Helikopta2.png" id="7_heli2"]
+[ext_resource type="Texture2D" uid="uid://djvp5b1c0bk7v" path="res://Assets/Characters/Helicopter/Helikopta4.png" id="7_kw0ot"]
+[ext_resource type="Texture2D" uid="uid://cuxmefeshoe5t" path="res://Assets/Characters/Helicopter/Helikopta3.png" id="8_heli3"]
+
+[sub_resource type="SpriteFrames" id="sf_helicopter"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_heli1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_heli2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_heli3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kw0ot")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 12.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="sb_button"]
 bg_color = Color(0.164706, 0.360784, 0.309804, 1)
@@ -12,15 +37,15 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="sb_button_hover"]
-bg_color = Color(0.223529, 0.478431, 0.407843, 1)
+[sub_resource type="StyleBoxFlat" id="sb_button_pressed"]
+bg_color = Color(0.129412, 0.286275, 0.247059, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="sb_button_pressed"]
-bg_color = Color(0.129412, 0.286275, 0.247059, 1)
+[sub_resource type="StyleBoxFlat" id="sb_button_hover"]
+bg_color = Color(0.223529, 0.478431, 0.407843, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -38,7 +63,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=587855425]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,15 +73,24 @@ grow_vertical = 2
 script = ExtResource("1_mainmenu")
 intro_dialogue = ExtResource("4_introdialogue")
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=255393745]
 repeat_size = Vector2(1200, 0)
 autoscroll = Vector2(-150, 0)
 
-[node name="Placeholder" type="Sprite2D" parent="Parallax2D"]
+[node name="Placeholder" type="Sprite2D" parent="Parallax2D" unique_id=541577115]
 texture = ExtResource("3_intro")
 centered = false
 
-[node name="Menu" type="Control" parent="."]
+[node name="Helicopter" type="AnimatedSprite2D" parent="." unique_id=1646933920]
+position = Vector2(102, 171)
+sprite_frames = SubResource("sf_helicopter")
+animation = &"fly"
+autoplay = "fly"
+speed_scale = 2.5
+script = ExtResource("5_helicopter")
+speed = 2.5
+
+[node name="Menu" type="Control" parent="." unique_id=1635696948]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -66,7 +100,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Background" type="ColorRect" parent="Menu"]
+[node name="Background" type="ColorRect" parent="Menu" unique_id=1563765851]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,7 +110,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.05098, 0.094118, 0.090196, 0.72)
 
-[node name="Title" type="Label" parent="Menu"]
+[node name="Title" type="Label" parent="Menu" unique_id=668563280]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -89,7 +123,7 @@ text = "Unsequenced"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="Menu"]
+[node name="Buttons" type="VBoxContainer" parent="Menu" unique_id=1653678711]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -104,43 +138,43 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="PlayButton" type="Button" parent="Menu/Buttons"]
+[node name="PlayButton" type="Button" parent="Menu/Buttons" unique_id=1209628485]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 28)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
 theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("sb_button_focus")
 theme_override_styles/normal = SubResource("sb_button")
-theme_override_styles/hover = SubResource("sb_button_hover")
 theme_override_styles/pressed = SubResource("sb_button_pressed")
+theme_override_styles/hover = SubResource("sb_button_hover")
+theme_override_styles/focus = SubResource("sb_button_focus")
 text = "Spielen"
 
-[node name="SettingsButton" type="Button" parent="Menu/Buttons"]
+[node name="SettingsButton" type="Button" parent="Menu/Buttons" unique_id=1184053791]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 28)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
 theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("sb_button_focus")
 theme_override_styles/normal = SubResource("sb_button")
-theme_override_styles/hover = SubResource("sb_button_hover")
 theme_override_styles/pressed = SubResource("sb_button_pressed")
+theme_override_styles/hover = SubResource("sb_button_hover")
+theme_override_styles/focus = SubResource("sb_button_focus")
 text = "Einstellungen"
 
-[node name="QuitButton" type="Button" parent="Menu/Buttons"]
+[node name="QuitButton" type="Button" parent="Menu/Buttons" unique_id=761884147]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 28)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.905882, 0.960784, 0.858824, 1)
 theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("sb_button_focus")
 theme_override_styles/normal = SubResource("sb_button")
-theme_override_styles/hover = SubResource("sb_button_hover")
 theme_override_styles/pressed = SubResource("sb_button_pressed")
+theme_override_styles/hover = SubResource("sb_button_hover")
+theme_override_styles/focus = SubResource("sb_button_focus")
 text = "Verlassen"
 
-[node name="SettingsMenu" parent="." instance=ExtResource("2_settingsmenu")]
+[node name="SettingsMenu" parent="." unique_id=1404638602 instance=ExtResource("2_settingsmenu")]
 unique_name_in_owner = true
 
 [connection signal="pressed" from="Menu/Buttons/PlayButton" to="." method="_on_play_button_pressed"]

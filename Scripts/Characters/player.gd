@@ -27,7 +27,15 @@ const ARRIVE_EPSILON: float = 1.0
 ## hotspots stacked on the same pixel.
 const MAX_HOTSPOTS_PER_CLICK: int = 32
 
+## The two animations in the sprite's SpriteFrames.
+const IDLE_ANIMATION: StringName = &"idle"
+const WALK_ANIMATION: StringName = &"walk"
+
 @onready var escalation_bar: ProgressBar = $"Player HUD/EscalationBar"
+
+## Maya's sprite. Holds the "idle" and "walk" animations; the art faces right, so
+## walking left is a horizontal flip.
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var camera: Camera2D = $Camera2D
 
@@ -85,14 +93,19 @@ func _physics_process(delta: float) -> void:
 
 	# Still more than one step away: keep walking.
 	if absf(distance_x) > Speed * delta:
-		velocity = Vector2(signf(distance_x) * Speed, 0.0)
+		var direction := signf(distance_x)
+		velocity = Vector2(direction * Speed, 0.0)
 		move_and_slide()
+		_face(direction)
+		_play(WALK_ANIMATION)
 		return
 
 	# Within a single step, so land exactly on the target instead of stepping
 	# over it and jittering back and forth.
 	position.x = click_target.x
 	velocity = Vector2.ZERO
+	# Standing still keeps whichever way Maya was last facing.
+	_play(IDLE_ANIMATION)
 
 	if _walking:
 		_walking = false
@@ -117,6 +130,21 @@ func _use(target: Interactable) -> void:
 		# walk, and waiting for an arrival that never comes would make the
 		# click do nothing at all.
 		_arrive()
+
+
+## Turns Maya to face `direction` (-1 left, 1 right). The art is drawn facing
+## right, so only leftward movement is mirrored. A direction of 0 leaves her
+## facing whichever way she already was.
+func _face(direction: float) -> void:
+	if direction != 0.0:
+		sprite.flip_h = direction < 0.0
+
+
+## Switches to `animation_name`, ignoring the call when it is already running so
+## the loop is not restarted from frame 0 every physics tick.
+func _play(animation_name: StringName) -> void:
+	if sprite.animation != animation_name or not sprite.is_playing():
+		sprite.play(animation_name)
 
 
 ## Whether `target` currently overlaps the interaction area around the player.

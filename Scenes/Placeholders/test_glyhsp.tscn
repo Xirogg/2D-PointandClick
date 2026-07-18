@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://da02lubw7omsc"]
+[gd_scene format=3 uid="uid://da02lubw7omsc"]
 
 [ext_resource type="Script" uid="uid://dnva7gldas4pq" path="res://Scenes/Placeholders/test_glyhsp.gd" id="1_6ccud"]
 
 [sub_resource type="StyleBoxFlat" id="sb_panel"]
-bg_color = Color(0.078431, 0.137255, 0.129412, 0.980392)
+bg_color = Color(0.078431, 0.137255, 0.129412, 0.9)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -14,15 +14,21 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="GlyphGallery" type="Control"]
-anchors_preset = 15
+[node name="GlyphGallery" type="Control" unique_id=1084829288]
+layout_mode = 3
+anchor_left = -0.009000001
+anchor_top = -0.042000003
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.76
+offset_top = 15.120001
+offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6ccud")
+total_slot_count = 15
 
-[node name="Backdrop" type="ColorRect" parent="."]
+[node name="Backdrop" type="ColorRect" parent="." unique_id=453233223]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,9 +36,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.05098, 0.094118, 0.090196, 0.882353)
+color = Color(0.05098, 0.094118, 0.090196, 0.6)
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=2000599133]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,29 +47,29 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="PanelContainer" parent="Center"]
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=2098339474]
 layout_mode = 2
 theme_override_styles/panel = SubResource("sb_panel")
 
-[node name="Margin" type="MarginContainer" parent="Center/Panel"]
+[node name="Margin" type="MarginContainer" parent="Center/Panel" unique_id=830166611]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="Center/Panel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Center/Panel/Margin" unique_id=1999353918]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Center/Panel/Margin/VBox"]
+[node name="Title" type="Label" parent="Center/Panel/Margin/VBox" unique_id=887698688]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.74902, 0.921569, 0.792157, 1)
 theme_override_font_sizes/font_size = 16
 text = "Glyphen"
 horizontal_alignment = 1
 
-[node name="GlyphGrid" type="GridContainer" parent="Center/Panel/Margin/VBox"]
+[node name="GlyphGrid" type="GridContainer" parent="Center/Panel/Margin/VBox" unique_id=990186898]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 6
