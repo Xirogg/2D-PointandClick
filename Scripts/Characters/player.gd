@@ -237,7 +237,18 @@ func _clamp_x_to_bounds(x: float) -> float:
 
 
 
+## The inventory button doubles as the "never mind" button for an armed item.
+##
+## While something is armed the first press only puts it away — the icon leaves
+## the cursor and the inventory deliberately stays shut. A second press then
+## opens it as usual. Cancelling and browsing are the two things a player wants
+## from this button, and cancelling is the more urgent of the two, so it gets
+## the first press.
 func _on_inventory_button_pressed() -> void:
+	if Global.selected_item != null:
+		Global.select_item(null)
+		return
+
 	$InventoryLayer.show()
 
 

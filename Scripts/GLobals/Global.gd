@@ -57,6 +57,30 @@ var has_visited_ship: bool = false
 
 var _broadcast_stage: StoryStage = StoryStage.FIRST_VISIT
 
+# --- One-shot story flags -------------------------------------------
+# "This already happened" markers, e.g. "the big tent handed out its gas mask".
+# Levels are rebuilt from scratch every time the player walks back into them,
+# so a level node cannot remember this on its own - it has to live out here in
+# the autoload, next to has_visited_ship.
+#   flag (StringName) -> true
+var story_flags: Dictionary = {}
+
+
+## Whether this one-shot has already fired.
+func has_flag(flag: StringName) -> bool:
+	return story_flags.get(flag, false)
+
+
+## Mark a one-shot as fired. Returns false when it had already fired, so a
+## reward can be written as a single guard:
+##     if Global.claim_flag(&"big_tent_gasmaske"):
+##         ItemLogic.give("gasmaske")
+func claim_flag(flag: StringName) -> bool:
+	if story_flags.get(flag, false):
+		return false
+	story_flags[flag] = true
+	return true
+
 
 ## The stage the game is in right now, highest reached condition wins.
 func get_story_stage() -> StoryStage:
@@ -78,6 +102,7 @@ func mark_ship_visited() -> void:
 ## Call this when starting a new game, next to reset_picked_up_items().
 func reset_story_state() -> void:
 	has_visited_ship = false
+	story_flags.clear()
 	_broadcast_stage = StoryStage.FIRST_VISIT
 	story_stage_changed.emit(_broadcast_stage)
 

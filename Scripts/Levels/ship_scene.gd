@@ -1,8 +1,9 @@
 extends Node2D
 
-## Which glyph the console puts on screen. Exported so the same console can
-## front a different glyph from the inspector once there are more of them.
-@export var console_glyph_id: StringName = &"Test"
+## Which glyph the console opens on the very first time. After that the console
+## reopens on whatever the player last cycled to, so the selection survives
+## walking away and coming back.
+@export var console_glyph_id: StringName = &"Zeit"
 
 @onready var _glyph_popup: GlyphPopup = $GlyphPopup
 
@@ -15,4 +16,7 @@ func _ready() -> void:
 
 ## Called by the Console Interactable once the player has walked over to it.
 func _on_console_interacted(_player: Node2D) -> void:
-	_glyph_popup.open(console_glyph_id)
+	var id := Lexicon.active_glyph_id
+	if id == &"":
+		id = console_glyph_id
+	_glyph_popup.open(id)

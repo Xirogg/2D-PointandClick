@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bubuwfxbtbme8"
+path="res://.godot/imported/Small Tent -- Stage 2 Dialogue.dialogue-951916400b24b9fecadc36f5f0b6fadd.tres"
+
+[deps]
+
+source_file="res://Dialogue/BaseCamp/Small Tent -- Stage 2 Dialogue.dialogue"
+dest_files=["res://.godot/imported/Small Tent -- Stage 2 Dialogue.dialogue-951916400b24b9fecadc36f5f0b6fadd.tres"]
+
+[params]
+
+defaults=true

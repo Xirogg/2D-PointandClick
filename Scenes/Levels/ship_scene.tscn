@@ -5,9 +5,13 @@
 [ext_resource type="Script" uid="uid://bnup18soqo87w" path="res://Scripts/Levels/ship_scene.gd" id="3_shipsc"]
 [ext_resource type="PackedScene" path="res://Scenes/GUI/Glyphs/glyph_popup.tscn" id="4_glyphp"]
 [ext_resource type="Script" uid="uid://cntogujji1otx" path="res://Scripts/Interaction/interactable.gd" id="5_ntract"]
+[ext_resource type="Script" path="res://Scripts/Glyphs/active_glyph_sprite.gd" id="6_glyphspr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_console"]
-size = Vector2(392, 237)
+size = Vector2(332, 219.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u2vya"]
+radius = 35.22783
 
 [node name="Ship_Scene" type="Node2D" unique_id=519845933]
 script = ExtResource("3_shipsc")
@@ -23,15 +27,27 @@ display_name = "Konsole"
 interaction_point = NodePath("InteractionPoint")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Console" unique_id=1067953796]
-position = Vector2(-561, -39.5)
+position = Vector2(-591, -48.25)
 shape = SubResource("RectangleShape2D_console")
 
 [node name="InteractionPoint" type="Marker2D" parent="Console" unique_id=809024377]
 position = Vector2(-40, 105)
 
+[node name="ActiveGlyphDisplay" type="Sprite2D" parent="." unique_id=1211411420]
+texture_filter = 1
+position = Vector2(568, 211)
+script = ExtResource("6_glyphspr")
+
 [node name="Player" parent="." unique_id=1531897282 instance=ExtResource("2_lc756")]
 position = Vector2(64, 259)
 
 [node name="GlyphPopup" parent="." unique_id=2062616247 instance=ExtResource("4_glyphp")]
+
+[node name="Item Check" type="Area2D" parent="." unique_id=1868072916]
+position = Vector2(739, 235)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Item Check" unique_id=322568411]
+position = Vector2(24, -13)
+shape = SubResource("CircleShape2D_u2vya")
 
 [connection signal="interacted" from="Console" to="." method="_on_console_interacted"]

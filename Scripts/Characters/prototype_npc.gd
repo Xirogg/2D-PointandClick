@@ -19,9 +19,18 @@ extends CharacterBody2D
 ##   4. Each slot has its own title, defaulting to "start". Point all three
 ##      slots at the same file and give them different titles if you would
 ##      rather keep one dialogue file per NPC.
+##   5. Connect "dialogue_finished" in the level script to hand out items or
+##      move the story on.
 ##
 ## The clicking itself belongs to the child Interactable: the player walks into
 ## range first, and only then is _on_interactable_interacted called.
+##
+## Scenery that talks but is not a character uses dialogue_hotspot.gd instead;
+## both share the slot-picking rule in StoryDialogue.
+
+## Fired after the balloon has closed, carrying the Global.StoryStage whose
+## dialogue just played. This is what levels hang their rewards off.
+signal dialogue_finished(stage: int)
 
 @export_group("Stage 1 - First Visit")
 @export var dialogue_first_visit: DialogueResource
@@ -38,37 +47,12 @@ extends CharacterBody2D
 
 ## Called by the child Interactable once the player has walked up to this NPC.
 func _on_interactable_interacted(_player: Node2D) -> void:
-	var stage := _stage_to_play()
+	var slots: Array[DialogueResource] = [dialogue_first_visit, dialogue_after_ship, dialogue_after_glyphs]
+	var titles: Array[String] = [title_first_visit, title_after_ship, title_after_glyphs]
+
+	var stage := StoryDialogue.play(slots, titles, name)
 	if stage < 0:
-		push_warning("NPC '%s' was clicked but has no Dialogue Resource assigned." % name)
 		return
-	DialogueManager.show_dialogue_balloon(_resource_for_stage(stage), _title_for_stage(stage))
 
-
-# Walks back from the current story stage until it finds a slot that actually
-# has a file in it. Returns -1 when every slot is empty.
-func _stage_to_play() -> int:
-	var stage := int(Global.get_story_stage())
-	while stage >= 0:
-		if _resource_for_stage(stage) != null:
-			return stage
-		stage -= 1
-	return -1
-
-
-func _resource_for_stage(stage: int) -> DialogueResource:
-	if stage == Global.StoryStage.GLYPHS_TRANSLATED:
-		return dialogue_after_glyphs
-	if stage == Global.StoryStage.AFTER_SHIP:
-		return dialogue_after_ship
-	return dialogue_first_visit
-
-
-# An empty title field means "start" rather than a broken jump into the file.
-func _title_for_stage(stage: int) -> String:
-	var title := title_first_visit
-	if stage == Global.StoryStage.GLYPHS_TRANSLATED:
-		title = title_after_glyphs
-	elif stage == Global.StoryStage.AFTER_SHIP:
-		title = title_after_ship
-	return title if not title.strip_edges().is_empty() else "start"
+	await DialogueManager.dialogue_ended
+	dialogue_finished.emit(stage)

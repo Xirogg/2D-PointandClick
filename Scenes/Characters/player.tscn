@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
 [ext_resource type="Script" uid="uid://c5f7e3skvr87x" path="res://Scripts/Characters/player_camera.gd" id="2_pcam"]
+[ext_resource type="Script" path="res://Scripts/GUI/item_cursor.gd" id="3_itemcursor"]
 [ext_resource type="Texture2D" uid="uid://cr7irmvjfumlq" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist1.png" id="10_idle1"]
 [ext_resource type="Texture2D" uid="uid://cpnupwnj51ny6" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist2.png" id="11_idle2"]
 [ext_resource type="Texture2D" uid="uid://c8kfbmmtdlfhg" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist3.png" id="12_idle3"]
@@ -171,6 +172,17 @@ text = "Schließen"
 [node name="Inventory Button" type="Button" parent="Player HUD" unique_id=1675823108]
 offset_right = 31.0
 offset_bottom = 29.0
+
+[node name="ItemCursor" type="TextureRect" parent="Player HUD"]
+texture_filter = 1
+z_index = 5
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_itemcursor")
 
 [node name="EscalationBar" type="ProgressBar" parent="Player HUD" unique_id=1611430457]
 offset_left = 37.0

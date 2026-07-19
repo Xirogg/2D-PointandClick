@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ddnw7c8aqf5x0"
+path="res://.godot/imported/NPC2 -- Stage 1 Dialogue.dialogue-580c070417b93d0b636cf8e153d54eb6.tres"
+
+[deps]
+
+source_file="res://Dialogue/BaseCamp/NPC2 -- Stage 1 Dialogue.dialogue"
+dest_files=["res://.godot/imported/NPC2 -- Stage 1 Dialogue.dialogue-580c070417b93d0b636cf8e153d54eb6.tres"]
+
+[params]
+
+defaults=true

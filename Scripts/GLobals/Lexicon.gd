@@ -6,17 +6,72 @@ signal glyph_confirmed(id: StringName)
 ## Fired the moment the last still-untranslated glyph is named correctly.
 ## Global listens to this to move the story on to its final stage.
 signal all_glyphs_translated()
+## The glyph the player currently has "in hand" — whatever the ship console is
+## showing. Carries null when nothing is selected.
+signal active_glyph_changed(glyph: Glyph)
 
 var glyphs: Dictionary = {}      # id -> Glyph
 var guesses: Dictionary = {}     # id -> String (player's guess)
 var discovered: Dictionary = {}  # id -> bool
 var confirmed: Dictionary = {}   # id -> bool
 
+## Cycle order for the console, sorted by Glyph.sort_order then id. Kept apart
+## from `glyphs` because a Dictionary's order follows load order, which is
+## whatever the filesystem hands back.
+var glyph_order: Array[StringName] = []
+
+## Which glyph is selected right now. Anything that needs to react to the
+## player's current pick reads this / listens to active_glyph_changed instead of
+## reaching into the console UI.
+var active_glyph_id: StringName = &""
+
 func _ready() -> void:
 	_load_all()
 
 func register(g: Glyph) -> void:
 	glyphs[g.id] = g
+	if not glyph_order.has(g.id):
+		glyph_order.append(g.id)
+
+
+# --- Active glyph ---------------------------------------------------
+
+## Selects `id`. An unknown id is ignored rather than clearing the selection, so
+## a typo in an inspector field cannot silently blank the display.
+func set_active_glyph(id: StringName) -> void:
+	if not glyphs.has(id) or active_glyph_id == id:
+		return
+	active_glyph_id = id
+	active_glyph_changed.emit(glyphs[id])
+
+
+func get_active_glyph() -> Glyph:
+	return glyphs.get(active_glyph_id)
+
+
+## Clears the selection — used when the console is closed and nothing should
+## read as "in hand" any more.
+func clear_active_glyph() -> void:
+	if active_glyph_id == &"":
+		return
+	active_glyph_id = &""
+	active_glyph_changed.emit(null)
+
+
+## The id `step` places along the cycle from `id`, wrapping at both ends.
+## An unknown `id` starts from the top of the list, so the first arrow press
+## always lands somewhere valid.
+func get_glyph_id_offset_from(id: StringName, step: int) -> StringName:
+	if glyph_order.is_empty():
+		return &""
+	var index := glyph_order.find(id)
+	if index == -1:
+		index = 0
+	return glyph_order[wrapi(index + step, 0, glyph_order.size())]
+
+
+func get_ordered_ids() -> Array[StringName]:
+	return glyph_order.duplicate()
 
 func discover(id: StringName) -> void:
 	if not discovered.get(id, false):
@@ -83,3 +138,16 @@ func _load_all() -> void:
 			var g := load(dir + file) as Glyph
 			if g != null:
 				register(g)
+	_sort_glyph_order()
+
+
+# Filenames decide load order, which makes the cycle depend on what the .tres
+# files happen to be called. sort_order puts that back under the designer's
+# control.
+func _sort_glyph_order() -> void:
+	glyph_order.sort_custom(func(a: StringName, b: StringName) -> bool:
+		var ga: Glyph = glyphs[a]
+		var gb: Glyph = glyphs[b]
+		if ga.sort_order != gb.sort_order:
+			return ga.sort_order < gb.sort_order
+		return String(a) < String(b))

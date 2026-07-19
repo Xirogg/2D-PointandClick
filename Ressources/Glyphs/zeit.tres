@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Glyph" format=3]
+
+[ext_resource type="Script" uid="uid://f4nd763e5voo" path="res://Scripts/Ressources/glyph.gd" id="1_glyph"]
+[ext_resource type="Texture2D" uid="uid://chfu46vyvt0i1" path="res://Assets/Items/Glyphs/Logogramm 1.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_glyph")
+id = &"Zeit"
+texture = ExtResource("2_tex")
+acceptable_words = Array[String](["Zeit"])
+category = "noun"
+sort_order = 0
+metadata/_custom_type_script = "uid://f4nd763e5voo"

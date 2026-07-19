@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dbevvsm6jparc"
+path="res://.godot/imported/NPC2 -- Stage 2 Dialogue.dialogue-b5d87b7b1fa65f439bec9a820bccd7ce.tres"
+
+[deps]
+
+source_file="res://Dialogue/BaseCamp/NPC2 -- Stage 2 Dialogue.dialogue"
+dest_files=["res://.godot/imported/NPC2 -- Stage 2 Dialogue.dialogue-b5d87b7b1fa65f439bec9a820bccd7ce.tres"]
+
+[params]
+
+defaults=true

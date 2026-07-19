@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bs1lxbkpseht8"
+path="res://.godot/imported/Big Tent -- Stage 3 Dialogue.dialogue-9177b220afd147568d1e593905cd5544.tres"
+
+[deps]
+
+source_file="res://Dialogue/BaseCamp/Big Tent -- Stage 3 Dialogue.dialogue"
+dest_files=["res://.godot/imported/Big Tent -- Stage 3 Dialogue.dialogue-9177b220afd147568d1e593905cd5544.tres"]
+
+[params]
+
+defaults=true
