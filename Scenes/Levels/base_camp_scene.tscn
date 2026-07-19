@@ -9,7 +9,6 @@
 [node name="BaseCamp_Scene" type="Node2D" unique_id=400114802]
 
 [node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=691299169 groups=["camera_bounds"]]
-modulate = Color(0, 1, 1, 1)
 z_index = -1
 position = Vector2(500, 180)
 texture = ExtResource("1_yflxa")

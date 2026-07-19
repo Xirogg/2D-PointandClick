@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://5lfcd8o5l287"]
+
+[ext_resource type="Script" uid="uid://ddo5pck7jdxa3" path="res://Scripts/Ressources/item_data.gd" id="1_itemdata"]
+[ext_resource type="Texture2D" uid="uid://wiyxnoctgbnk" path="res://Assets/Items/Kompletter Schutzanzug.png" id="2_bv53f"]
+
+[resource]
+script = ExtResource("1_itemdata")
+id = &"schutzausruestung"
+name_en = "Sealed Hazmat Gear"
+description_en = "Suit and mask together. Now it actually seals."
+name_de = "Vollständige Schutzausrüstung"
+description_de = "Anzug und Maske zusammen. Jetzt ist es wirklich dicht."
+texture = ExtResource("2_bv53f")

@@ -1,5 +1,11 @@
 extends Control
 
+## The inventory grid: one slot per inventory index, drag-to-swap, and the
+## combine flow.
+##
+## The slots are built once and then reused. Rebuilding them on every change
+## used to throw away and re-instantiate all ten every time a single item moved,
+## which also silently closed whichever popup the player had open.
 
 var InventorySlot = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
@@ -13,28 +19,23 @@ var InventorySlot = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 ## Player owns the InventoryLayer, so it does the actual hiding.
 signal close_requested
 
-var dragged_slot = null
-var origin_slot_index = null
-var target_slot_index = null
+var dragged_slot: Control = null
+var origin_slot_index: int = -1
+var target_slot_index: int = -1
 
 
 func _ready() -> void:
-
+	_build_slots()
 	Global.updateinventory.connect(on_updateinvenory)
 	on_updateinvenory()
 
 
-func cleargrid():
-	
-	while Grid_Container.get_child_count() > 0:
-		var child = Grid_Container.get_child(0)
-		Grid_Container.remove_child(child)
+# One slot node per inventory index, created once and kept for the whole run.
+func _build_slots() -> void:
+	for child in Grid_Container.get_children():
 		child.queue_free()
-		
-func on_updateinvenory():
-	#print("Update Inv")
-	cleargrid()
-	for item in Global.inventory:
+
+	for i in range(Global.inventory_size):
 		var slot = InventorySlot.instantiate()
 		slot.drag_start.connect(on_drag_start)
 		slot.drag_end.connect(on_drag_end)
@@ -43,18 +44,19 @@ func on_updateinvenory():
 		slot.craft_requested.connect(on_slot_craft_requested)
 		Grid_Container.add_child(slot)
 
-		if item != null:
 
-			slot.set_item(item)
-
+func on_updateinvenory() -> void:
+	var slots := Grid_Container.get_children()
+	for i in range(slots.size()):
+		var stack = Global.inventory[i] if i < Global.inventory.size() else null
+		if stack != null:
+			slots[i].set_stack(stack)
 		else:
-
-			slot.setempty()
+			slots[i].setempty()
 
 
 ## A slot was clicked: describe it, and keep it the only slot with a popup open.
-func on_slot_selected(slot: Control):
-
+func on_slot_selected(slot: Control) -> void:
 	for other_slot in Grid_Container.get_children():
 		if other_slot != slot:
 			other_slot.hide_popups()
@@ -63,134 +65,85 @@ func on_slot_selected(slot: Control):
 	setdescriptionname(slot.display_description())
 
 
-func on_slot_use_requested(_slot: Control):
-
+func on_slot_use_requested(_slot: Control) -> void:
 	close_requested.emit()
 
 
-func on_slot_craft_requested(_slot: Control):
-
+func on_slot_craft_requested(_slot: Control) -> void:
 	craft_item()
 
 
-func check_crafting():
-
-	#Get the Dev Names for each Item
-	var origin_slot = Global.inventory[origin_slot_index]
-	var target_slot = Global.inventory[target_slot_index]
-
-	#Need two actual items to attempt a combination.
-	if origin_slot == null or target_slot == null:
-		return ""
-
-	var origin_name = origin_slot["gd_name"]
-	var target_name = target_slot["gd_name"]
-
-
-	var item_array: Array = [origin_name, target_name]
-	item_array.sort()
-	#print(item_array)
-	
-	#Check for valid Combination
-	for Recepies in ItemLogic.CraftingRecepies.keys():
-		
-		var sorted_recepie = Recepies.duplicate()
-		sorted_recepie.sort()
-		#Check for all possibilities
-		if item_array == sorted_recepie:
-			for item in item_array:
-				Global.removeitem(item)
-			
-			return ItemLogic.CraftingRecepies[Recepies]
-			
-	return ""
-	
-func craft_item():
-
-	# Only escalate when the player actually tried to combine two items.
-	var origin_item = Global.inventory[origin_slot_index]
-	var target_item = Global.inventory[target_slot_index]
-	if origin_item == null or target_item == null:
+## Combine the two slots the player dragged together.
+##
+## All the rules live in ItemLogic.craft(): it finds the recipe, consumes the
+## inputs and adds the result, or fires craft_failed (which Global turns into an
+## escalation tick). This function only supplies the two ids.
+func craft_item() -> void:
+	if origin_slot_index < 0 or target_slot_index < 0:
 		return
 
-	var recepie = check_crafting()
+	var origin = Global.inventory[origin_slot_index]
+	var target = Global.inventory[target_slot_index]
+	if origin == null or target == null:
+		return
 
-	if recepie != "":
+	ItemLogic.craft(origin.id(), target.id())
 
-		ItemLogic.add_item(recepie)
 
-	else:
-
-		# The two items can't be combined -> the player failed. Escalate.
-		Global.increase_escalation()
-	
-
-func on_drag_start(slot_control: Control):
-
+func on_drag_start(slot_control: Control) -> void:
 	dragged_slot = slot_control
 	origin_slot_index = get_slot_index(dragged_slot)
-	print("Drag start: ", origin_slot_index)
-	
-func on_drag_end(): 
 
-	print("Drag end")
-	var target_slot = get_slot_under_mouse()
+
+func on_drag_end() -> void:
+	var target_slot := get_slot_under_mouse()
 	target_slot_index = get_slot_index(target_slot)
-	print("Target Slot ",target_slot)
-	if target_slot and dragged_slot != target_slot: 
-		
-		if target_slot.item != null:
-			
-			print("Cant Change That shit burv", target_slot_index )
-			target_slot.show_craft_interface()
-			
-			
-		else:
-			
-		
-			drop_slot(dragged_slot, target_slot)
-			print("GGGR",target_slot.item)
+
+	if target_slot == null or dragged_slot == target_slot:
+		return
+
+	if target_slot.stack != null:
+		# Something is already there — offer to combine instead of swapping.
+		target_slot.show_craft_interface()
 	else:
-		print("GEGG", target_slot)
-		
+		drop_slot(dragged_slot, target_slot)
+
+
 func get_slot_under_mouse() -> Control:
-	
-	var mouse_position = get_viewport().get_mouse_position()
-	
+	var mouse_position := get_viewport().get_mouse_position()
+
 	for slot in Grid_Container.get_children():
-		if slot is Control:
-			if slot.get_global_rect().has_point(mouse_position):
-				
-				return slot 
+		if slot is Control and slot.get_global_rect().has_point(mouse_position):
+			return slot
 
 	return null
-		
+
+
 func get_slot_index(slot: Control) -> int:
+	if slot == null:
+		return -1
 	#Valid Slot
 	for i in range(Grid_Container.get_child_count()):
 		if Grid_Container.get_child(i) == slot:
-		
-			return i  
+			return i
 	#Invalid Slot
-	return -1 
-	
-func drop_slot(slot_1: Control, slot_2: Control):
-	
-	var slot_1_index = get_slot_index(slot_1)
-	var slot_2_index = get_slot_index(slot_2)
-	
+	return -1
+
+
+func drop_slot(slot_1: Control, slot_2: Control) -> void:
+	var slot_1_index := get_slot_index(slot_1)
+	var slot_2_index := get_slot_index(slot_2)
+
 	if slot_1_index == -1 or slot_2_index == -1:
-		print("Ching Chong")
 		return
-	else:
-		if Global.swap_inventory(slot_1_index, slot_2_index):
-			on_updateinvenory()
-			print("Dropping slots: ", slot_1_index," ", slot_2_index )
-	
-func setitemname(item_Name):
-	print("NAME ", item_Name)
+
+	# swap_inventory emits updateinventory, which redraws the slots.
+	Global.swap_inventory(slot_1_index, slot_2_index)
+
+
+func setitemname(item_Name: String) -> void:
 	item_name.text = item_Name
-	
-func setdescriptionname(description_name):
-	print("DES",item_description)
+
+
+func setdescriptionname(description_name: String) -> void:
 	item_description.text = description_name

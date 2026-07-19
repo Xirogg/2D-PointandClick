@@ -1,23 +1,27 @@
 extends Node2D
 
+## An item lying in the level, waiting to be walked over to and picked up.
+##
+## This node holds no item data of its own — it points at an ItemData resource,
+## which is also what the inventory, the recipes and the puzzles use. Setting up
+## a pickup is therefore: drop item.tscn into the level, drag an ItemData into
+## "Item", done.
+
+## What this pickup gives the player. Drag in a .tres from res://Ressources/Items/.
+@export var item: ItemData:
+	set(value):
+		item = value
+		_refresh_icon()
+
 # Optional manual override. Leave empty to let the item derive a stable,
 # unique id automatically from where it is placed (see _resolve_item_id).
 # Set this by hand if you want a specific, save-game-stable key for an item.
 @export var item_id: StringName = &""
 
-@export var gd_name = ""
-@export var item_name_de = ""
-@export var item_texture: Texture
-@export var item_descrpition_de = ""
-
-#For Englisch localisation
-@export var item_name_en = ""
-@export var item_description_en = ""
-
-var scene_path: String = "res://Scenes/GUI/Inventory/item.tscn"
-
 # Resolved once in _ready so pickup and the respawn check always agree.
 var _resolved_id: StringName
+
+@onready var icon: Sprite2D = $"Item Icon"
 
 
 func _ready() -> void:
@@ -28,7 +32,15 @@ func _ready() -> void:
 		queue_free()
 		return
 
-	$"Item Icon".texture = item_texture
+	_refresh_icon()
+
+
+# The setter can run before _ready (when the scene is being built), at which
+# point the icon node does not exist yet. _ready calls this again.
+func _refresh_icon() -> void:
+	if icon == null:
+		return
+	icon.texture = item.texture if item != null else null
 
 
 # Builds the key used to remember whether this item was picked up.
@@ -39,8 +51,9 @@ func _resolve_item_id() -> StringName:
 		return item_id
 	if owner != null:
 		return StringName(owner.scene_file_path + "::" + str(owner.get_path_to(self)))
-	# Fallback: no owner (e.g. spawned at runtime). Absolute path is less
-	# robust but still stable as long as the tree layout is unchanged.
+	# Fallback: no owner (e.g. spawned at runtime). ItemLogic.spawn_in_world
+	# sets item_id explicitly, so reaching this means someone instantiated the
+	# scene by hand without giving it a key.
 	push_warning("Item '%s' has no owner and no item_id; set item_id for stable pickup state." % name)
 	return StringName(get_path())
 
@@ -51,22 +64,14 @@ func _on_pickup_range_interacted(_player: Node2D) -> void:
 	pickupitem()
 
 
-func pickupitem():
+func pickupitem() -> void:
+	if item == null:
+		push_warning("Item '%s' has no ItemData assigned; nothing to pick up." % name)
+		return
 	if not Global.PlayerNode:
 		return
 
-	var Item = {
-		"quantity": 1,
-		"gd_name": gd_name,
-		"name_de": item_name_de,
-		"description_de": item_descrpition_de,
-		"texture": item_texture,
-		"scene_path": scene_path,
-		"name_en": item_name_en,
-		"description_en": item_description_en
-	}
-
 	# Global adds it to the inventory and records the pickup flag. Only remove
 	# the world item if it was actually taken (e.g. not when inventory is full).
-	if Global.pickup_world_item(Item, _resolved_id):
-		self.queue_free()
+	if Global.pickup_world_item(item, _resolved_id):
+		queue_free()

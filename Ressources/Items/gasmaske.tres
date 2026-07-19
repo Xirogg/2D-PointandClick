@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://vdvd7c3v073g"]
+
+[ext_resource type="Script" uid="uid://ddo5pck7jdxa3" path="res://Scripts/Ressources/item_data.gd" id="1_itemdata"]
+[ext_resource type="Texture2D" uid="uid://xy4rl8ejustj" path="res://Assets/Items/Gasmaske.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_itemdata")
+id = &"gasmaske"
+name_en = "Gas Mask"
+description_en = "A worn filter mask. The seal still looks intact."
+name_de = "Gasmaske"
+description_de = "Eine leicht abgenutzte Filtermaske. Die Dichtung sieht noch intakt aus."
+texture = ExtResource("2_texture")

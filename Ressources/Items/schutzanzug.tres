@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://2oamilx6efca"]
+
+[ext_resource type="Script" uid="uid://ddo5pck7jdxa3" path="res://Scripts/Ressources/item_data.gd" id="1_itemdata"]
+[ext_resource type="Texture2D" uid="uid://ckm1wxwc8gnh0" path="res://Assets/Items/Schutzanzug.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_itemdata")
+id = &"schutzanzug"
+name_en = "Hazmat Suit"
+description_en = "Heavy protective gear. Useless without a mask."
+name_de = "Schutzanzug"
+description_de = "Schwere Schutzkleidung. Ohne Maske nutzlos."
+texture = ExtResource("2_texture")

@@ -22,37 +22,41 @@ signal use_requested(slot)
 ## "Kombinieren" pressed. The UI runs the crafting check.
 signal craft_requested(slot)
 
-## The inventory entry shown here, or null while the slot is empty.
-var item = null
+## The ItemStack shown here, or null while the slot is empty.
+var stack: ItemStack = null
 
 @onready var item_icon: TextureRect = $ItemIcon
 @onready var use_button: Button = $UseButton
 @onready var craft_button: Button = $CraftButton
 
 
-func set_item(new_item) -> void:
-	item = new_item
-	item_icon.texture = new_item["texture"]
+## The ItemData in this slot, or null. Recipes and puzzles work on this.
+func item() -> ItemData:
+	return stack.item if stack != null else null
+
+
+func set_stack(new_stack: ItemStack) -> void:
+	stack = new_stack
+	if stack == null or stack.item == null:
+		setempty()
+		return
+	item_icon.texture = stack.item.texture
 
 
 func setempty() -> void:
-	item = null
+	stack = null
 	item_icon.texture = null
 	hide_popups()
 
 
 ## Name in the player's language, empty while the slot is empty.
 func display_name() -> String:
-	if item == null:
-		return ""
-	return item["name_de"] if Global.SelectedLanguage == "de" else item["name_en"]
+	return stack.display_name() if stack != null else ""
 
 
 ## Description in the player's language, empty while the slot is empty.
 func display_description() -> String:
-	if item == null:
-		return ""
-	return item["description_de"] if Global.SelectedLanguage == "de" else item["description_en"]
+	return stack.display_description() if stack != null else ""
 
 
 func show_craft_interface() -> void:
@@ -76,7 +80,7 @@ func _on_item_button_gui_input(event: InputEvent) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		selected.emit(self)
 		# An empty slot has nothing to use, so it only clears the labels.
-		if item != null:
+		if stack != null:
 			use_button.show()
 		return
 
@@ -91,29 +95,12 @@ func _on_item_button_gui_input(event: InputEvent) -> void:
 
 func _on_use_button_pressed() -> void:
 	use_button.hide()
-	if item == null:
+	var data := item()
+	if data == null:
 		return
 
 	use_requested.emit(self)
-
-	if item["name_de"] == "Luna":
-		_unlock_lunari()
-		return
-
-	# Puzzles match on the German name (see activity_module.needed_item), so
-	# this key deliberately ignores the selected language.
-	Global.change_selecteditem(item["name_de"])
-
-
-## The Lunari token unlocks the shapeshift rather than becoming a held item.
-## Player does not define `shpapeshiftable_races` yet, so this warns instead of
-## crashing until that half exists.
-func _unlock_lunari() -> void:
-	var player := get_tree().get_first_node_in_group("Player")
-	if player == null or not "shpapeshiftable_races" in player:
-		push_warning("Luna used, but Player has no 'shpapeshiftable_races' - shapeshift unlock skipped.")
-		return
-	player.shpapeshiftable_races["Lunari"] = true
+	Global.select_item(data)
 
 
 func _on_craft_button_pressed() -> void:
