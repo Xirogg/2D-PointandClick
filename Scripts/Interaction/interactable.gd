@@ -23,6 +23,13 @@ extends Area2D
 ## Fired once the player is actually standing close enough to this hotspot.
 signal interacted(player: Node2D)
 
+## Fired instead of "interacted" when the player clicks this hotspot while an
+## item is armed with "BENUTZEN". Only hotspots that actually connect this take
+## the item route — everywhere else an armed item changes nothing and the click
+## still means "interact", so arming a picture cannot silently break the console
+## or an NPC.
+signal item_used(item: ItemData, player: Node2D)
+
 ## The physics layer every Interactable lives on. The Player masks exactly this
 ## layer, both for its reach area and for the click query, so the two cannot
 ## drift apart.
@@ -74,5 +81,9 @@ func get_walk_target_x(from_x: float) -> float:
 ## player is actually there.
 func interact(player: Node2D) -> void:
 	if not enabled:
+		return
+	var armed := Global.selected_item
+	if armed != null and not item_used.get_connections().is_empty():
+		item_used.emit(armed, player)
 		return
 	interacted.emit(player)

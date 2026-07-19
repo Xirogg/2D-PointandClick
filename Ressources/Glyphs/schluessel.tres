@@ -10,4 +10,5 @@ texture = ExtResource("2_tex")
 acceptable_words = Array[String](["Schlüssel", "Schluessel"])
 category = "noun"
 sort_order = 2
+paired_item_id = &"bild_2"
 metadata/_custom_type_script = "uid://f4nd763e5voo"

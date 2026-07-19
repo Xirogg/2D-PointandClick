@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://cspp3t7jeew4h"]
+[gd_scene load_steps=5 format=3 uid="uid://cspp3t7jeew4h"]
 
 [ext_resource type="Script" uid="uid://bc75ve8qcdo66" path="res://Scripts/Characters/prototype_npc.gd" id="1_xv470"]
-[ext_resource type="Texture2D" uid="uid://bplsrobgle78v" path="res://icon.svg" id="2_xv470"]
 [ext_resource type="Script" path="res://Scripts/Interaction/interactable.gd" id="3_ntract"]
+[ext_resource type="SpriteFrames" path="res://Ressources/Animations/side_npc_idle.tres" id="4_idle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_npc"]
 size = Vector2(40, 62)
@@ -18,9 +18,11 @@ display_name = "NPC"
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_npc")
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=1334395940]
-position = Vector2(-3.8146973e-06, 0)
-scale = Vector2(0.2734375, 0.40625)
-texture = ExtResource("2_xv470")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1334395940]
+position = Vector2(0, -6)
+sprite_frames = ExtResource("4_idle")
+animation = &"idle"
+autoplay = "idle"
 
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+[connection signal="item_used" from="Interactable" to="." method="_on_interactable_item_used"]

@@ -32,6 +32,11 @@ extends CharacterBody2D
 ## dialogue just played. This is what levels hang their rewards off.
 signal dialogue_finished(stage: int)
 
+## Fired after the hand-over dialogue has closed, once the player has actively
+## used "Expected Item" on this NPC. The level decides what that is worth —
+## consuming the item, opening a route — the same way it does for rewards.
+signal item_accepted(item: ItemData)
+
 @export_group("Stage 1 - First Visit")
 @export var dialogue_first_visit: DialogueResource
 @export var title_first_visit: String = "start"
@@ -43,6 +48,21 @@ signal dialogue_finished(stage: int)
 @export_group("Stage 3 - Glyphs Translated")
 @export var dialogue_after_glyphs: DialogueResource
 @export var title_after_glyphs: String = "start"
+
+## An item this NPC wants handed over in person: the player arms it with
+## "BENUTZEN" and clicks the NPC. Carrying it around is not enough.
+##
+## Leave empty and the NPC ignores items entirely — clicking it with something
+## armed just starts the usual conversation, which is also what happens when the
+## *wrong* item is used, so a guard who wants a permit still says "no permit,
+## no entry" instead of going silent.
+@export_group("Item hand-over")
+@export var expected_item: ItemData
+## Played once the right item is handed over. Falling back to the stage dialogue
+## would replay the "you may not pass" line at the exact moment the player
+## finally may, so this slot is worth filling wherever expected_item is set.
+@export var dialogue_item_accepted: DialogueResource
+@export var title_item_accepted: String = "start"
 
 
 ## Called by the child Interactable once the player has walked up to this NPC.
@@ -56,3 +76,24 @@ func _on_interactable_interacted(_player: Node2D) -> void:
 
 	await DialogueManager.dialogue_ended
 	dialogue_finished.emit(stage)
+
+
+## Called by the child Interactable when the player clicks this NPC with an item
+## armed. Anything this NPC has no use for falls through to the ordinary
+## conversation, so arming an item never turns an NPC into a dead click.
+func _on_interactable_item_used(item: ItemData, player: Node2D) -> void:
+	if expected_item == null or item != expected_item:
+		_on_interactable_interacted(player)
+		return
+
+	# Handing the item over spends the arming — the player is done aiming it,
+	# and leaving it stuck to the cursor invites using it a second time.
+	Global.select_item(null)
+
+	if dialogue_item_accepted != null:
+		DialogueManager.show_dialogue_balloon(
+			dialogue_item_accepted,
+			StoryDialogue.title_for([title_item_accepted], 0))
+		await DialogueManager.dialogue_ended
+
+	item_accepted.emit(item)

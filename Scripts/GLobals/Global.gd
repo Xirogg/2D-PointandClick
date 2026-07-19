@@ -55,6 +55,13 @@ signal story_stage_changed(new_stage: StoryStage)
 ## Set once the ship scene has been entered. Ship_scene does this itself.
 var has_visited_ship: bool = false
 
+## The scene path the player just walked out of, or "" when the game simply
+## loaded a level fresh (from the intro, or running one directly in the editor).
+## A level reads this on load to put the player at the entrance he actually came
+## in through, instead of always at the spot the .tscn happens to park him on.
+## Set it right before change_scene_to_file(); the arriving level clears it.
+var came_from: String = ""
+
 var _broadcast_stage: StoryStage = StoryStage.FIRST_VISIT
 
 # --- One-shot story flags -------------------------------------------
@@ -64,6 +71,15 @@ var _broadcast_stage: StoryStage = StoryStage.FIRST_VISIT
 # the autoload, next to has_visited_ship.
 #   flag (StringName) -> true
 var story_flags: Dictionary = {}
+
+
+## Where the player came from, forgetting it on the way out. Clearing matters:
+## without it, a later fresh load of the same level would still think the player
+## walked in from wherever he last did.
+func take_came_from() -> String:
+	var origin := came_from
+	came_from = ""
+	return origin
 
 
 ## Whether this one-shot has already fired.

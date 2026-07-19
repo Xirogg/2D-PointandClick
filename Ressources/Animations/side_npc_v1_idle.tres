@@ -1,0 +1,50 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3]
+
+[ext_resource type="Texture2D" uid="uid://creuee0rxwxtn" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie1.png" id="1_idle1"]
+[ext_resource type="Texture2D" uid="uid://dne4k702b6qd6" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie2.png" id="2_idle2"]
+[ext_resource type="Texture2D" uid="uid://dm61sftbnfdbp" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie3.png" id="3_idle3"]
+[ext_resource type="Texture2D" uid="uid://tj6xuy1qylcn" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie4.png" id="4_idle4"]
+[ext_resource type="Texture2D" uid="uid://dp3mntumr30ou" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie5.png" id="5_idle5"]
+[ext_resource type="Texture2D" uid="uid://m4sce5kuvkcg" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie6.png" id="6_idle6"]
+[ext_resource type="Texture2D" uid="uid://dsvyt213la3d5" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie7.png" id="7_idle7"]
+[ext_resource type="Texture2D" uid="uid://glxqreqibdy0" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie8.png" id="8_idle8"]
+[ext_resource type="Texture2D" uid="uid://b0ol2bjw1reb" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie9.png" id="9_idle9"]
+[ext_resource type="Texture2D" uid="uid://dme5jhllxlpdo" path="res://Assets/Characters/Side NPCs/Side NPc v1/Side - Kopie10.png" id="10_idle10"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_idle2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idle5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idle6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idle7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_idle8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_idle9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_idle10")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]

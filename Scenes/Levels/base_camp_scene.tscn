@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhjey25ck7e0k"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/base_camp_scene.gd" id="1_basecamp"]
+[ext_resource type="Script" uid="uid://bktgo8umc8cf6" path="res://Scripts/Levels/base_camp_scene.gd" id="1_basecamp"]
 [ext_resource type="Texture2D" uid="uid://c3ih3er83aqdy" path="res://Assets/Scenes/Base_Camp_Scene.png" id="1_yflxa"]
 [ext_resource type="PackedScene" uid="uid://cspp3t7jeew4h" path="res://Scenes/Characters/prototype_npc.tscn" id="2_c7yk6"]
 [ext_resource type="Script" path="res://Scripts/Interaction/dialogue_hotspot.gd" id="2_hotspot"]
@@ -17,6 +17,9 @@
 [ext_resource type="Resource" uid="uid://ddnw7c8aqf5x0" path="res://Dialogue/BaseCamp/NPC2 -- Stage 1 Dialogue.dialogue" id="19_npc2_1"]
 [ext_resource type="Resource" uid="uid://dbevvsm6jparc" path="res://Dialogue/BaseCamp/NPC2 -- Stage 2 Dialogue.dialogue" id="20_npc2_2"]
 [ext_resource type="Resource" uid="uid://c83febbi8unsa" path="res://Dialogue/BaseCamp/NPC2 -- Stage 3 Dialogue.dialogue" id="21_npc2_3"]
+[ext_resource type="Resource" uid="uid://d4idgfcqow3nx" path="res://Dialogue/BaseCamp/NPC2 -- Item Accepted.dialogue" id="22_npc2_item"]
+[ext_resource type="Resource" uid="uid://5lfcd8o5l287" path="res://Ressources/Items/schutzausruestung.tres" id="23_ticket"]
+[ext_resource type="SpriteFrames" path="res://Ressources/Animations/side_npc_v1_idle.tres" id="24_npc2_look"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yflxa"]
 size = Vector2(89, 125)
@@ -33,19 +36,24 @@ position = Vector2(500, 180)
 texture = ExtResource("1_yflxa")
 
 [node name="NPC 1" parent="." unique_id=1535008498 instance=ExtResource("2_c7yk6")]
-position = Vector2(395, 321)
+position = Vector2(450, 300)
 dialogue_first_visit = ExtResource("16_npc1_1")
 dialogue_after_ship = ExtResource("17_npc1_2")
 dialogue_after_glyphs = ExtResource("18_npc1_3")
 
 [node name="NPC 2" parent="." unique_id=2037405147 instance=ExtResource("2_c7yk6")]
-position = Vector2(493, 314)
+position = Vector2(975, 300)
 dialogue_first_visit = ExtResource("19_npc2_1")
 dialogue_after_ship = ExtResource("20_npc2_2")
 dialogue_after_glyphs = ExtResource("21_npc2_3")
+expected_item = ExtResource("23_ticket")
+dialogue_item_accepted = ExtResource("22_npc2_item")
+
+[node name="AnimatedSprite2D" parent="NPC 2" index="1" unique_id=1334395940]
+sprite_frames = ExtResource("24_npc2_look")
 
 [node name="Player" parent="." unique_id=1531897282 instance=ExtResource("5_yflxa")]
-position = Vector2(280, 314)
+position = Vector2(55, 314)
 
 [node name="Big Tent" type="Area2D" parent="." unique_id=1546836090]
 position = Vector2(798, 269)
@@ -72,3 +80,5 @@ display_name = "Kleines Zelt"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Small Tent" unique_id=732948132]
 position = Vector2(87, -59.5)
 shape = SubResource("RectangleShape2D_2cjoj")
+
+[editable path="NPC 2"]

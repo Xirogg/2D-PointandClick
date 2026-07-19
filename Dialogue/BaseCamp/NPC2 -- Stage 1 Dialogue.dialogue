@@ -1,3 +1,6 @@
 ~ start
-Wachmann: Zum Schiff lasse ich dich nur mit vollständiger Schutzausrüstung.
+if ItemLogic.has("schutzausruestung")
+	Wachmann: Du hast die Ausrüstung dabei? Dann zeig sie mir - benutz sie an mir.
+else
+	Wachmann: Zum Schiff lasse ich dich nur mit vollständiger Schutzausrüstung.
 => END

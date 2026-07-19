@@ -1,0 +1,50 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3]
+
+[ext_resource type="Texture2D" uid="uid://dxdn65aam8q7s" path="res://Assets/Characters/Side NPCs/Side1.png" id="1_idle1"]
+[ext_resource type="Texture2D" uid="uid://c768d477xx6at" path="res://Assets/Characters/Side NPCs/Side2.png" id="2_idle2"]
+[ext_resource type="Texture2D" uid="uid://d025bssxm3cxx" path="res://Assets/Characters/Side NPCs/Side3.png" id="3_idle3"]
+[ext_resource type="Texture2D" uid="uid://cvfv5buttgxsb" path="res://Assets/Characters/Side NPCs/Side4.png" id="4_idle4"]
+[ext_resource type="Texture2D" uid="uid://dygc17ego0mav" path="res://Assets/Characters/Side NPCs/Side5.png" id="5_idle5"]
+[ext_resource type="Texture2D" uid="uid://dbvtnryana0gm" path="res://Assets/Characters/Side NPCs/Side6.png" id="6_idle6"]
+[ext_resource type="Texture2D" uid="uid://c6e86skfyco2j" path="res://Assets/Characters/Side NPCs/Side7.png" id="7_idle7"]
+[ext_resource type="Texture2D" uid="uid://cg53fq4nsmd6v" path="res://Assets/Characters/Side NPCs/Side8.png" id="8_idle8"]
+[ext_resource type="Texture2D" uid="uid://dkmn5a70mtjlp" path="res://Assets/Characters/Side NPCs/Side9.png" id="9_idle9"]
+[ext_resource type="Texture2D" uid="uid://umakogl1jvrn" path="res://Assets/Characters/Side NPCs/Side10.png" id="10_idle10"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_idle2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idle5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idle6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idle7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_idle8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_idle9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_idle10")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]

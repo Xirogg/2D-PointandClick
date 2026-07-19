@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://d4idgfcqow3nx"
+path="res://.godot/imported/NPC2 -- Item Accepted.dialogue-620ca9f2a765c2fb5cf7b68bb126e4a0.tres"
+
+[deps]
+
+source_file="res://Dialogue/BaseCamp/NPC2 -- Item Accepted.dialogue"
+dest_files=["res://.godot/imported/NPC2 -- Item Accepted.dialogue-620ca9f2a765c2fb5cf7b68bb126e4a0.tres"]
+
+[params]
+
+defaults=true

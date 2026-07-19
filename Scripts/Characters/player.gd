@@ -74,6 +74,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		click_at(get_global_mouse_position())
 
 
+## Drops the player at world X `x` on load, without walking there.
+##
+## Levels call this to place him at the entrance he actually came in through.
+## Moving `position` alone is not enough: _ready() has already pointed
+## click_target at wherever the .tscn parked him, so he would immediately stroll
+## back across the level. Any pending interaction is dropped for the same reason.
+func place_at_x(x: float) -> void:
+	position.x = x
+	click_target = Vector2(x, position.y)
+	_pending_interactable = null
+	_walking = false
+
+
 ## Reacts to a click at `world_position`. Split out from _unhandled_input so the
 ## decision can be driven without a real mouse (tests, cutscenes, a "use item on
 ## thing" flow later).

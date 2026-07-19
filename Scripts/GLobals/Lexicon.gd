@@ -73,6 +73,36 @@ func get_glyph_id_offset_from(id: StringName, step: int) -> StringName:
 func get_ordered_ids() -> Array[StringName]:
 	return glyph_order.duplicate()
 
+
+# --- Decoding (glyph <-> "Bild" item) -------------------------------
+
+## The glyph that `item_id` decodes, or null when that item is not paired with
+## any glyph. Doubles as the "is this even a decoding picture?" test, so no code
+## has to know that the items happen to be named bild_*.
+func get_glyph_for_item(item_id: StringName) -> Glyph:
+	if item_id == &"":
+		return null
+	for id in glyph_order:
+		var glyph: Glyph = glyphs[id]
+		if glyph.paired_item_id == item_id:
+			return glyph
+	return null
+
+
+## True when `item_id` belongs to some glyph — i.e. using it on the decoder is
+## meant to produce a right/wrong answer rather than being ignored.
+func is_decoding_item(item_id: StringName) -> bool:
+	return get_glyph_for_item(item_id) != null
+
+
+## Whether `item_id` is the picture that goes with the glyph on screen right
+## now. False when nothing is selected, so a decode attempt without an active
+## glyph never reads as correct.
+func item_matches_active_glyph(item_id: StringName) -> bool:
+	var glyph := get_active_glyph()
+	return glyph != null and glyph.paired_item_id != &"" \
+		and glyph.paired_item_id == item_id
+
 func discover(id: StringName) -> void:
 	if not discovered.get(id, false):
 		discovered[id] = true

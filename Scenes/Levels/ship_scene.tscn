@@ -13,8 +13,12 @@ size = Vector2(332, 219.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_u2vya"]
 radius = 35.22783
 
-[node name="Ship_Scene" type="Node2D" unique_id=519845933]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkba1"]
+size = Vector2(44, 104)
+
+[node name="Ship_Scene" type="Node2D" unique_id=519845933 node_paths=PackedStringArray("background")]
 script = ExtResource("3_shipsc")
+background = NodePath("Placeholder_BG")
 
 [node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=940820431 groups=["camera_bounds"]]
 position = Vector2(407, 182)
@@ -39,15 +43,31 @@ position = Vector2(568, 211)
 script = ExtResource("6_glyphspr")
 
 [node name="Player" parent="." unique_id=1531897282 instance=ExtResource("2_lc756")]
-position = Vector2(64, 259)
+position = Vector2(115, 261)
 
 [node name="GlyphPopup" parent="." unique_id=2062616247 instance=ExtResource("4_glyphp")]
 
 [node name="Item Check" type="Area2D" parent="." unique_id=1868072916]
 position = Vector2(739, 235)
+script = ExtResource("5_ntract")
+display_name = "Bildprüfung"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Item Check" unique_id=322568411]
 position = Vector2(24, -13)
 shape = SubResource("CircleShape2D_u2vya")
 
+[node name="Scene changer" type="Area2D" parent="." unique_id=1022778174 node_paths=PackedStringArray("interaction_point")]
+script = ExtResource("5_ntract")
+display_name = "Zurück zum Basislager"
+interaction_point = NodePath("InteractionPoint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene changer" unique_id=923497443]
+position = Vector2(68, 200)
+shape = SubResource("RectangleShape2D_bkba1")
+
+[node name="InteractionPoint" type="Marker2D" parent="Scene changer" unique_id=1022778175]
+position = Vector2(68, 200)
+
 [connection signal="interacted" from="Console" to="." method="_on_console_interacted"]
+[connection signal="item_used" from="Item Check" to="." method="_on_item_check_item_used"]
+[connection signal="interacted" from="Scene changer" to="." method="_on_scene_changer_interacted"]
