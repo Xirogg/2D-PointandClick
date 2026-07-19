@@ -131,6 +131,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=1531897282 groups=["Player"]]
 script = ExtResource("1_40svl")
+Speed = 125
 
 [node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=146567486]
 visible = false

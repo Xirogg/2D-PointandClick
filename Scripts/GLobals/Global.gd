@@ -31,13 +31,82 @@ var LastSelectedItem = null
 var SelectedLanguage: String
 ###########################
 
+# --- Story stage ----------------------------------------------------
+# How far the story has come. NPCs pick which of their dialogue files to
+# play from this, so the same NPC in the same scene says something new on
+# a later visit. Kept deliberately small: the vertical slice only needs
+# three steps.
+enum StoryStage {
+	FIRST_VISIT = 0,        ## Nothing happened yet.
+	AFTER_SHIP = 1,         ## The player has been inside the ship at least once.
+	GLYPHS_TRANSLATED = 2,  ## Every glyph in the game carries its correct name.
+}
+
+## Fired when the story moves forward, for anything that has to react on the
+## spot (swapping an NPC sprite, unlocking a door). Dialogue does NOT need
+## this — NPCs read get_story_stage() fresh every time they are clicked.
+signal story_stage_changed(new_stage: StoryStage)
+
+## Set once the ship scene has been entered. Ship_scene does this itself.
+var has_visited_ship: bool = false
+
+var _broadcast_stage: StoryStage = StoryStage.FIRST_VISIT
+
+
+## The stage the game is in right now, highest reached condition wins.
+func get_story_stage() -> StoryStage:
+	if Lexicon.is_everything_translated():
+		return StoryStage.GLYPHS_TRANSLATED
+	if has_visited_ship:
+		return StoryStage.AFTER_SHIP
+	return StoryStage.FIRST_VISIT
+
+
+## Called by the ship scene when the player arrives there.
+func mark_ship_visited() -> void:
+	if has_visited_ship:
+		return
+	has_visited_ship = true
+	_check_story_stage()
+
+
+## Call this when starting a new game, next to reset_picked_up_items().
+func reset_story_state() -> void:
+	has_visited_ship = false
+	_broadcast_stage = StoryStage.FIRST_VISIT
+	story_stage_changed.emit(_broadcast_stage)
+
+
+# Only announces an actual change, so listeners cannot fire twice for the
+# same stage.
+func _check_story_stage() -> void:
+	var stage := get_story_stage()
+	if stage == _broadcast_stage:
+		return
+	_broadcast_stage = stage
+	print("Story stage: ", StoryStage.keys()[stage])
+	story_stage_changed.emit(stage)
+
+
+func _on_all_glyphs_translated() -> void:
+	_check_story_stage()
+
 
 func _ready() -> void:
-	
+
 
 	inventory.resize(inventory_size)
-	
-	
+
+	# Lexicon autoloads *after* this script, so it does not exist yet inside
+	# _ready. Deferring puts the connect on the next idle frame, by which
+	# point every autoload is in the tree.
+	_connect_lexicon.call_deferred()
+
+
+func _connect_lexicon() -> void:
+	Lexicon.all_glyphs_translated.connect(_on_all_glyphs_translated)
+
+
 
 func _process(delta: float) -> void:
 	checklanguage()

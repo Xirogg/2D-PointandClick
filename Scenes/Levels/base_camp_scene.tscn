@@ -1,28 +1,26 @@
 [gd_scene format=3 uid="uid://dhjey25ck7e0k"]
 
+[ext_resource type="Texture2D" uid="uid://c3ih3er83aqdy" path="res://Assets/Scenes/Base_Camp_Scene.png" id="1_yflxa"]
 [ext_resource type="PackedScene" uid="uid://cspp3t7jeew4h" path="res://Scenes/Characters/prototype_npc.tscn" id="2_c7yk6"]
 [ext_resource type="Resource" uid="uid://clyx8e7rqd5bp" path="res://Dialogue/BaseCamp_Test_NPC.dialogue" id="3_left"]
 [ext_resource type="Resource" uid="uid://b2ctb1lkperrp" path="res://Dialogue/BaseCamp_NPC1.dialogue" id="4_right"]
 [ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="5_yflxa"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vw3q0"]
-load_path = "res://.godot/imported/Please.png-73bd79c79e8976a2b9a2a2fa46fd1215.ctex"
 
 [node name="BaseCamp_Scene" type="Node2D" unique_id=400114802]
 
 [node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=691299169 groups=["camera_bounds"]]
 modulate = Color(0, 1, 1, 1)
 z_index = -1
-position = Vector2(601, 183)
-texture = SubResource("CompressedTexture2D_vw3q0")
+position = Vector2(500, 180)
+texture = ExtResource("1_yflxa")
 
 [node name="Prototype NPC" parent="." unique_id=1535008498 instance=ExtResource("2_c7yk6")]
 position = Vector2(65, 321)
-dialogue_resource = ExtResource("4_right")
+dialogue_first_visit = ExtResource("4_right")
 
 [node name="Prototype NPC2" parent="." unique_id=2037405147 instance=ExtResource("2_c7yk6")]
 position = Vector2(163, 314)
-dialogue_resource = ExtResource("3_left")
+dialogue_first_visit = ExtResource("3_left")
 
 [node name="Player" parent="." unique_id=1531897282 instance=ExtResource("5_yflxa")]
-position = Vector2(289, 289)
+position = Vector2(280, 314)

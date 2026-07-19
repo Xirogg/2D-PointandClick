@@ -1,36 +1,36 @@
 [gd_scene format=3 uid="uid://bawrgabf0imiw"]
 
-[ext_resource type="Texture2D" uid="uid://dkrsql2fef78k" path="res://Assets/Placeholders/Placeholder.png" id="1_6dpnc"]
 [ext_resource type="PackedScene" uid="uid://byaqju3fev4ui" path="res://Scenes/Characters/player.tscn" id="2_lc756"]
+[ext_resource type="Texture2D" uid="uid://dgwad8u2g67ed" path="res://Assets/Scenes/Ship_Scene_BG.png" id="2_u2vya"]
 [ext_resource type="Script" uid="uid://bnup18soqo87w" path="res://Scripts/Levels/ship_scene.gd" id="3_shipsc"]
 [ext_resource type="PackedScene" path="res://Scenes/GUI/Glyphs/glyph_popup.tscn" id="4_glyphp"]
-[ext_resource type="Script" path="res://Scripts/Interaction/interactable.gd" id="5_ntract"]
+[ext_resource type="Script" uid="uid://cntogujji1otx" path="res://Scripts/Interaction/interactable.gd" id="5_ntract"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_console"]
-size = Vector2(520, 237)
+size = Vector2(392, 237)
 
 [node name="Ship_Scene" type="Node2D" unique_id=519845933]
 script = ExtResource("3_shipsc")
 
 [node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=940820431 groups=["camera_bounds"]]
-modulate = Color(1, 0.36862746, 1, 1)
-position = Vector2(750, 180)
-texture = ExtResource("1_6dpnc")
+position = Vector2(407, 182)
+texture = ExtResource("2_u2vya")
 
-[node name="Console" type="Area2D" parent="." node_paths=PackedStringArray("interaction_point")]
+[node name="Console" type="Area2D" parent="." unique_id=412750248 node_paths=PackedStringArray("interaction_point")]
 position = Vector2(1142, 174.5)
 script = ExtResource("5_ntract")
 display_name = "Konsole"
 interaction_point = NodePath("InteractionPoint")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Console"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Console" unique_id=1067953796]
+position = Vector2(-561, -39.5)
 shape = SubResource("RectangleShape2D_console")
 
-[node name="InteractionPoint" type="Marker2D" parent="Console"]
+[node name="InteractionPoint" type="Marker2D" parent="Console" unique_id=809024377]
 position = Vector2(-40, 105)
 
 [node name="Player" parent="." unique_id=1531897282 instance=ExtResource("2_lc756")]
-position = Vector2(593, 280)
+position = Vector2(64, 259)
 
 [node name="GlyphPopup" parent="." unique_id=2062616247 instance=ExtResource("4_glyphp")]
 
