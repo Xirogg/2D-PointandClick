@@ -52,6 +52,10 @@ var _pending_interactable: Interactable = null
 ## True while a walk is running, so arrival fires exactly once.
 var _walking: bool = false
 
+## Whether Maya is physically moving this frame. Drives the footsteps loop, and
+## only ever toggles the sound on a real start/stop, not every physics tick.
+var _moving: bool = false
+
 
 func _ready() -> void:
 	click_target = position
@@ -111,6 +115,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		_face(direction)
 		_play(WALK_ANIMATION)
+		_set_moving(true)
 		return
 
 	# Within a single step, so land exactly on the target instead of stepping
@@ -119,6 +124,7 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO
 	# Standing still keeps whichever way Maya was last facing.
 	_play(IDLE_ANIMATION)
+	_set_moving(false)
 
 	if _walking:
 		_walking = false
@@ -158,6 +164,23 @@ func _face(direction: float) -> void:
 func _play(animation_name: StringName) -> void:
 	if sprite.animation != animation_name or not sprite.is_playing():
 		sprite.play(animation_name)
+
+
+## Flips the footsteps loop on or off, but only when the movement state actually
+## changes — the walk/idle branches call this every physics tick, and the
+## AudioManager should only be told on the real start and stop.
+func _set_moving(value: bool) -> void:
+	if value == _moving:
+		return
+	_moving = value
+	AudioManager.set_walking(value)
+
+
+## Leaving the scene mid-stride must not leave the footsteps loop droning on
+## under the next scene, which may be a menu or a level with no walking sound.
+## Clearing the stream also resets it for scenes that never set one.
+func _exit_tree() -> void:
+	AudioManager.set_footsteps_stream(null)
 
 
 ## Whether `target` currently overlaps the interaction area around the player.
@@ -267,3 +290,15 @@ func _on_inventory_button_pressed() -> void:
 
 func _on_close_inv_pressed() -> void:
 	$InventoryLayer.hide()
+
+
+## The HUD's glyph button opens the full-screen glyph overview, the same way the
+## inventory button opens the inventory.
+func _on_glyphs_button_pressed() -> void:
+	$GlyphLayer.show()
+
+
+## The gallery's own "Schließen" button asked to close; the Player owns the layer,
+## so it does the hiding.
+func _on_glyph_gallery_close_requested() -> void:
+	$GlyphLayer.hide()

@@ -27,6 +27,16 @@ signal escalation_changed(new_value: int)
 
 @onready var Inventory_Slot_Scene = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
+# --- Mouse cursor ---------------------------------------------------
+# The hardware cursor ignores the canvas_items stretch, so the raw 16x16 tile
+# draws at 16 screen pixels while the rest of the game is upscaled 2x from the
+# 640x360 viewport. Blowing the image up by the same factor puts it back on the
+# game's pixel grid. Nearest keeps the pixel art crisp.
+const CURSOR_IMAGE: Texture2D = preload("res://Assets/Fonts/tile_0028.png")
+const CURSOR_SCALE: int = 2
+# Top-left, because tile_0028 is an arrow whose tip sits in that corner.
+const CURSOR_HOTSPOT: Vector2 = Vector2.ZERO
+
 ## The item the player armed with "BENUTZEN", or null. Puzzle hotspots
 ## (activity_module.gd) compare against this. Holding the ItemData rather than a
 ## German display string means renaming or translating an item can no longer
@@ -140,11 +150,30 @@ func _on_all_glyphs_translated() -> void:
 
 func _ready() -> void:
 	inventory.resize(inventory_size)
+	_apply_cursor()
 
 	# Lexicon and ItemLogic autoload *after* this script, so they do not exist
 	# yet inside _ready. Deferring puts the connects on the next idle frame, by
 	# which point every autoload is in the tree.
 	_connect_autoloads.call_deferred()
+
+
+## Replaces the project-setting cursor with a scaled-up copy of the same image.
+func _apply_cursor() -> void:
+	# duplicate(): get_image() hands out the texture's own cached Image, and
+	# resize() works in place — scaling it directly would corrupt the resource
+	# for every other user of it.
+	var img := CURSOR_IMAGE.get_image().duplicate() as Image
+	img.resize(
+		img.get_width() * CURSOR_SCALE,
+		img.get_height() * CURSOR_SCALE,
+		Image.INTERPOLATE_NEAREST
+	)
+	Input.set_custom_mouse_cursor(
+		ImageTexture.create_from_image(img),
+		Input.CURSOR_ARROW,
+		CURSOR_HOTSPOT * CURSOR_SCALE
+	)
 
 
 func _connect_autoloads() -> void:

@@ -32,9 +32,15 @@ func _ready() -> void:
 	# switch to their stage 2 dialogue from now on.
 	Global.mark_ship_visited()
 
+	# The ship's own footstep sound, plus the one-shot that greets the player on
+	# arrival (only fired here in _ready, so re-opening the console doesn't).
+	AudioManager.set_footsteps_stream(AudioManager.WALK_SHIP)
+	AudioManager.play(AudioManager.SHIP_ENTER)
+
 
 ## Called by the Console Interactable once the player has walked over to it.
 func _on_console_interacted(_player: Node2D) -> void:
+	AudioManager.play(AudioManager.CONSOLE_POPUP)
 	var id := Lexicon.active_glyph_id
 	if id == &"":
 		id = console_glyph_id

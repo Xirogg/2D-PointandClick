@@ -21,7 +21,7 @@ script = ExtResource("3_shipsc")
 background = NodePath("Placeholder_BG")
 
 [node name="Placeholder_BG" type="Sprite2D" parent="." unique_id=940820431 groups=["camera_bounds"]]
-position = Vector2(407, 182)
+position = Vector2(406, 180)
 texture = ExtResource("2_u2vya")
 
 [node name="Console" type="Area2D" parent="." unique_id=412750248 node_paths=PackedStringArray("interaction_point")]

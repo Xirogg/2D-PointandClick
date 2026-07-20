@@ -9,6 +9,11 @@ extends Control
 
 const GlyphSlotScene := preload("res://Scenes/Placeholders/test_glyph_scene.tscn")
 
+## The "Schließen" button was pressed. Whoever opened the gallery (the Player,
+## through its GlyphLayer) owns the actual hiding — the same split the inventory
+## uses with its own close_requested.
+signal close_requested
+
 ## Slots shown in total, real plus locked. A value at or below the number of
 ## real glyphs simply adds no padding.
 @export var total_slot_count: int = 20
@@ -39,3 +44,7 @@ func _add_slot(id: StringName, locked: bool = false) -> void:
 	view.glyph_id = id
 	view.locked = locked
 	grid.add_child(slot)
+
+
+func _on_close_button_pressed() -> void:
+	close_requested.emit()

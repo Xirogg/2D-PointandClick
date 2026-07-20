@@ -36,6 +36,7 @@ const SHIP_TICKET := &"schutzausruestung"
 
 
 func _ready() -> void:
+	AudioManager.set_footsteps_stream(AudioManager.WALK_BASE_CAMP)
 	_place_player()
 	_big_tent.dialogue_finished.connect(_on_big_tent_dialogue_finished)
 	_small_tent.dialogue_finished.connect(_on_small_tent_dialogue_finished)

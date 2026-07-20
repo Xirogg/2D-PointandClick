@@ -3,7 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://wmpjjuiim3u7" path="res://Scenes/GUI/Inventory/inventory_ui.tscn" id="1_3etf2"]
 [ext_resource type="Script" uid="uid://bwlhx5k1xw6bv" path="res://Scripts/Characters/player.gd" id="1_40svl"]
 [ext_resource type="Script" uid="uid://c5f7e3skvr87x" path="res://Scripts/Characters/player_camera.gd" id="2_pcam"]
-[ext_resource type="Script" path="res://Scripts/GUI/item_cursor.gd" id="3_itemcursor"]
+[ext_resource type="Script" uid="uid://cbuecpxd4dbco" path="res://Scripts/GUI/item_cursor.gd" id="3_itemcursor"]
+[ext_resource type="Texture2D" uid="uid://jo83amqght8s" path="res://Assets/Icons/InventoryIcon.png" id="4_3k74t"]
+[ext_resource type="Texture2D" uid="uid://chfu46vyvt0i1" path="res://Assets/Items/Glyphs/Logogramm 1.png" id="5_v8iml"]
 [ext_resource type="Texture2D" uid="uid://cr7irmvjfumlq" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist1.png" id="10_idle1"]
 [ext_resource type="Texture2D" uid="uid://cpnupwnj51ny6" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist2.png" id="11_idle2"]
 [ext_resource type="Texture2D" uid="uid://c8kfbmmtdlfhg" path="res://Assets/Characters/Maya (Protagonist)/Idle/Protagonist3.png" id="12_idle3"]
@@ -22,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://tusf63gay4yo" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist6.png" id="25_walk6"]
 [ext_resource type="Texture2D" uid="uid://dq3m0yf4guce0" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist7.png" id="26_walk7"]
 [ext_resource type="Texture2D" uid="uid://d0hkuwo1x33vt" path="res://Assets/Characters/Maya (Protagonist)/Walk/Protagonist8.png" id="27_walk8"]
+[ext_resource type="PackedScene" uid="uid://da02lubw7omsc" path="res://Scenes/Placeholders/test_glyhsp.tscn" id="28_glyphg"]
 
 [sub_resource type="StyleBoxFlat" id="sb_close"]
 bg_color = Color(0.164706, 0.360784, 0.309804, 1)
@@ -167,16 +170,29 @@ theme_override_styles/pressed = SubResource("sb_close_hover")
 theme_override_styles/hover = SubResource("sb_close_hover")
 text = "Schließen"
 
+[node name="GlyphLayer" type="CanvasLayer" parent="." unique_id=1044598498]
+visible = false
+
+[node name="GlyphGallery" parent="GlyphLayer" unique_id=1411668680 instance=ExtResource("28_glyphg")]
+
 [node name="Player HUD" type="CanvasLayer" parent="." unique_id=2055598798]
 
 [node name="Inventory Button" type="Button" parent="Player HUD" unique_id=1675823108]
 offset_right = 31.0
 offset_bottom = 29.0
+icon = ExtResource("4_3k74t")
 
-[node name="ItemCursor" type="TextureRect" parent="Player HUD"]
-texture_filter = 1
-z_index = 5
+[node name="Glyphs Button" type="Button" parent="Player HUD" unique_id=174733028]
+offset_top = 41.0
+offset_right = 31.0
+offset_bottom = 70.0
+tooltip_text = "Glyphen"
+icon = ExtResource("5_v8iml")
+
+[node name="ItemCursor" type="TextureRect" parent="Player HUD" unique_id=1819322587]
 visible = false
+z_index = 5
+texture_filter = 1
 offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 2
@@ -185,10 +201,10 @@ stretch_mode = 5
 script = ExtResource("3_itemcursor")
 
 [node name="EscalationBar" type="ProgressBar" parent="Player HUD" unique_id=1611430457]
-offset_left = 37.0
-offset_top = 6.0
-offset_right = 187.0
-offset_bottom = 24.0
+offset_left = 41.0
+offset_top = 1.0
+offset_right = 191.0
+offset_bottom = 19.0
 theme_override_styles/background = SubResource("sb_escalation_bg")
 theme_override_styles/fill = SubResource("sb_escalation_fill")
 max_value = 10.0
@@ -208,6 +224,7 @@ shape = SubResource("CircleShape2D_reach")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1096616963]
 script = ExtResource("2_pcam")
+follow_speed = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1765270009]
 position = Vector2(0, -6)
@@ -217,4 +234,6 @@ autoplay = "idle"
 
 [connection signal="close_requested" from="InventoryLayer/ColorRect/InventoryUI" to="." method="_on_close_inv_pressed"]
 [connection signal="pressed" from="InventoryLayer/ColorRect/Close Inv" to="." method="_on_close_inv_pressed"]
+[connection signal="close_requested" from="GlyphLayer/GlyphGallery" to="." method="_on_glyph_gallery_close_requested"]
 [connection signal="pressed" from="Player HUD/Inventory Button" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="Player HUD/Glyphs Button" to="." method="_on_glyphs_button_pressed"]
