@@ -80,7 +80,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(0.74902, 0.921569, 0.792157, 1)
 theme_override_font_sizes/font_size = 16
-text = "Glyphen"
+text = "Logogramme"
 horizontal_alignment = 1
 
 [node name="GlyphGrid" type="GridContainer" parent="Center/Panel/Margin/VBox" unique_id=990186898]

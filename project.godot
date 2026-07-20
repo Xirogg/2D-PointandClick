@@ -16,8 +16,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Unsequenced"
 run/main_scene="res://Scenes/GUI/Menus/main_menu.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/icon="uid://18r0akt250ui"
 
 [autoload]
 
@@ -26,13 +26,13 @@ Global="*res://Scripts/Globals/Global.gd"
 ItemLogic="*res://Scripts/Globals/ItemLogic.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Lexicon="*uid://cox207qi7j4f6"
-VerifyFlow="*res://_verify_flow.gd"
 AudioManager="*res://Scripts/Globals/AudioManager.gd"
 MusicManager="*res://Scripts/Globals/MusicManager.gd"
 
 [dialogue_manager]
 
 runtime/balloon_path="res://Scenes/GUI/dialogue_balloon.tscn"
+runtime/advanced/uses_dotnet=true
 
 [display]
 

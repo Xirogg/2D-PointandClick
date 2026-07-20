@@ -164,7 +164,12 @@ func _refresh_confirmation(id: StringName) -> void:
 func _load_all() -> void:
 	var dir := "res://Ressources/Glyphs/"
 	for file in DirAccess.get_files_at(dir):
-		if file.ends_with(".tres"):
+		# In an exported build the .tres is converted to binary and listed as
+		# "<name>.tres.remap". Loading the original path still works, so just
+		# strip the suffix — without this the lexicon is empty in an export.
+		if file.ends_with(".remap"):
+			file = file.trim_suffix(".remap")
+		if file.ends_with(".tres") or file.ends_with(".res"):
 			var g := load(dir + file) as Glyph
 			if g != null:
 				register(g)
