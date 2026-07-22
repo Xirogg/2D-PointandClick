@@ -64,6 +64,13 @@ func _on_big_tent_dialogue_finished(stage: int) -> void:
 			if Global.claim_flag(&"big_tent_bilder"):
 				ItemLogic.give("bild_1")
 				ItemLogic.give("bild_2")
+		Global.StoryStage.GLYPHS_TRANSLATED:
+			# The distrust ending. General Braun's interrogation lives in this
+			# tent's stage 3 dialogue; only the right name (Callahan) sets the
+			# flag, and every wrong guess loops inside the dialogue. So the flag
+			# being up here is exactly "Maya just proved who she is".
+			if Global.interrogation_passed:
+				get_tree().change_scene_to_file(ENDING_SCENE)
 
 
 # --- Small tent -----------------------------------------------------
@@ -84,6 +91,12 @@ func _on_npc_1_dialogue_finished(stage: int) -> void:
 			if Global.claim_flag(&"npc_1_bild_3"):
 				ItemLogic.give("bild_3")
 		Global.StoryStage.GLYPHS_TRANSLATED:
+			# Once the camp has stopped trusting Maya, Finn no longer walks her
+			# to the finish — his stage 3 line only sends her to General Braun in
+			# the big tent, and the ending is rolled from there instead. So bow
+			# out here and let the tent's interrogation decide.
+			if Global.is_distrusted():
+				return
 			# Reaching stage 3 at all already means every glyph is named
 			# correctly. Asking Lexicon directly anyway keeps the ending honest
 			# if the stage rule is ever loosened.

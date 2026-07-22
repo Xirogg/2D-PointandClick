@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/GUI/Glyphs/glyph_popup.tscn" id="4_glyphp"]
 [ext_resource type="Script" uid="uid://cntogujji1otx" path="res://Scripts/Interaction/interactable.gd" id="5_ntract"]
 [ext_resource type="Script" path="res://Scripts/Glyphs/active_glyph_sprite.gd" id="6_glyphspr"]
+[ext_resource type="PackedScene" uid="uid://bct5u4urjxvls" path="res://Scenes/Modules/hover_text.tscn" id="7_hover"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_console"]
 size = Vector2(332, 219.5)
@@ -27,7 +28,7 @@ texture = ExtResource("2_u2vya")
 [node name="Console" type="Area2D" parent="." unique_id=412750248 node_paths=PackedStringArray("interaction_point")]
 position = Vector2(1142, 174.5)
 script = ExtResource("5_ntract")
-display_name = "Konsole"
+display_name = "Timewalker"
 interaction_point = NodePath("InteractionPoint")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Console" unique_id=1067953796]
@@ -67,6 +68,8 @@ shape = SubResource("RectangleShape2D_bkba1")
 
 [node name="InteractionPoint" type="Marker2D" parent="Scene changer" unique_id=1022778175]
 position = Vector2(68, 200)
+
+[node name="HoverText" parent="." unique_id=1645418709 instance=ExtResource("7_hover")]
 
 [connection signal="interacted" from="Console" to="." method="_on_console_interacted"]
 [connection signal="item_used" from="Item Check" to="." method="_on_item_check_item_used"]

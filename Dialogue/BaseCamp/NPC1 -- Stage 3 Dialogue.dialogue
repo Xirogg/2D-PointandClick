@@ -1,3 +1,7 @@
 ~ start
-Finn: Du hast alle Glyphen übersetzt. Dann bringen wir das hier zu Ende.
+if Global.is_distrusted()
+	Finn: Hallo Maya, ich sehe du hast deine Arbeit getan.
+	Finn: Maya, General Braun vertraut mir nicht mehr. Geh doch mit deinem Wissen zu ihm ins Zelt und zeig ihm, was du gemacht hast, vielleicht hilft das.
+else
+	Finn: Du hast alle Glyphen übersetzt. Dann bringen wir das hier zu Ende.
 => END

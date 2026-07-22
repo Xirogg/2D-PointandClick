@@ -7,7 +7,8 @@
 script = ExtResource("1_glyph")
 id = &"Gefahr"
 texture = ExtResource("2_tex")
-acceptable_words = Array[String](["Gefahr"])
+acceptable_words = Array[String](["Gefahr", "Achtung"])
 category = "noun"
 sort_order = 1
+paired_item_id = &"bild_1"
 metadata/_custom_type_script = "uid://f4nd763e5voo"

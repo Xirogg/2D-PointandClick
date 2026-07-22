@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" format=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://y8jadqdq8j0i"]
 
 [ext_resource type="Script" uid="uid://ddo5pck7jdxa3" path="res://Scripts/Ressources/item_data.gd" id="1_itemdata"]
 [ext_resource type="Texture2D" uid="uid://l1fatqdosic3" path="res://Assets/Items/Bilder Items/Gefahr-Bild.png" id="2_texture"]
@@ -9,5 +9,5 @@ id = &"bild_1"
 name_en = "Bild 1"
 description_en = "The government thinks this picture helps you a great deal with your research."
 name_de = "Bild 1"
-description_de = "Die Regierung denkt das Bild hilft dir stark bei der Forschung"
+description_de = "Die Regierung denkt das Bild hilft dir stark bei der Forschung. Es stellt das menschliche Zeichen für Gefahr da."
 texture = ExtResource("2_texture")

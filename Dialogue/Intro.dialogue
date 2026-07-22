@@ -1,17 +1,17 @@
 ~ start
-General Braun: Maya Callahan, es ist mir eine Ehre
-General Braun: Ich bin General Braun, oberster Offizier dieser Sonderexpedition.
-General Braun: Wie Sie bereits wissen ist in der Nähe von Ontario ein unidentifiziertes Flugobjekt gelandet
-General Braun: Wir haben bereits den ersten Kontakt aufgenommen, sind jedoch auf ein Problem gestoßen:
-General Braun: Die Aliens kommuniziern nicht mit Buchstaben, sondern mit unlesbaren Zeichen.
-General Braun: Daher sind sie hier, wir brauchen die Hilfe einer Linguistin.
-General Braun: Ihre Aufgabe wird es sein die unbekannte Sprache zu übersetzen.
-General Braun: Ihnen sollten aber die Folgen bewusst sein
-General Braun: ...
-General Braun: Während wir gerade noch mit den Chinesen und Russen zusammenarbeiten kann sich das schon bald ändern. 
-General Braun: Sie müssen garantieren, dass sie die Sprache am schnellsten entschlüsseln. 
-General Braun: Dafür haben sie im Basislager noch etwas Hilfe von anderen Bereichen. 
-General Braun: Physiker Finn Beck erwartet sie bereits schon 
-General Braun: Ich wünsche ihnen Viel Erfolg, sie werden es brauchen. 
+General Braun: Maya Callahan, es ist mir eine Ehre [#voice=res://Assets/VoiceActing/GeneralBraunVA-01.wav]
+General Braun: Ich bin General Braun, oberster Offizier dieser Sonderexpedition. [#voice=res://Assets/VoiceActing/GeneralBraunVA-02.wav]
+General Braun: Wie Sie bereits wissen ist in der Nähe von Ontario ein unidentifiziertes Flugobjekt gelandet [#voice=res://Assets/VoiceActing/GeneralBraunVA-03.wav]
+General Braun: Wir haben bereits den ersten Kontakt aufgenommen, sind jedoch auf ein Problem gestoßen: [#voice=res://Assets/VoiceActing/GeneralBraunVA-04.wav]
+General Braun: Die Aliens kommuniziern nicht mit Buchstaben, sondern mit unlesbaren Zeichen. [#voice=res://Assets/VoiceActing/GeneralBraunVA-05.wav]
+General Braun: Daher sind sie hier, wir brauchen die Hilfe einer Linguistin. [#voice=res://Assets/VoiceActing/GeneralBraunVA-06.wav]
+General Braun: Ihre Aufgabe wird es sein die unbekannte Sprache zu übersetzen. [#voice=res://Assets/VoiceActing/GeneralBraunVA-07.wav]
+General Braun: Ihnen sollten aber die Folgen bewusst sein [#voice=res://Assets/VoiceActing/GeneralBraunVA-08.wav]
+General Braun: ... [#voice=res://Assets/VoiceActing/GeneralBraunVA-09.wav]
+General Braun: Während wir gerade noch mit den Chinesen und Russen zusammenarbeiten kann sich das schon bald ändern. [#voice=res://Assets/VoiceActing/GeneralBraunVA-10.wav]
+General Braun: Sie müssen garantieren, dass sie die Sprache am schnellsten entschlüsseln. [#voice=res://Assets/VoiceActing/GeneralBraunVA-11.wav]
+General Braun: Dafür haben sie im Basislager noch etwas Hilfe von anderen Bereichen. [#voice=res://Assets/VoiceActing/GeneralBraunVA-12.wav]
+General Braun: Physiker Finn Beck erwartet sie bereits schon [#voice=res://Assets/VoiceActing/GeneralBraunVA-13.wav]
+General Braun: Ich wünsche ihnen Viel Erfolg, sie werden es brauchen. [#voice=res://Assets/VoiceActing/GeneralBraunVA-14.wav]
 
 => END

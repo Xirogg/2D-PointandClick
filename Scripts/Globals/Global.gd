@@ -25,6 +25,16 @@ const ESCALATION_MAX: int = 10
 var escalation: int = 0
 signal escalation_changed(new_value: int)
 
+## Above this the base camp stops trusting Maya ("more than 6/10"), which
+## diverts the endgame: Finn stops walking her to the finish and sends her to
+## General Braun in the big tent to prove who she is. Read by is_distrusted().
+const DISTRUST_ESCALATION: int = 6
+
+## Set from the big tent interrogation dialogue the moment Maya gives her real
+## name (Callahan). base_camp_scene reads it once that dialogue closes and rolls
+## the ending; every wrong answer loops inside the dialogue and leaves it false.
+var interrogation_passed: bool = false
+
 @onready var Inventory_Slot_Scene = preload("res://Scenes/GUI/Inventory/inventory_slot.tscn")
 
 # --- Mouse cursor ---------------------------------------------------
@@ -129,8 +139,23 @@ func mark_ship_visited() -> void:
 func reset_story_state() -> void:
 	has_visited_ship = false
 	story_flags.clear()
+	interrogation_passed = false
 	_broadcast_stage = StoryStage.FIRST_VISIT
 	story_stage_changed.emit(_broadcast_stage)
+
+
+## Whether escalation has crossed into "the base camp no longer trusts Maya".
+## Both the Finn redirect and General Braun's interrogation branch on this, so
+## the threshold lives in exactly one place. Called from .dialogue files too.
+func is_distrusted() -> bool:
+	return escalation > DISTRUST_ESCALATION
+
+
+## Called as a mutation from the big tent interrogation dialogue once Maya names
+## herself correctly. Only records that it happened; base_camp_scene turns it
+## into the actual scene change after the dialogue has closed.
+func pass_interrogation() -> void:
+	interrogation_passed = true
 
 
 # Only announces an actual change, so listeners cannot fire twice for the

@@ -1,3 +1,22 @@
 ~ start
-Das große Zelt ist leergeräumt. Hier gibt es nichts mehr zu holen.
-=> END
+if Global.is_distrusted()
+	=> interrogation
+else
+	Das große Zelt ist leergeräumt. Hier gibt es nichts mehr zu holen.
+	=> END
+
+~ interrogation
+General Braun: Maya. Wir müssen reden.
+General Braun: Die Regierung hegt Zweifel an Ihnen. Man munkelt, Sie könnten eine Spionin sein.
+General Braun: Zur Sicherheit muss ich Ihre Identität bestätigen. Wie lautet Ihr Nachname?
+- Becker
+	General Braun: Becker? Das steht nicht in unseren Akten. Versuchen Sie es noch einmal.
+	=> END
+- Hunter
+	General Braun: Hunter? Nein, so steht es nicht geschrieben. Versuchen Sie es noch einmal.
+	=> END
+- Callahan
+	General Braun: Callahan. Ja... das stimmt.
+	do Global.pass_interrogation()
+	General Braun: Verzeihen Sie das Misstrauen, Maya. Bringen wir das hier zu Ende.
+	=> END

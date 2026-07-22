@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://d4idgfcqow3nx" path="res://Dialogue/BaseCamp/NPC2 -- Item Accepted.dialogue" id="22_npc2_item"]
 [ext_resource type="Resource" uid="uid://5lfcd8o5l287" path="res://Ressources/Items/schutzausruestung.tres" id="23_ticket"]
 [ext_resource type="SpriteFrames" path="res://Ressources/Animations/side_npc_v1_idle.tres" id="24_npc2_look"]
+[ext_resource type="PackedScene" uid="uid://bct5u4urjxvls" path="res://Scenes/Modules/hover_text.tscn" id="25_hover"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yflxa"]
 size = Vector2(89, 125)
@@ -41,6 +42,9 @@ dialogue_first_visit = ExtResource("16_npc1_1")
 dialogue_after_ship = ExtResource("17_npc1_2")
 dialogue_after_glyphs = ExtResource("18_npc1_3")
 
+[node name="Interactable" parent="NPC 1" index="0"]
+display_name = "Finn"
+
 [node name="NPC 2" parent="." unique_id=2037405147 instance=ExtResource("2_c7yk6")]
 position = Vector2(975, 300)
 dialogue_first_visit = ExtResource("19_npc2_1")
@@ -48,6 +52,9 @@ dialogue_after_ship = ExtResource("20_npc2_2")
 dialogue_after_glyphs = ExtResource("21_npc2_3")
 expected_item = ExtResource("23_ticket")
 dialogue_item_accepted = ExtResource("22_npc2_item")
+
+[node name="Interactable" parent="NPC 2" index="0"]
+display_name = "Wachmann"
 
 [node name="AnimatedSprite2D" parent="NPC 2" index="1" unique_id=1334395940]
 sprite_frames = ExtResource("24_npc2_look")
@@ -81,4 +88,7 @@ display_name = "Kleines Zelt"
 position = Vector2(87, -59.5)
 shape = SubResource("RectangleShape2D_2cjoj")
 
+[node name="HoverText" parent="." unique_id=590111235 instance=ExtResource("25_hover")]
+
+[editable path="NPC 1"]
 [editable path="NPC 2"]
